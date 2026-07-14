@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 import { 
   ArrowLeft, User, CreditCard, Plus, Check, AlertCircle, 
-  Edit, Printer, Ban, UserCheck, Calendar, Activity, GraduationCap 
+  Edit, Printer, Ban, UserCheck, Calendar, Activity, GraduationCap, X 
 } from 'lucide-react';
 import Link from 'next/link';
 import Avatar from '@/components/ui/Avatar';
@@ -68,11 +68,8 @@ export default function StaffProfilePage() {
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>('employment');
 
-  // Adjustment form states
+  // Selected payment for printing receipt modal
   const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
-  const [adjustmentAmount, setAdjustmentAmount] = useState('');
-  const [adjustmentReason, setAdjustmentReason] = useState('');
-  const [isSubmittingAdjustment, setIsSubmittingAdjustment] = useState(false);
 
   const loadStaffDetail = async () => {
     setIsLoading(true);
@@ -95,43 +92,6 @@ export default function StaffProfilePage() {
   useEffect(() => {
     if (staffId) loadStaffDetail();
   }, [staffId]);
-
-  const handleAdjustmentSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedPayment) return;
-    if (!adjustmentAmount || !adjustmentReason) {
-      alert('Please enter amount and reason.');
-      return;
-    }
-
-    setIsSubmittingAdjustment(true);
-    try {
-      const res = await fetch(`/api/hr/salary/${selectedPayment.id}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount: parseFloat(adjustmentAmount),
-          reason: adjustmentReason,
-        }),
-      });
-
-      if (res.ok) {
-        setSuccessMsg('Salary adjustment successfully applied.');
-        setAdjustmentAmount('');
-        setAdjustmentReason('');
-        setSelectedPayment(null);
-        loadStaffDetail();
-      } else {
-        const data = await res.json();
-        alert(data.error || 'Failed to apply adjustment.');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Error updating salary logs.');
-    } finally {
-      setIsSubmittingAdjustment(false);
-    }
-  };
 
   const handleStatusChange = async (nextStatus: string) => {
     if (!staff) return;
@@ -375,9 +335,10 @@ export default function StaffProfilePage() {
                               <td className="px-4 py-2.5">
                                 <button
                                   onClick={() => setSelectedPayment(pmt)}
-                                  className="text-[10px] text-primary hover:underline font-bold uppercase tracking-wider"
+                                  className="text-[10px] text-primary hover:underline font-bold uppercase tracking-wider flex items-center gap-1"
                                 >
-                                  Adjust
+                                  <Printer className="h-3 w-3" />
+                                  <span>Print</span>
                                 </button>
                               </td>
                             </tr>
@@ -388,51 +349,89 @@ export default function StaffProfilePage() {
                   </table>
                 </div>
 
-                {/* Salary Adjustment Drawer Modal */}
+                {/* Printable Payslip Modal */}
                 {selectedPayment && (
-                  <div className="p-4 border border-slate-200 bg-slate-50 rounded-2xl space-y-4 animate-in slide-in-from-bottom duration-150">
-                    <h5 className="font-bold text-slate-800 text-[10px] uppercase tracking-wider">
-                      Apply adjustment for slip: {selectedPayment.receiptNumber} ({selectedPayment.month}/{selectedPayment.year})
-                    </h5>
-                    <form onSubmit={handleAdjustmentSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
-                      <div>
-                        <label className="block text-[9px] font-bold text-slate-400 uppercase mb-1">Adjustment Amount (INR)</label>
-                        <input
-                          type="number"
-                          step="any"
-                          value={adjustmentAmount}
-                          onChange={(e) => setAdjustmentAmount(e.target.value)}
-                          placeholder="e.g. -500 or 1200"
-                          className="w-full px-3 py-1.5 text-xs border border-slate-200 bg-white rounded-xl focus:outline-none focus:border-primary text-slate-900"
-                        />
+                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                    <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-150">
+                      
+                      <div className="flex justify-between items-center px-4 py-3 border-b bg-slate-50">
+                        <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Salary Payment Receipt</h3>
+                        <button onClick={() => setSelectedPayment(null)} className="p-1 text-slate-400 hover:text-slate-600">
+                          <X className="h-4 w-4" />
+                        </button>
                       </div>
-                      <div>
-                        <label className="block text-[9px] font-bold text-slate-400 uppercase mb-1">Reason / Spec</label>
-                        <input
-                          type="text"
-                          value={adjustmentReason}
-                          onChange={(e) => setAdjustmentReason(e.target.value)}
-                          placeholder="e.g. Deducted leave or bonus"
-                          className="w-full px-3 py-1.5 text-xs border border-slate-200 bg-white rounded-xl focus:outline-none focus:border-primary text-slate-900"
-                        />
+
+                      <div id="print-salary-receipt" className="p-6 space-y-4 text-xs font-mono text-slate-800 bg-white">
+                        <div className="text-center border-b border-dashed pb-3 mb-3">
+                          <h1 className="text-sm font-bold uppercase text-slate-900">SCHOOL ERP</h1>
+                          <p className="text-[9px] text-slate-500">123 Education Blvd, New Delhi</p>
+                          <p className="text-[10px] font-bold border border-slate-850 px-2 mt-2 inline-block">SALARY VOUCHER</p>
+                        </div>
+
+                        <div className="space-y-1.5 border-b border-dashed pb-3 mb-3">
+                          <p>Receipt: <strong>{selectedPayment.receiptNumber}</strong></p>
+                          <p>Date: {new Date(selectedPayment.createdAt).toLocaleString()}</p>
+                          <p>Staff: {staff?.name} ({staff?.employeeCode})</p>
+                          <p>Designation: {staff?.designation}</p>
+                          <p>Salary Period: {selectedPayment.month}/{selectedPayment.year}</p>
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <div className="flex justify-between">
+                            <span>Gross Contract Salary</span>
+                            <span>{formatINR(Number(selectedPayment.grossSalary))}</span>
+                          </div>
+                          {(() => {
+                            const totalAdj = selectedPayment.adjustments?.reduce((sum: number, adj: any) => sum + Number(adj.amount), 0) || 0;
+                            return (
+                              <>
+                                <div className="flex justify-between">
+                                  <span>Adjustments Applied</span>
+                                  <span>{totalAdj >= 0 ? '+' : ''}{formatINR(totalAdj)}</span>
+                                </div>
+                                <div className="flex justify-between font-bold border-t border-dashed pt-2 mt-2 text-slate-950 text-sm">
+                                  <span>Net Disbursed</span>
+                                  <span>{formatINR(Number(selectedPayment.grossSalary) + totalAdj)}</span>
+                                </div>
+                              </>
+                            );
+                          })()}
+                        </div>
+
+                        <div className="pt-6 flex justify-between text-[9px] text-slate-500">
+                          <span>Method: {selectedPayment.paymentMethod}</span>
+                          <span>Audit trail sequence locked</span>
+                        </div>
                       </div>
-                      <div className="flex gap-2">
+
+                      <div className="flex justify-end gap-2 px-4 py-3 border-t bg-slate-50">
                         <button
-                          type="submit"
-                          disabled={isSubmittingAdjustment}
-                          className="px-4 py-2 bg-primary text-white font-bold rounded-xl text-[10px] uppercase tracking-wide hover:opacity-90 disabled:opacity-50"
+                          type="button"
+                          className="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-colors"
+                          onClick={() => setSelectedPayment(null)}
                         >
-                          Apply
+                          Close
                         </button>
                         <button
                           type="button"
-                          onClick={() => setSelectedPayment(null)}
-                          className="px-4 py-2 bg-white border border-slate-200 text-slate-655 font-bold rounded-xl text-[10px] uppercase tracking-wide hover:bg-slate-50"
+                          className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-[10px] font-bold uppercase tracking-wider transition-colors flex items-center gap-1"
+                          onClick={() => {
+                            const printContent = document.getElementById('print-salary-receipt')?.innerHTML;
+                            const originalContent = document.body.innerHTML;
+                            if (printContent) {
+                              document.body.innerHTML = printContent;
+                              window.print();
+                              document.body.innerHTML = originalContent;
+                              window.location.reload();
+                            }
+                          }}
                         >
-                          Cancel
+                          <Printer className="h-3.5 w-3.5" />
+                          <span>Print Receipt</span>
                         </button>
                       </div>
-                    </form>
+
+                    </div>
                   </div>
                 )}
               </div>
