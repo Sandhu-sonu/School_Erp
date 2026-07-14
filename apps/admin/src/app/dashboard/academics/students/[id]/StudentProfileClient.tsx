@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { 
   User, BookOpen, CreditCard, CalendarDays, Bus, 
   UserCheck, AlertCircle, FileSpreadsheet, ShieldAlert,
-  Edit, Printer, Download, ArrowUpRight, Ban, Calendar, Activity, GraduationCap
+  Edit, Printer, Download, ArrowUpRight, Ban, Calendar, Activity, GraduationCap, Plus
 } from 'lucide-react';
 import Avatar from '@/components/ui/Avatar';
 import Badge from '@/components/ui/Badge';
@@ -197,6 +197,14 @@ export default function StudentProfileClient({ student, calculatedAge }: Profile
             >
               <CreditCard className="h-4 w-4 text-green-500" />
               View Fees Ledger
+            </button>
+
+            <button 
+              onClick={() => router.push(`/dashboard/finance/fees?search=${student.admissionNumber}`)}
+              className="w-full p-2 hover:bg-slate-50 rounded-xl flex items-center gap-2 transition-colors"
+            >
+              <Plus className="h-4 w-4 text-emerald-500" />
+              Collect Fee
             </button>
 
             {statusVal === 'ACTIVE' ? (

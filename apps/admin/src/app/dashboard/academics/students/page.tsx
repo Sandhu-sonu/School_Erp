@@ -2,7 +2,7 @@ import React from 'react';
 import { prisma } from '@school-erp/db';
 import { getStudents } from '@/lib/services/admissions';
 import Link from 'next/link';
-import { Eye } from 'lucide-react';
+import { Eye, CreditCard } from 'lucide-react';
 import StudentFilterBar from './StudentFilterBar';
 
 export const dynamic = 'force-dynamic';
@@ -111,6 +111,13 @@ export default async function StudentsPage({ searchParams }: PageProps) {
                       </td>
                       <td className="erp-table-cell text-right">
                         <div className="flex justify-end gap-1.5">
+                          <Link
+                            href={`/dashboard/finance/fees?search=${student.admissionNumber}`}
+                            className="p-1 rounded text-slate-500 hover:text-emerald-600 hover:bg-slate-100"
+                            title="Collect Fee"
+                          >
+                            <CreditCard className="h-3.5 w-3.5" />
+                          </Link>
                           <Link
                             href={`/dashboard/academics/students/${student.id}`}
                             className="p-1 rounded text-slate-500 hover:text-blue-600 hover:bg-slate-100"
