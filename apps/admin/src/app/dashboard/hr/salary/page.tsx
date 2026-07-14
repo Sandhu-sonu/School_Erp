@@ -59,7 +59,7 @@ export default function ManualSalaryDesk() {
 
   // Search staff suggestions
   useEffect(() => {
-    if (staffSearchQuery.trim().length < 2) {
+    if (staffSearchQuery.trim().length < 1) {
       setStaffSuggestions([]);
       return;
     }
@@ -174,7 +174,7 @@ export default function ManualSalaryDesk() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         {/* Left Form Panel */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="erp-card space-y-4">
+          <div className="bg-white border border-slate-200 rounded shadow-sm p-3 relative space-y-4">
             <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider border-b pb-2 flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5 text-slate-400" />
               1. Salary Period & Employee Selection
