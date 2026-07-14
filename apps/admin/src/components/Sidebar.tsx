@@ -191,7 +191,7 @@ export default function Sidebar({ userRole, enabledModules = [] }: SidebarProps)
                   href={item.href}
                   className={`flex items-center justify-between group px-2.5 py-1.5 rounded-xl text-xs transition-colors ${
                     isActive 
-                      ? 'bg-blue-600 text-white font-semibold' 
+                      ? 'sidebar-link-active' 
                       : 'hover:bg-slate-800 text-slate-400 hover:text-slate-200'
                   }`}
                 >
@@ -231,7 +231,7 @@ export default function Sidebar({ userRole, enabledModules = [] }: SidebarProps)
                   title={collapsed ? item.name : undefined}
                   className={`flex items-center justify-between group px-2.5 py-1.5 rounded-xl text-xs transition-all relative ${
                     isActive 
-                      ? 'bg-primary text-white font-semibold' 
+                      ? 'sidebar-link-active' 
                       : 'hover:bg-slate-800/80 text-slate-400 hover:text-slate-200'
                   }`}
                 >

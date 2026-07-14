@@ -38,7 +38,7 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6 select-none text-xs font-semibold text-slate-700">
       {/* 1. Header Greeting board */}
-      <div className="bg-slate-900 text-white rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="bg-slate-900 text-white rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 grid-bg-overlay">
         <div className="absolute right-0 top-0 -mr-6 -mt-6 w-36 h-36 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
         <div className="space-y-1 relative z-10">
           <div className="flex items-center gap-2">

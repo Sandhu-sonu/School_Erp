@@ -1,47 +1,36 @@
 @import "../../../../packages/ui/src/index.css";
 
-/* Semantic design variables for Light Mode */
+/* Premium modern theme tokens for School ERP */
 :root {
-  --radius: 12px;
+  --radius: 16px;
   
-  /* Semantic Variables (Default Blue theme) */
-  --primary-rgb: 37, 99, 235;
+  /* Primary HSL tokens for modern look */
   --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 20% 98%;
+  --primary-rgb: 37, 99, 235;
   
-  --secondary: 220 14.3% 95.9%;
-  --secondary-foreground: 220.2 22% 26.2%;
-  
-  --success: 142.1 76.2% 36.3%;
-  --success-foreground: 355.6 100% 97.3%;
-  
-  --warning: 38 92% 50%;
-  --warning-foreground: 48 96% 89%;
-  
-  --danger: 0 84.2% 60.2%;
-  --danger-foreground: 210 20% 98%;
-  
-  --info: 199 89% 48%;
-  --info-foreground: 210 20% 98%;
-
-  --muted: 220 14.3% 95.9%;
-  --muted-foreground: 220 8.9% 46.1%;
-  
-  --background: 210 20% 98%;
+  /* Soft background & clean surfaces */
+  --background: 210 40% 98.5%;
   --foreground: 224 71.4% 4.1%;
   
   --card: 0 0% 100%;
   --card-foreground: 224 71.4% 4.1%;
   
-  --border: 220 13% 91%;
+  --secondary: 215 15% 96.5%;
+  --secondary-foreground: 220.2 22% 26.2%;
   
+  --muted: 215 15% 96.5%;
+  --muted-foreground: 220 8.9% 46.1%;
+  
+  --border: 214.3 31.8% 91.4%;
+  
+  /* Modern deep sidebar look */
   --sidebar: 222.2 47.4% 11.2%;
   --sidebar-foreground: 210 20% 98%;
   
   --header: 0 0% 100%;
 }
 
-/* Brand overrides for Light Mode */
+/* Brand palette enhancements with gradients and richer saturation */
 .theme-green {
   --primary: 142.1 76.2% 36.3%;
   --primary-rgb: 22, 163, 74;
@@ -59,47 +48,105 @@
   --primary-rgb: 234, 88, 12;
 }
 
-/* Dark Mode specifications */
+/* Premium Dark Mode setup */
 .dark {
-  --background: 224 71.4% 4.1%;
+  --background: 222.2 47.4% 7%;
   --foreground: 210 20% 98%;
   
-  --card: 224 71.4% 4.1%;
+  --card: 222.2 47.4% 9.5%;
   --card-foreground: 210 20% 98%;
   
-  --popover: 224 71.4% 4.1%;
-  --popover-foreground: 210 20% 98%;
-  
-  --primary: 210 20% 98%;
-  --primary-foreground: 220.2 22% 26.2%;
-  
-  --secondary: 215 27.9% 16.9%;
+  --secondary: 217.2 32.6% 14.5%;
   --secondary-foreground: 210 20% 98%;
   
-  --muted: 215 27.9% 16.9%;
-  --muted-foreground: 217.9 10.6% 64.9%;
+  --muted: 217.2 32.6% 14.5%;
+  --muted-foreground: 215 20.2% 65.1%;
   
-  --border: 215 27.9% 16.9%;
-  --header: 224 71.4% 4.1%;
+  --border: 217.2 32.6% 14.5%;
+  --header: 222.2 47.4% 9.5%;
 }
 
-/* Dark Mode brand color tweaks to keep readable high-contrast ratios */
 .dark.theme-blue { --primary: 217.2 91.2% 59.8%; }
 .dark.theme-green { --primary: 142.1 70.2% 45.3%; }
 .dark.theme-purple { --primary: 258.1 80.4% 65.3%; }
 .dark.theme-red { --primary: 0 70.2% 60.6%; }
 .dark.theme-orange { --primary: 20.1 85.4% 58.2%; }
 
-/* Soft Card Hover Animations & Shadows */
-.hover-card-effect {
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.hover-card-effect:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05), 0 8px 8px -6px rgba(0, 0, 0, 0.05);
+/* Global Styling Overrides */
+body {
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  letter-spacing: -0.01em;
 }
 
-/* Base styles adjustments */
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+/* Premium Card hover lift with subtle drop-shadows */
+.hover-card-effect {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+.hover-card-effect:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+  border-color: rgba(var(--primary-rgb), 0.15);
+}
+
+/* Custom Scrollbar design */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Premium Active state markers in sidebar */
+.sidebar-link-active {
+  background: linear-gradient(135deg, rgb(var(--primary-rgb)) 0%, rgba(var(--primary-rgb), 0.8) 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 16px -4px rgba(var(--primary-rgb), 0.35);
+  font-weight: 700 !important;
+}
+
+/* Modern inputs, forms and table controls */
+input, select, textarea {
+  border-radius: 12px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease-in-out;
+}
+input:focus, select:focus, textarea:focus {
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1) !important;
+}
+
+/* Dynamic status badge glow effects */
+.badge-success-glow {
+  background-color: rgba(34, 197, 94, 0.08);
+  color: rgb(21, 128, 61);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.05);
+}
+
+.badge-warning-glow {
+  background-color: rgba(245, 158, 11, 0.08);
+  color: rgb(180, 83, 9);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.badge-danger-glow {
+  background-color: rgba(239, 68, 68, 0.08);
+  color: rgb(185, 28, 28);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Linear background grids */
+.grid-bg-overlay {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
