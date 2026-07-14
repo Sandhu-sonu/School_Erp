@@ -313,7 +313,7 @@ export default function FeeCollectionDesk() {
         <div className="lg:col-span-2 space-y-6">
           
           {/* Search Box */}
-          <div className="erp-card relative">
+          <div className="bg-white border border-slate-200 rounded shadow-sm p-3 relative">
             <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Search Student</label>
             <div className="relative">
               <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-400" />
