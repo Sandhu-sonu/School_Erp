@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 import { 
   Search, User, CreditCard, Receipt, Printer, X, 
   ArrowLeftRight, AlertCircle, CheckCircle2, RefreshCw 
@@ -59,6 +60,9 @@ export default function FeeCollectionDesk() {
   const userRole = session?.user?.role;
   const isClerk = userRole === 'CLERK';
 
+  const searchParams = useSearchParams();
+  const querySearch = searchParams.get('search');
+
   // Search state
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<StudentDetail[]>([]);
@@ -67,6 +71,29 @@ export default function FeeCollectionDesk() {
   // Selected student details
   const [selectedStudent, setSelectedStudent] = useState<StudentDetail | null>(null);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
+
+  // Auto-fetch student on mount if search parameter is present in URL
+  useEffect(() => {
+    if (querySearch) {
+      const fetchAndSelectStudent = async () => {
+        setIsSearching(true);
+        try {
+          const res = await fetch(`/api/finance/students?search=${encodeURIComponent(querySearch)}`);
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.length > 0) {
+              loadStudentDetail(data[0].id);
+            }
+          }
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsSearching(false);
+        }
+      };
+      fetchAndSelectStudent();
+    }
+  }, [querySearch]);
 
   // Form collection states
   const [amount, setAmount] = useState<string>('');
