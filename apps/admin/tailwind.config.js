@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "rgb(var(--primary-rgb) / <alpha-value>)",
+        primary: "hsl(var(--primary))",
       }
     },
   },

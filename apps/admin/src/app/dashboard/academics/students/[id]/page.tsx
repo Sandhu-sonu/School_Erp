@@ -22,6 +22,9 @@ export default async function StudentProfilePage({ params }: PageProps) {
   const diffMs = new Date().getTime() - dobTime;
   const age = Math.floor(diffMs / (365.25 * 24 * 60 * 60 * 1000));
 
+  // Serialize Decimal and Date objects to plain JSON types
+  const serializedStudent = JSON.parse(JSON.stringify(student));
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -31,7 +34,7 @@ export default async function StudentProfilePage({ params }: PageProps) {
       </div>
 
       {/* Profile Detail Console */}
-      <StudentProfileClient student={student} calculatedAge={age} />
+      <StudentProfileClient student={serializedStudent} calculatedAge={age} />
     </div>
   );
 }
