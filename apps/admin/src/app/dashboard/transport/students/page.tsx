@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Search, Bus, MapPin, Plus, Trash2, ShieldAlert, Phone, Users, Check } from 'lucide-react';
+import { Search, Bus, MapPin, Plus, Trash2, ShieldAlert, Phone, Users, Check, RefreshCw } from 'lucide-react';
 
 interface RosterItem {
   id: string;
@@ -63,6 +63,34 @@ export default function StudentTransportPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searching, setSearching] = useState(false);
+  const [searched, setSearched] = useState(false);
+
+  // Auto-search debouncer as user types (from length >= 1)
+  useEffect(() => {
+    if (searchQuery.trim().length < 1) {
+      setSearchResults([]);
+      setSearched(false);
+      return;
+    }
+    const delayDebounce = setTimeout(async () => {
+      setSearching(true);
+      setError('');
+      try {
+        const res = await fetch(`/api/transport/students?search=${encodeURIComponent(searchQuery)}`);
+        if (res.ok) {
+          const data = await res.json();
+          setSearchResults(data);
+          setSearched(true);
+        }
+      } catch (err: any) {
+        console.error(err);
+      } finally {
+        setSearching(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchQuery]);
 
   // Assignment Modal/Panel
   const [selectedStudent, setSelectedStudent] = useState<SearchResult | null>(null);
@@ -214,6 +242,11 @@ export default function StudentTransportPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="erp-input w-full pl-9"
               />
+              {searching && (
+                <div className="absolute right-3 top-2.5">
+                  <RefreshCw className="h-3.5 w-3.5 text-slate-400 animate-spin" />
+                </div>
+              )}
             </div>
             <button
               type="submit"
@@ -223,6 +256,12 @@ export default function StudentTransportPage() {
               {searching ? 'Searching...' : 'Search'}
             </button>
           </form>
+
+          {searched && searchResults.length === 0 && (
+            <p className="text-xs text-slate-400 italic text-center py-4 bg-slate-50 border border-dashed rounded">
+              No students found matching your search query.
+            </p>
+          )}
 
           {searchResults.length > 0 && (
             <div className="border border-slate-100 rounded overflow-hidden max-h-60 overflow-y-auto">
