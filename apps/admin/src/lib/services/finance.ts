@@ -161,6 +161,11 @@ export async function collectFee(
         notes: notes || null,
         isReversed: false,
       },
+      include: {
+        collectedBy: {
+          select: { name: true }
+        }
+      }
     });
 
     // 4. Update balances in StudentFeeAccount

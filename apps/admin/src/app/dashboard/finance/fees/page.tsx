@@ -17,7 +17,7 @@ interface Transaction {
   receiptNumber: string;
   paymentMode: PaymentMode;
   transactionDate: string;
-  collectedBy: { name: string };
+  collectedBy?: { name: string } | null;
   notes: string | null;
   isReversed: boolean;
 }
@@ -652,7 +652,7 @@ export default function FeeCollectionDesk() {
                       )}
 
                       <div className="text-[10px] text-slate-400 flex justify-between">
-                        <span>By: {tx.collectedBy.name}</span>
+                        <span>By: {tx.collectedBy?.name || 'Staff'}</span>
                         <span>{new Date(tx.transactionDate).toLocaleDateString()}</span>
                       </div>
 
@@ -827,7 +827,7 @@ export default function FeeCollectionDesk() {
                         <span className="font-mono text-green-700">₹{Number(activeReceipt.amount).toFixed(2)}</span>
                       </div>
                       <p className="text-[10px] text-slate-400 mt-2 font-mono">
-                        Mode: {activeReceipt.paymentMode} | Collected by: {activeReceipt.collectedBy.name}
+                        Mode: {activeReceipt.paymentMode} | Collected by: {activeReceipt.collectedBy?.name || 'Staff'}
                       </p>
                     </div>
                   </div>
@@ -888,7 +888,7 @@ export default function FeeCollectionDesk() {
                     </div>
                     <div className="flex justify-between text-[8px] text-slate-500 pt-2 text-left">
                       <span>Mode: {activeReceipt.paymentMode}</span>
-                      <span>By: {activeReceipt.collectedBy.name}</span>
+                      <span>By: {activeReceipt.collectedBy?.name || 'Staff'}</span>
                     </div>
                   </div>
 
