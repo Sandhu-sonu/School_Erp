@@ -1,0 +1,848 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum StudentStatus {
+  ACTIVE
+  TRANSFERRED // Left school with Transfer Certificate
+  DROPPED     // Removed from rolls
+  SUSPENDED   // Suspended temporarily
+  DELETED     // Soft deleted (never hard delete)
+  ALUMNI      // Class 12 passed out
+}
+
+enum FeeStatus {
+  PAID
+  PARTIAL
+  UNPAID
+}
+
+enum PaymentMode {
+  CASH
+  UPI
+  BANK
+  CHEQUE
+}
+
+enum UserRole {
+  PRINCIPAL
+  HEAD
+  CLERK
+  ACCOUNTANT
+  TEACHER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  VISITED
+  ADMITTED
+  CLOSED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  HALF_DAY
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  passwordHash String
+  name         String
+  role         UserRole
+  status       UserStatus @default(ACTIVE)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  
+  transactions          FeeTransaction[]
+  classAssignments      ClassTeacher[]
+  auditLogs             AuditLog[]
+  salaryPaymentsCreated SalaryPayment[]
+  salaryAdjustments     SalaryAdjustment[]
+  reportAudits          ReportAudit[]
+  errorLogs             ErrorLog[]
+}
+
+model Parent {
+  id                String    @id @default(uuid())
+  fatherName        String
+  motherName        String?
+  mobile            String    @unique
+  alternateMobile   String?
+  occupation        String?
+  address           String?
+  remarks           String?
+  passwordHash      String    @default("ceaca87578c7f925910c3ec40731cad3:0afd0d087d1e103261de093d85a4b2d30e6d968defd368f60485b93e3d8cb8ff84e9cd6ca2310fb9661df572c99e2f6d59ab619ee2f98de5cc957ace8ee9b95e")
+  passwordChangedAt DateTime?
+  lastLoginAt       DateTime?
+  isVerified        Boolean   @default(true)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  students Student[]
+}
+
+model Student {
+  id              String        @id @default(uuid())
+  admissionNumber String        @unique // Format: SCH/YYYY/CLASS/XXXX
+  name            String
+  dob             DateTime
+  gender          String
+  photo           String?
+  status          StudentStatus @default(ACTIVE)
+  admissionDate   DateTime      @default(now())
+  parentId        String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  parent      Parent             @relation(fields: [parentId], references: [id])
+  enrollments ClassEnrollment[]
+  promotions  PromotionHistory[]
+  examMarks   ExamMark[]
+  results     Result[]
+  transports  StudentTransport[]
+
+  @@index([admissionNumber])
+  @@index([parentId])
+  @@index([createdAt])
+}
+
+model AcademicSession {
+  id        String   @id @default(uuid())
+  name      String   @unique // e.g. "2026-27"
+  isActive  Boolean  @default(false)
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments        ClassEnrollment[]
+  feePlans           FeePlan[]
+  historyFrom        PromotionHistory[]  @relation("FromSession")
+  historyTo          PromotionHistory[]  @relation("ToSession")
+  admissionSequences AdmissionSequence[]
+  classTeachers      ClassTeacher[]
+  timetables         Timetable[]
+  exams              Exam[]
+}
+
+model Class {
+  id        String   @id @default(uuid())
+  name      String   @unique // e.g., "Nursery", "LKG", "UKG", "Class 1" ... "Class 12"
+  sequence  Int      // 1 for Nursery, 2 for LKG ... 15 for Class 12
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments   ClassEnrollment[]
+  feePlans      FeePlan[]
+  historyFrom   PromotionHistory[]  @relation("FromClass")
+  historyTo     PromotionHistory[]  @relation("ToClass")
+  leads         Lead[]
+  timetables    Timetable[]
+  sections      Section[]
+  classTeachers ClassTeacher[]
+  subjects      Subject[]
+}
+
+model Section {
+  id        String   @id @default(uuid())
+  classId   String
+  name      String   // e.g. "A", "B", "C" (unique only within this class)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  class         Class             @relation(fields: [classId], references: [id], onDelete: Cascade)
+  enrollments   ClassEnrollment[]
+  timetables    Timetable[]
+  classTeachers ClassTeacher[]
+
+  @@unique([classId, name])
+}
+
+model Subject {
+  id         String   @id @default(uuid())
+  name       String
+  code       String
+  classId    String
+  isOptional Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  class      Class      @relation(fields: [classId], references: [id], onDelete: Cascade)
+  timetables Timetable[]
+  examMarks  ExamMark[]
+
+  @@unique([classId, code])
+}
+
+model ClassTeacher {
+  id        String   @id @default(uuid())
+  teacherId String
+  classId   String
+  sectionId String?
+  sessionId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  teacher User            @relation(fields: [teacherId], references: [id])
+  class   Class           @relation(fields: [classId], references: [id])
+  section Section?        @relation(fields: [sectionId], references: [id])
+  session AcademicSession @relation(fields: [sessionId], references: [id])
+
+  @@unique([classId, sectionId, sessionId])
+}
+
+model ClassEnrollment {
+  id         String   @id @default(uuid())
+  studentId  String
+  sessionId  String
+  classId    String
+  sectionId  String?
+  isArchived Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  student Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session AcademicSession @relation(fields: [sessionId], references: [id])
+  class   Class           @relation(fields: [classId], references: [id])
+  section Section?        @relation(fields: [sectionId], references: [id])
+
+  attendance        Attendance[]
+  attendanceSummary AttendanceSummary[]
+  feeAccount        StudentFeeAccount?
+
+  @@unique([studentId, sessionId])
+  @@index([studentId, sessionId])
+  @@index([classId, sectionId])
+}
+
+model StudentFeeAccount {
+  id           String    @id @default(uuid())
+  enrollmentId String    @unique
+  totalFee     Decimal   @db.Decimal(10, 2)
+  discount     Decimal   @default(0) @db.Decimal(10, 2)
+  waiver       Decimal   @default(0) @db.Decimal(10, 2)
+  paidAmount   Decimal   @default(0) @db.Decimal(10, 2)
+  remainingFee Decimal   @db.Decimal(10, 2)
+  feeStatus    FeeStatus @default(UNPAID)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  enrollment   ClassEnrollment  @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  transactions FeeTransaction[]
+  adjustments  FeeAdjustment[]
+}
+
+model FeePlan {
+  id              String   @id @default(uuid())
+  sessionId       String
+  classId         String
+  tuitionFee      Decimal  @db.Decimal(10, 2)
+  admissionFee    Decimal  @db.Decimal(10, 2)
+  annualCharges   Decimal  @default(0) @db.Decimal(10, 2)
+  activityCharges Decimal  @default(0) @db.Decimal(10, 2)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  session AcademicSession @relation(fields: [sessionId], references: [id])
+  class   Class           @relation(fields: [classId], references: [id])
+
+  @@unique([sessionId, classId])
+}
+
+model Route {
+  id            String   @id @default(uuid())
+  name          String   @unique
+  vehicleNumber String
+  driverName    String
+  driverMobile  String
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  stops      Stop[]
+  transports StudentTransport[]
+}
+
+model Stop {
+  id        String   @id @default(uuid())
+  routeId   String
+  name      String
+  fare      Decimal  @db.Decimal(10, 2)
+  orderNo   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  route      Route              @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  transports StudentTransport[]
+}
+
+model StudentTransport {
+  id          String    @id @default(uuid())
+  studentId   String
+  routeId     String
+  stopId      String
+  activeFrom  DateTime
+  activeTo    DateTime?
+  monthlyFare Decimal   @db.Decimal(10, 2)
+  status      String    @default("ACTIVE") // "ACTIVE" or "INACTIVE"
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  route   Route   @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  stop    Stop    @relation(fields: [stopId], references: [id], onDelete: Cascade)
+}
+
+model PromotionHistory {
+  id            String   @id @default(uuid())
+  studentId     String
+  fromSessionId String
+  toSessionId   String
+  fromClassId   String
+  toClassId     String
+  promotedAt    DateTime @default(now())
+
+  student     Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  fromSession AcademicSession @relation(name: "FromSession", fields: [fromSessionId], references: [id])
+  toSession   AcademicSession @relation(name: "ToSession", fields: [toSessionId], references: [id])
+  fromClass   Class           @relation(name: "FromClass", fields: [fromClassId], references: [id])
+  toClass     Class           @relation(name: "ToClass", fields: [toClassId], references: [id])
+}
+
+model AdmissionSequence {
+  id           String   @id @default(uuid())
+  sessionId    String
+  year         Int
+  currentValue Int      @default(0)
+
+  session AcademicSession @relation(fields: [sessionId], references: [id])
+
+  @@unique([sessionId, year])
+}
+
+model ReceiptSequence {
+  id           String @id @default(uuid())
+  prefix       String @unique
+  currentValue Int    @default(0)
+}
+
+model FeeTransaction {
+  id              String      @id @default(uuid())
+  feeAccountId    String
+  amount          Decimal     @db.Decimal(10, 2)
+  discountAmount  Decimal     @default(0) @db.Decimal(10, 2)
+  waiverAmount    Decimal     @default(0) @db.Decimal(10, 2)
+  receiptNumber   String      @unique // Format: SCH-YYYY-00001
+  paymentMode     PaymentMode
+  transactionDate DateTime    @default(now())
+  collectedById   String
+  notes           String?
+  isReversed      Boolean     @default(false) // Correction reversal support
+  createdAt       DateTime    @default(now())
+
+  feeAccount  StudentFeeAccount @relation(fields: [feeAccountId], references: [id], onDelete: Cascade)
+  collectedBy User              @relation(fields: [collectedById], references: [id])
+
+  @@index([transactionDate])
+  @@index([createdAt])
+}
+
+model Lead {
+  id          String     @id @default(uuid())
+  studentName String
+  parentName  String
+  mobile      String
+  email       String?
+  classId     String
+  status      LeadStatus @default(NEW)
+  notes       String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  class Class @relation(fields: [classId], references: [id])
+}
+
+model Expense {
+  id            String      @id @default(uuid())
+  title         String
+  amount        Decimal     @db.Decimal(10, 2)
+  category      String      // e.g. "Salary", "Utility", "Maintenance"
+  expenseDate   DateTime
+  paidTo        String
+  paymentMode   PaymentMode
+  notes         String?
+  referenceType String?
+  referenceId   String?
+  isLocked      Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Attendance {
+  id           String           @id @default(uuid())
+  enrollmentId String
+  date         DateTime         @db.Date
+  status       AttendanceStatus
+  remarks      String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  enrollment ClassEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  @@unique([enrollmentId, date])
+}
+
+model AttendanceSummary {
+  id           String   @id @default(uuid())
+  enrollmentId String
+  yearMonth    String   // Format: "YYYY-MM" (e.g. "2026-07")
+  present      Int      @default(0)
+  absent       Int      @default(0)
+  late         Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  enrollment ClassEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  @@unique([enrollmentId, yearMonth])
+}
+
+model Timetable {
+  id           String  @id @default(uuid())
+  sessionId    String
+  classId      String
+  sectionId    String?
+  dayOfWeek    Int     // 1 = Monday, 6 = Saturday (or 1-7)
+  periodNumber Int     // 1, 2, 3...
+  subjectId    String
+  staffId      String?
+  startTime    String
+  endTime      String
+
+  session AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  class   Class           @relation(fields: [classId], references: [id], onDelete: Cascade)
+  section Section?        @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  subject Subject         @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  staff   Staff?          @relation(fields: [staffId], references: [id], onDelete: SetNull)
+
+  @@unique([classId, sectionId, sessionId, dayOfWeek, periodNumber])
+  @@unique([staffId, sessionId, dayOfWeek, periodNumber])
+}
+
+enum NoticeStatus {
+  DRAFT
+  PUBLISHED
+  EXPIRED
+  ARCHIVED
+}
+
+model Notice {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  targetRole  String?      // e.g. "TEACHER", "CLERK", etc.
+  targetClass String?      // class name or class ID, null for all
+  publishDate DateTime?
+  expiryDate  DateTime?
+  status      NoticeStatus
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model GalleryItem {
+  id          String   @id @default(uuid())
+  title       String
+  imageUrl    String
+  category    String?
+  createdAt   DateTime @default(now())
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      String?
+  role        String?
+  action      String
+  details     String?
+  entity      String?
+  beforeJson  Json?
+  afterJson   Json?
+  ipAddress   String?
+  browser     String?
+  requestId   String?
+  createdAt   DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+}
+
+enum AdjustmentType {
+  DEBIT
+  CREDIT
+}
+
+model FeeAdjustment {
+  id            String            @id @default(uuid())
+  feeAccountId  String
+  amount        Decimal           @db.Decimal(10, 2)
+  type          AdjustmentType
+  description   String
+  referenceType String?
+  referenceId   String?
+  createdAt     DateTime          @default(now())
+
+  feeAccount    StudentFeeAccount @relation(fields: [feeAccountId], references: [id], onDelete: Cascade)
+}
+
+enum StaffStatus {
+  ACTIVE
+  INACTIVE
+  DELETED
+}
+
+model EmployeeSequence {
+  id         String @id @default(uuid())
+  nextNumber Int    @default(1)
+}
+
+model SalaryReceiptSequence {
+  id         String @id @default(uuid())
+  year       Int    @unique
+  nextNumber Int    @default(1)
+}
+
+model Staff {
+  id            String          @id @default(uuid())
+  employeeCode  String          @unique
+  name          String
+  mobile        String
+  email         String?
+  gender        String
+  dob           DateTime
+  joiningDate   DateTime
+  designation   String
+  qualification String
+  monthlySalary Decimal         @db.Decimal(10, 2)
+  status        StaffStatus     @default(ACTIVE)
+  remarks       String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  salaryPayments SalaryPayment[]
+  timetables     Timetable[]
+}
+
+model SalaryPayment {
+  id            String             @id @default(uuid())
+  staffId       String
+  month         Int
+  year          Int
+  grossSalary   Decimal            @db.Decimal(10, 2)
+  paymentMethod PaymentMode
+  remarks       String?
+  receiptNumber String             @unique
+  createdById   String
+  createdAt     DateTime           @default(now())
+
+  staff         Staff              @relation(fields: [staffId], references: [id])
+  createdBy     User               @relation(fields: [createdById], references: [id])
+  adjustments   SalaryAdjustment[]
+
+  @@unique([staffId, month, year])
+}
+
+model SalaryAdjustment {
+  id              String        @id @default(uuid())
+  salaryPaymentId String
+  amount          Decimal       @db.Decimal(10, 2)
+  reason          String
+  createdById     String
+  createdAt       DateTime      @default(now())
+
+  salaryPayment   SalaryPayment @relation(fields: [salaryPaymentId], references: [id], onDelete: Cascade)
+  createdBy       User          @relation(fields: [createdById], references: [id])
+}
+
+model Exam {
+  id        String   @id @default(uuid())
+  sessionId String
+  name      String
+  startDate DateTime
+  endDate   DateTime
+  published Boolean  @default(false)
+
+  session AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  marks   ExamMark[]
+  results Result[]
+}
+
+model ExamMark {
+  id        String   @id @default(uuid())
+  examId    String
+  studentId String
+  subjectId String
+  maxMarks  Decimal  @db.Decimal(5, 2)
+  obtained  Decimal? @db.Decimal(5, 2) // Null represents ABSENT
+
+  exam    Exam    @relation(fields: [examId], references: [id], onDelete: Cascade)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, studentId, subjectId])
+}
+
+model Result {
+  id           String   @id @default(uuid())
+  examId       String
+  studentId    String
+  total        Decimal  @db.Decimal(6, 2)
+  percentage   Decimal  @db.Decimal(5, 2)
+  finalGrade   String
+  rank         Int
+  published    Boolean  @default(false)
+  generatedAt  DateTime @default(now())
+  snapshotJson Json
+  createdAt    DateTime @default(now())
+
+  exam    Exam    @relation(fields: [examId], references: [id], onDelete: Cascade)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, studentId])
+}
+
+model ReportAudit {
+  id         String   @id @default(uuid())
+  userId     String?
+  reportType String   // e.g. "STUDENTS", "FINANCE", "ATTENDANCE", etc.
+  filters    String   // JSON string of active filters
+  exported   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([reportType])
+}
+
+model SystemSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  group     String   // e.g. "PROFILE", "PREFIX", "DEFAULTS", "LIMITS"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ModuleType {
+  CORE
+  OPTIONAL
+  FUTURE
+}
+
+enum ModuleStatus {
+  ACTIVE
+  BETA
+  COMING_SOON
+  DEPRECATED
+}
+
+enum SchoolBoard {
+  CBSE
+  ICSE
+  PSEB
+  HBSE
+  UP_BOARD
+  STATE_BOARD
+  OTHER
+}
+
+model ModuleSetting {
+  moduleKey    String       @id
+  moduleName   String
+  type         ModuleType
+  status       ModuleStatus @default(ACTIVE)
+  enabled      Boolean      @default(true)
+  version      String       @default("v1")
+  description  String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  dependencies ModuleDependency[] @relation("ModuleDependencies")
+  dependents   ModuleDependency[] @relation("ModuleDependents")
+}
+
+model ModuleDependency {
+  id                 String @id @default(uuid())
+  moduleKey          String
+  dependsOnModuleKey String
+
+  module     ModuleSetting @relation("ModuleDependencies", fields: [moduleKey], references: [moduleKey], onDelete: Cascade)
+  dependsOn  ModuleSetting @relation("ModuleDependents", fields: [dependsOnModuleKey], references: [moduleKey], onDelete: Cascade)
+
+  @@unique([moduleKey, dependsOnModuleKey])
+}
+
+model SchoolSettings {
+  id              String      @id @default(uuid())
+  schoolName      String
+  address         String
+  board           SchoolBoard @default(CBSE)
+  principalName   String
+  phone           String
+  email           String
+  website         String?
+  logoUrl         String?
+  // Academic Prefixes
+  sessionPrefix   String      @default("SCH")
+  admissionPrefix String      @default("SCH")
+  employeePrefix  String      @default("EMP")
+  receiptPrefix   String      @default("SCH")
+  // Regional Configuration
+  currency                  String      @default("INR ₹")
+  timezone                  String      @default("Asia/Kolkata")
+  dateFormat                String      @default("DD/MM/YYYY")
+  language                  String      @default("English")
+  // Defaults
+  workingDays               Int         @default(220)
+  passingPercent            Float       @default(40.0)
+  sessionTimeoutMinutes     Int         @default(30)
+  maxLoginAttempts          Int         @default(5)
+  lockDurationMinutes       Int         @default(15)
+  backupRetentionDays       Int         @default(30)
+  importFileSizeLimitMb     Int         @default(10)
+  uploadFileSizeLimitMb     Int         @default(5)
+  passwordMinLength         Int         @default(8)
+  passwordRequireMixedCase  Boolean     @default(true)
+  passwordRequireSymbols     Boolean     @default(true)
+  createdAt                 DateTime    @default(now())
+  updatedAt                 DateTime    @updatedAt
+}
+
+enum ErrorLevel {
+  INFO
+  WARNING
+  ERROR
+  CRITICAL
+}
+
+enum BackupStatus {
+  COMPLETED
+  FAILED
+}
+
+enum BackupType {
+  MANUAL
+  AUTO
+}
+
+enum UatStatus {
+  PENDING
+  PASSED
+  FAILED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum SeverityLevel {
+  LOW
+  MEDIUM
+  HIGH
+  BLOCKER
+}
+
+model ErrorLog {
+  id         String     @id @default(uuid())
+  level      ErrorLevel
+  module     String
+  route      String?
+  message    String
+  stackTrace String?
+  requestId  String?
+  userId     String?
+  resolved   Boolean    @default(false)
+  createdAt  DateTime   @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([createdAt])
+  @@index([level])
+}
+
+model BackupHistory {
+  id              String       @id @default(uuid())
+  backupName      String
+  backupType      BackupType
+  fileSize        BigInt
+  filePath        String
+  duration        Int          // In milliseconds
+  backupVersion   String
+  databaseVersion String
+  checksum        String
+  status          BackupStatus
+  createdBy       String?
+  createdAt       DateTime     @default(now())
+}
+
+model ImportHistory {
+  id               String   @id @default(uuid())
+  module           String   // STUDENTS, PARENTS, STAFF, etc.
+  fileName         String
+  totalRecords     Int
+  successRecords   Int
+  failedRecords    Int
+  duplicateRecords Int      @default(0)
+  skippedRecords   Int      @default(0)
+  rollback         Boolean  @default(false)
+  validationErrors Json?
+  importedBy       String?
+  createdAt        DateTime @default(now())
+}
+
+model ExportHistory {
+  id           String   @id @default(uuid())
+  module       String
+  exportType   String   // CSV, EXCEL, PDF
+  totalRows    Int
+  downloadedAt DateTime @default(now())
+  ipAddress    String?
+  browser      String?
+  requestId    String?
+  exportedBy   String?
+  createdAt    DateTime @default(now())
+}
+
+model UatTestCase {
+  id            String        @id @default(uuid())
+  testCase      String
+  module        String
+  executedBy    String
+  verifiedBy    String
+  date          DateTime      @default(now())
+  status        UatStatus     @default(PENDING)
+  severity      SeverityLevel @default(MEDIUM)
+  remarks       String?
+  bugReference  String?
+  priority      Priority      @default(MEDIUM)
+  attachments   Json?
+  moduleVersion String?
+  buildVersion  String?
+  executionTime Int           @default(0) // In milliseconds
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}

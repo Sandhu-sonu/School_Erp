@@ -1,0 +1,15 @@
+{
+  "name": "@school-erp/ui",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.css",
+  "scripts": {
+    "lint": "echo UI is CSS only"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.0.0"
+  }
+}

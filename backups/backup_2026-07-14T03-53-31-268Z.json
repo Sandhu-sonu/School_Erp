@@ -1,0 +1,2752 @@
+{
+  "dbVersion": "PostgreSQL 15",
+  "backupVersion": "v1.0.0",
+  "timestamp": "2026-07-14T03:53:31.370Z",
+  "tables": {
+    "schoolSettings": [
+      {
+        "id": "2392b3be-5dca-4e72-bd76-e51e207db6bd",
+        "schoolName": "Delhi Public School, Noida",
+        "address": "123, School Lane, New Delhi, India",
+        "board": "CBSE",
+        "principalName": "Dr. R. K. Sharma",
+        "phone": "+91 98765 43210",
+        "email": "info@demoindianacademy.edu.in",
+        "website": "https://demoindianacademy.edu.in",
+        "logoUrl": "/logo.png",
+        "sessionPrefix": "SCH",
+        "admissionPrefix": "SCH",
+        "employeePrefix": "EMP",
+        "receiptPrefix": "SCH",
+        "currency": "INR ₹",
+        "timezone": "Asia/Kolkata",
+        "dateFormat": "DD/MM/YYYY",
+        "language": "English",
+        "workingDays": 220,
+        "passingPercent": 40,
+        "sessionTimeoutMinutes": 30,
+        "maxLoginAttempts": 5,
+        "lockDurationMinutes": 15,
+        "backupRetentionDays": 30,
+        "importFileSizeLimitMb": 10,
+        "uploadFileSizeLimitMb": 5,
+        "passwordMinLength": 8,
+        "passwordRequireMixedCase": true,
+        "passwordRequireSymbols": true,
+        "createdAt": "2026-07-11T15:34:49.628Z",
+        "updatedAt": "2026-07-11T15:34:49.630Z"
+      }
+    ],
+    "moduleSetting": [
+      {
+        "moduleKey": "DASHBOARD",
+        "moduleName": "Dashboard",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Main school summary metrics desk",
+        "createdAt": "2026-07-11T15:34:49.349Z",
+        "updatedAt": "2026-07-11T15:34:49.349Z"
+      },
+      {
+        "moduleKey": "ADMISSIONS",
+        "moduleName": "Admissions",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Student registrations and leads pipeline",
+        "createdAt": "2026-07-11T15:34:49.354Z",
+        "updatedAt": "2026-07-11T15:34:49.354Z"
+      },
+      {
+        "moduleKey": "PARENTS",
+        "moduleName": "Parents",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Family contact directory profiles",
+        "createdAt": "2026-07-11T15:34:49.356Z",
+        "updatedAt": "2026-07-11T15:34:49.356Z"
+      },
+      {
+        "moduleKey": "STUDENTS",
+        "moduleName": "Students",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Active pupil profiles registry",
+        "createdAt": "2026-07-11T15:34:49.358Z",
+        "updatedAt": "2026-07-11T15:34:49.358Z"
+      },
+      {
+        "moduleKey": "CLASSES",
+        "moduleName": "Classes & Sections",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Grade structure configurations",
+        "createdAt": "2026-07-11T15:34:49.359Z",
+        "updatedAt": "2026-07-11T15:34:49.359Z"
+      },
+      {
+        "moduleKey": "SESSIONS",
+        "moduleName": "Academic Sessions",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Annual session logs",
+        "createdAt": "2026-07-11T15:34:49.361Z",
+        "updatedAt": "2026-07-11T15:34:49.361Z"
+      },
+      {
+        "moduleKey": "FEES",
+        "moduleName": "Fee Management",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Fee plan structure configuration",
+        "createdAt": "2026-07-11T15:34:49.363Z",
+        "updatedAt": "2026-07-11T15:34:49.363Z"
+      },
+      {
+        "moduleKey": "FEES_COLLECTION",
+        "moduleName": "Fee Collection",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Dues collection",
+        "createdAt": "2026-07-11T15:34:49.366Z",
+        "updatedAt": "2026-07-11T15:34:49.366Z"
+      },
+      {
+        "moduleKey": "RECEIPTS",
+        "moduleName": "Receipts",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Invoicing transaction logs",
+        "createdAt": "2026-07-11T15:34:49.368Z",
+        "updatedAt": "2026-07-11T15:34:49.368Z"
+      },
+      {
+        "moduleKey": "PROMOTIONS",
+        "moduleName": "Promotions",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Student advancement desks",
+        "createdAt": "2026-07-11T15:34:49.369Z",
+        "updatedAt": "2026-07-11T15:34:49.369Z"
+      },
+      {
+        "moduleKey": "REPORTS",
+        "moduleName": "Reports",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Data aggregates reports desk",
+        "createdAt": "2026-07-11T15:34:49.370Z",
+        "updatedAt": "2026-07-11T15:34:49.370Z"
+      },
+      {
+        "moduleKey": "SETTINGS",
+        "moduleName": "Settings",
+        "type": "CORE",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "School settings console",
+        "createdAt": "2026-07-11T15:34:49.372Z",
+        "updatedAt": "2026-07-11T15:34:49.372Z"
+      },
+      {
+        "moduleKey": "LIBRARY",
+        "moduleName": "Library",
+        "type": "FUTURE",
+        "status": "COMING_SOON",
+        "enabled": false,
+        "version": "v2",
+        "description": "Book logs tracking desk",
+        "createdAt": "2026-07-11T15:34:49.386Z",
+        "updatedAt": "2026-07-11T15:34:49.386Z"
+      },
+      {
+        "moduleKey": "HOSTEL",
+        "moduleName": "Hostel",
+        "type": "FUTURE",
+        "status": "COMING_SOON",
+        "enabled": false,
+        "version": "v2",
+        "description": "Dorm room allotments roster",
+        "createdAt": "2026-07-11T15:34:49.387Z",
+        "updatedAt": "2026-07-11T15:34:49.387Z"
+      },
+      {
+        "moduleKey": "SMS",
+        "moduleName": "SMS Alerts",
+        "type": "FUTURE",
+        "status": "COMING_SOON",
+        "enabled": false,
+        "version": "v2",
+        "description": "Text broadcasts system",
+        "createdAt": "2026-07-11T15:34:49.388Z",
+        "updatedAt": "2026-07-11T15:34:49.388Z"
+      },
+      {
+        "moduleKey": "WHATSAPP",
+        "moduleName": "WhatsApp Alerts",
+        "type": "FUTURE",
+        "status": "COMING_SOON",
+        "enabled": false,
+        "version": "v2",
+        "description": "WhatsApp broadcasts system",
+        "createdAt": "2026-07-11T15:34:49.389Z",
+        "updatedAt": "2026-07-11T15:34:49.389Z"
+      },
+      {
+        "moduleKey": "ONLINE_ADMISSION",
+        "moduleName": "Online Admission",
+        "type": "FUTURE",
+        "status": "COMING_SOON",
+        "enabled": false,
+        "version": "v2",
+        "description": "Public portal admissions forms",
+        "createdAt": "2026-07-11T15:34:49.390Z",
+        "updatedAt": "2026-07-11T15:34:49.390Z"
+      },
+      {
+        "moduleKey": "PARENT_PORTAL",
+        "moduleName": "Parent Portal",
+        "type": "FUTURE",
+        "status": "COMING_SOON",
+        "enabled": false,
+        "version": "v2",
+        "description": "Parent dashboard desk",
+        "createdAt": "2026-07-11T15:34:49.391Z",
+        "updatedAt": "2026-07-11T15:34:49.391Z"
+      },
+      {
+        "moduleKey": "STUDENT_PORTAL",
+        "moduleName": "Student Portal",
+        "type": "FUTURE",
+        "status": "COMING_SOON",
+        "enabled": false,
+        "version": "v2",
+        "description": "Student dashboard desk",
+        "createdAt": "2026-07-11T15:34:49.392Z",
+        "updatedAt": "2026-07-11T15:34:49.392Z"
+      },
+      {
+        "moduleKey": "EXAMS",
+        "moduleName": "Examinations",
+        "type": "OPTIONAL",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Subject exams logs",
+        "createdAt": "2026-07-11T15:34:49.374Z",
+        "updatedAt": "2026-07-11T15:34:49.680Z"
+      },
+      {
+        "moduleKey": "RESULTS",
+        "moduleName": "Results",
+        "type": "OPTIONAL",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Dense rank mark sheets publication",
+        "createdAt": "2026-07-11T15:34:49.375Z",
+        "updatedAt": "2026-07-11T15:34:49.681Z"
+      },
+      {
+        "moduleKey": "TRANSPORT",
+        "moduleName": "Transport",
+        "type": "OPTIONAL",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Bus route tracking and prorated billing",
+        "createdAt": "2026-07-11T15:34:49.376Z",
+        "updatedAt": "2026-07-11T15:34:49.683Z"
+      },
+      {
+        "moduleKey": "HR",
+        "moduleName": "Staff Management (HR)",
+        "type": "OPTIONAL",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Employee onboarding details desk",
+        "createdAt": "2026-07-11T15:34:49.378Z",
+        "updatedAt": "2026-07-11T15:34:49.684Z"
+      },
+      {
+        "moduleKey": "SALARY",
+        "moduleName": "Salary",
+        "type": "OPTIONAL",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Employee pay slip disbursements logs",
+        "createdAt": "2026-07-11T15:34:49.379Z",
+        "updatedAt": "2026-07-11T15:34:49.685Z"
+      },
+      {
+        "moduleKey": "COMMUNICATIONS",
+        "moduleName": "Communications",
+        "type": "OPTIONAL",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "Admin notice board announcements",
+        "createdAt": "2026-07-11T15:34:49.380Z",
+        "updatedAt": "2026-07-11T15:34:49.686Z"
+      },
+      {
+        "moduleKey": "WEBSITE",
+        "moduleName": "Website",
+        "type": "OPTIONAL",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "School portal console editor",
+        "createdAt": "2026-07-11T15:34:49.382Z",
+        "updatedAt": "2026-07-11T15:34:49.686Z"
+      },
+      {
+        "moduleKey": "GALLERY",
+        "moduleName": "Gallery",
+        "type": "OPTIONAL",
+        "status": "ACTIVE",
+        "enabled": true,
+        "version": "v1",
+        "description": "School image gallery",
+        "createdAt": "2026-07-11T15:34:49.385Z",
+        "updatedAt": "2026-07-11T15:34:49.687Z"
+      },
+      {
+        "moduleKey": "ATTENDANCE",
+        "moduleName": "Attendance",
+        "type": "OPTIONAL",
+        "status": "ACTIVE",
+        "enabled": false,
+        "version": "v1",
+        "description": "Daily attendance logs",
+        "createdAt": "2026-07-11T15:34:49.373Z",
+        "updatedAt": "2026-07-11T15:37:38.868Z"
+      }
+    ],
+    "moduleDependency": [
+      {
+        "id": "2523d1f9-5891-48ba-84f1-6d6e7dbf3ee7",
+        "moduleKey": "ATTENDANCE",
+        "dependsOnModuleKey": "STUDENTS"
+      },
+      {
+        "id": "a5d95adb-94e8-4b26-a0d9-b082e3964832",
+        "moduleKey": "EXAMS",
+        "dependsOnModuleKey": "STUDENTS"
+      },
+      {
+        "id": "4cd63381-cf44-4259-9ae0-c4f2f09e5fac",
+        "moduleKey": "RESULTS",
+        "dependsOnModuleKey": "EXAMS"
+      },
+      {
+        "id": "3be92cb9-0a67-41b4-b80b-491406f2d4df",
+        "moduleKey": "TRANSPORT",
+        "dependsOnModuleKey": "FEES"
+      },
+      {
+        "id": "7bd20870-987a-4002-891c-da8c6b761372",
+        "moduleKey": "SALARY",
+        "dependsOnModuleKey": "HR"
+      },
+      {
+        "id": "e053183d-1df8-4abc-8195-70f5eb2f5fa6",
+        "moduleKey": "GALLERY",
+        "dependsOnModuleKey": "WEBSITE"
+      }
+    ],
+    "systemSetting": [],
+    "user": [
+      {
+        "id": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "email": "principal@school.erp",
+        "passwordHash": "471c07169b2d04f5b1e5832546a4300b:ffbe9ccc08d7658f9f82d58a038c76a177888e5c92ca121ebd19f64f384202cab674137d3daaa4817b149ee55cc8c155fac087fc3faa2c30275477f11274b255",
+        "name": "Dr. Jane Doe",
+        "role": "PRINCIPAL",
+        "status": "ACTIVE",
+        "createdAt": "2026-06-24T10:05:39.661Z",
+        "updatedAt": "2026-06-24T10:05:39.661Z"
+      },
+      {
+        "id": "9a6c48ce-ac05-48d2-ba6e-bbc83eb36855",
+        "email": "clerk@school.erp",
+        "passwordHash": "c72172541e632f4211f2e421c8e2cc62:6265761221a2be0d1740c714742bec6b366c7b9d53e43abbd02cda7ac04d781719d483ca1a22e9bf4acc831ebad8b3d617710b89ea50eaf0f903ac4e29131d70",
+        "name": "John Clerk",
+        "role": "CLERK",
+        "status": "ACTIVE",
+        "createdAt": "2026-06-24T10:05:39.673Z",
+        "updatedAt": "2026-06-24T10:05:39.673Z"
+      },
+      {
+        "id": "8640a277-0272-4ad5-a832-66ac018d2055",
+        "email": "accountant@school.erp",
+        "passwordHash": "70cf6a220bdc760e5386a0b1e263baee:a9eef7883f232d1d38c5ac5c6a5a24b712b1f4836343103a451a2c7324de580f9365e45d3c961ae312c658e247f9e0ff1deb0d969f3de6cdc81c9a0429523bc6",
+        "name": "Alice Accountant",
+        "role": "ACCOUNTANT",
+        "status": "ACTIVE",
+        "createdAt": "2026-06-24T10:05:39.676Z",
+        "updatedAt": "2026-06-24T10:05:39.676Z"
+      },
+      {
+        "id": "11a4eaa6-7320-4b9b-a812-3f679b3cfa15",
+        "email": "teacher@school.erp",
+        "passwordHash": "282c5b8c4500cf1f98e40a6030640f44:b24f1de61125a7dd8fad422db3d99f5d0e7a06c2be8a083f0b21515473cbede75d122bc8f97b10a1dd31867cf9579deca72cae23086acd7017bbb90031d6496a",
+        "name": "Bob Teacher",
+        "role": "TEACHER",
+        "status": "ACTIVE",
+        "createdAt": "2026-06-24T10:05:39.679Z",
+        "updatedAt": "2026-06-24T10:05:39.679Z"
+      }
+    ],
+    "parent": [
+      {
+        "id": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "fatherName": "Father Test",
+        "motherName": null,
+        "mobile": "9990070023",
+        "alternateMobile": null,
+        "occupation": null,
+        "address": null,
+        "remarks": null,
+        "passwordHash": "$2b$10$QO6.Y/264q/wJ6Jb3u1V3.sR7Bv7d8sU6R7U/3bYc.H7z38n9k.6u",
+        "passwordChangedAt": null,
+        "lastLoginAt": null,
+        "isVerified": true,
+        "createdAt": "2026-06-24T10:08:18.471Z",
+        "updatedAt": "2026-06-24T10:08:18.471Z"
+      },
+      {
+        "id": "b672c4f2-7b2c-4e0a-9277-b360e8dccfc1",
+        "fatherName": "Nishan Singh",
+        "motherName": "Amandeep Kaur",
+        "mobile": "6280918604",
+        "alternateMobile": null,
+        "occupation": null,
+        "address": null,
+        "remarks": null,
+        "passwordHash": "$2b$10$QO6.Y/264q/wJ6Jb3u1V3.sR7Bv7d8sU6R7U/3bYc.H7z38n9k.6u",
+        "passwordChangedAt": null,
+        "lastLoginAt": null,
+        "isVerified": true,
+        "createdAt": "2026-06-24T13:08:17.703Z",
+        "updatedAt": "2026-06-24T13:08:17.703Z"
+      },
+      {
+        "id": "0aa3327b-f8ea-461e-a4b4-5868c2a48b30",
+        "fatherName": "Rajesh Kumar",
+        "motherName": "Sunita Devi",
+        "mobile": "9876543210",
+        "alternateMobile": null,
+        "occupation": null,
+        "address": "123, Sector 15, Noida, UP",
+        "remarks": null,
+        "passwordHash": "c34fdd4c5825cc2c5576046700d6dec3:d8aaaf935ea2e892a57436a3916162692bc07449d7d073e8164ba4828b0cd154b442a6c5b7fc4b61ca12e815d3f0db6f0430655ab527b3fdc0d47f25ca8a31cc",
+        "passwordChangedAt": null,
+        "lastLoginAt": null,
+        "isVerified": true,
+        "createdAt": "2026-07-14T03:25:57.415Z",
+        "updatedAt": "2026-07-14T03:25:57.415Z"
+      },
+      {
+        "id": "2138d8c6-8c0f-4fce-9a17-fb1ebe5b92b3",
+        "fatherName": "Father B",
+        "motherName": null,
+        "mobile": "2222222222",
+        "alternateMobile": null,
+        "occupation": null,
+        "address": "Address B",
+        "remarks": null,
+        "passwordHash": "48743c44e48b7692cc3e9af0878dc007:7cb67343f828ecd0eeed595cff65e596eb17e4169862cb5261d265e9cdebce4f25983fedf206ae8548b26784a4cd94d06bc262ef665d19c39618b9c1f9ab8dcb",
+        "passwordChangedAt": null,
+        "lastLoginAt": null,
+        "isVerified": true,
+        "createdAt": "2026-07-14T03:30:42.117Z",
+        "updatedAt": "2026-07-14T03:32:33.623Z"
+      },
+      {
+        "id": "776d36a0-68ae-4b27-a2c9-342388a89823",
+        "fatherName": "Father A",
+        "motherName": null,
+        "mobile": "1111111111",
+        "alternateMobile": null,
+        "occupation": null,
+        "address": "Address A",
+        "remarks": null,
+        "passwordHash": "b3ab17a4cd3fda9fe3778e46155b4302:4f6af9f602be33f092dec1e301c413dd3f088e02ee187692efaa8f5fede6d267c037e8664c27dcfc362edd98acbdfdc3e59cd9b083ba48d31a6e9b77e04f1fe7",
+        "passwordChangedAt": "2026-07-14T03:32:33.940Z",
+        "lastLoginAt": "2026-07-14T03:32:33.881Z",
+        "isVerified": true,
+        "createdAt": "2026-07-14T03:30:42.038Z",
+        "updatedAt": "2026-07-14T03:32:33.942Z"
+      }
+    ],
+    "student": [
+      {
+        "id": "a4e3a75b-ceb4-47ed-a717-a82b3979e9f4",
+        "admissionNumber": "SCH-A31185",
+        "name": "Student Alpha",
+        "dob": "2012-01-01T00:00:00.000Z",
+        "gender": "MALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-06-24T10:08:18.473Z",
+        "parentId": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "createdAt": "2026-06-24T10:08:18.473Z",
+        "updatedAt": "2026-06-24T10:08:18.473Z"
+      },
+      {
+        "id": "ca7ec062-961b-4cfa-ab62-68f40454e923",
+        "admissionNumber": "SCH-B79858",
+        "name": "Student Beta",
+        "dob": "2012-02-01T00:00:00.000Z",
+        "gender": "FEMALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-06-24T10:08:18.480Z",
+        "parentId": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "createdAt": "2026-06-24T10:08:18.480Z",
+        "updatedAt": "2026-06-24T10:08:18.480Z"
+      },
+      {
+        "id": "625000e6-356a-4367-a6cb-a681c69226ea",
+        "admissionNumber": "SCH-C98326",
+        "name": "Student Gamma",
+        "dob": "2012-03-01T00:00:00.000Z",
+        "gender": "MALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-06-24T10:08:18.482Z",
+        "parentId": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "createdAt": "2026-06-24T10:08:18.482Z",
+        "updatedAt": "2026-06-24T10:08:18.482Z"
+      },
+      {
+        "id": "b0dda942-d3b7-432d-a996-acaca7c9b697",
+        "admissionNumber": "SCH/2026/C10/0001",
+        "name": "Phase 7 Student",
+        "dob": "2012-05-15T00:00:00.000Z",
+        "gender": "Male",
+        "photo": "students/student-b0dda942-d3b7-432d-a996-acaca7c9b697.webp",
+        "status": "ACTIVE",
+        "admissionDate": "2026-06-24T10:28:25.276Z",
+        "parentId": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "createdAt": "2026-06-24T10:28:25.279Z",
+        "updatedAt": "2026-06-24T10:28:25.326Z"
+      },
+      {
+        "id": "d571c9f6-bcce-48ab-97f8-34556b2355ef",
+        "admissionNumber": "SCH/2026/C10/0002",
+        "name": "Phase 7 Student",
+        "dob": "2012-05-15T00:00:00.000Z",
+        "gender": "Male",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-06-24T10:28:42.698Z",
+        "parentId": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "createdAt": "2026-06-24T10:28:42.700Z",
+        "updatedAt": "2026-06-24T10:28:42.752Z"
+      },
+      {
+        "id": "7cd51c5a-bcd7-4096-bb23-dbf8a44f5cca",
+        "admissionNumber": "SCH/2026/08/2385",
+        "name": "ReportTestStudent-1",
+        "dob": "2015-06-15T00:00:00.000Z",
+        "gender": "MALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-06-24T12:15:47.828Z",
+        "parentId": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "createdAt": "2026-06-24T12:15:47.832Z",
+        "updatedAt": "2026-06-24T12:15:47.832Z"
+      },
+      {
+        "id": "d212b7e9-cdef-4a79-93a0-bbada9d558cb",
+        "admissionNumber": "SCH/2026/08/1017",
+        "name": "ReportTestStudent-2",
+        "dob": "2014-08-20T00:00:00.000Z",
+        "gender": "FEMALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-06-24T12:15:47.834Z",
+        "parentId": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "createdAt": "2026-06-24T12:15:47.836Z",
+        "updatedAt": "2026-06-24T12:15:47.836Z"
+      },
+      {
+        "id": "db965b8d-285a-4be5-a147-a46a0d577b22",
+        "admissionNumber": "SCH/2026/NUR/0003",
+        "name": "Test Student",
+        "dob": "2018-05-15T00:00:00.000Z",
+        "gender": "MALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-06-24T00:00:00.000Z",
+        "parentId": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "createdAt": "2026-06-24T13:00:04.183Z",
+        "updatedAt": "2026-06-24T13:00:04.183Z"
+      },
+      {
+        "id": "56a65bd3-5c81-4645-806d-47349708496d",
+        "admissionNumber": "SCH/2026/NUR/0004",
+        "name": "Test Student",
+        "dob": "2018-05-15T00:00:00.000Z",
+        "gender": "MALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-06-24T00:00:00.000Z",
+        "parentId": "bb33131e-edc3-404c-a7d2-feae1792767e",
+        "createdAt": "2026-06-24T13:03:42.667Z",
+        "updatedAt": "2026-06-24T13:03:42.667Z"
+      },
+      {
+        "id": "dd479921-103f-402d-9cec-a26abe982aba",
+        "admissionNumber": "SCH/2026/C1/0005",
+        "name": "Azeej Kaur",
+        "dob": "2017-01-31T00:00:00.000Z",
+        "gender": "MALE",
+        "photo": "students/student-dd479921-103f-402d-9cec-a26abe982aba.webp",
+        "status": "ACTIVE",
+        "admissionDate": "2026-04-24T00:00:00.000Z",
+        "parentId": "b672c4f2-7b2c-4e0a-9277-b360e8dccfc1",
+        "createdAt": "2026-06-24T13:08:48.162Z",
+        "updatedAt": "2026-06-24T13:09:07.084Z"
+      },
+      {
+        "id": "7d7dec31-ea98-4079-9b7d-39c803926263",
+        "admissionNumber": "SCH-2026-9999",
+        "name": "Aarav Kumar",
+        "dob": "2012-05-15T00:00:00.000Z",
+        "gender": "MALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-07-14T03:25:57.429Z",
+        "parentId": "0aa3327b-f8ea-461e-a4b4-5868c2a48b30",
+        "createdAt": "2026-07-14T03:25:57.429Z",
+        "updatedAt": "2026-07-14T03:25:57.429Z"
+      },
+      {
+        "id": "fb650be1-b921-46d4-bb56-9ff5dd75a3dd",
+        "admissionNumber": "ADM-AAAA-2026",
+        "name": "Student A",
+        "dob": "2012-01-01T00:00:00.000Z",
+        "gender": "MALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-07-14T03:30:42.053Z",
+        "parentId": "776d36a0-68ae-4b27-a2c9-342388a89823",
+        "createdAt": "2026-07-14T03:30:42.053Z",
+        "updatedAt": "2026-07-14T03:32:33.564Z"
+      },
+      {
+        "id": "be0ff38f-745a-4823-ba20-7c9dac4217bb",
+        "admissionNumber": "ADM-BBBB-2026",
+        "name": "Student B",
+        "dob": "2012-02-02T00:00:00.000Z",
+        "gender": "FEMALE",
+        "photo": null,
+        "status": "ACTIVE",
+        "admissionDate": "2026-07-14T03:30:42.119Z",
+        "parentId": "2138d8c6-8c0f-4fce-9a17-fb1ebe5b92b3",
+        "createdAt": "2026-07-14T03:30:42.119Z",
+        "updatedAt": "2026-07-14T03:32:33.624Z"
+      }
+    ],
+    "academicSession": [
+      {
+        "id": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "name": "2026-27",
+        "isActive": true,
+        "startDate": "2026-04-01T00:00:00.000Z",
+        "endDate": "2027-03-31T23:59:59.000Z",
+        "createdAt": "2026-06-24T10:05:39.683Z",
+        "updatedAt": "2026-06-24T10:05:39.683Z"
+      }
+    ],
+    "class": [
+      {
+        "id": "12026550-6a89-4d42-9881-ad97640ff224",
+        "name": "Nursery",
+        "sequence": 1,
+        "createdAt": "2026-06-24T10:05:39.693Z",
+        "updatedAt": "2026-06-24T10:05:39.693Z"
+      },
+      {
+        "id": "8b299f34-26a9-473d-9ff2-6539e1c9c970",
+        "name": "LKG",
+        "sequence": 2,
+        "createdAt": "2026-06-24T10:05:39.716Z",
+        "updatedAt": "2026-06-24T10:05:39.716Z"
+      },
+      {
+        "id": "eca706ea-2b82-403b-831a-095fc8c9ae01",
+        "name": "UKG",
+        "sequence": 3,
+        "createdAt": "2026-06-24T10:05:39.727Z",
+        "updatedAt": "2026-06-24T10:05:39.727Z"
+      },
+      {
+        "id": "c82956b2-08f4-4586-a950-40421502874b",
+        "name": "Class 1",
+        "sequence": 4,
+        "createdAt": "2026-06-24T10:05:39.736Z",
+        "updatedAt": "2026-06-24T10:05:39.736Z"
+      },
+      {
+        "id": "b89c3a3e-df19-4dfe-bda8-f3bf2b8cc77c",
+        "name": "Class 2",
+        "sequence": 5,
+        "createdAt": "2026-06-24T10:05:39.748Z",
+        "updatedAt": "2026-06-24T10:05:39.748Z"
+      },
+      {
+        "id": "67192dee-ee4f-44f9-a7b0-b8d94fe4cef9",
+        "name": "Class 3",
+        "sequence": 6,
+        "createdAt": "2026-06-24T10:05:39.759Z",
+        "updatedAt": "2026-06-24T10:05:39.759Z"
+      },
+      {
+        "id": "7479ae3c-dd6f-46c0-9f59-f517968240c4",
+        "name": "Class 4",
+        "sequence": 7,
+        "createdAt": "2026-06-24T10:05:39.770Z",
+        "updatedAt": "2026-06-24T10:05:39.770Z"
+      },
+      {
+        "id": "00c8bfd1-f4c8-4a43-a5cf-d89475a21d55",
+        "name": "Class 5",
+        "sequence": 8,
+        "createdAt": "2026-06-24T10:05:39.781Z",
+        "updatedAt": "2026-06-24T10:05:39.781Z"
+      },
+      {
+        "id": "b54b39b7-c26c-445e-804f-14e0236696a2",
+        "name": "Class 6",
+        "sequence": 9,
+        "createdAt": "2026-06-24T10:05:39.792Z",
+        "updatedAt": "2026-06-24T10:05:39.792Z"
+      },
+      {
+        "id": "ed80a044-f189-44b3-9e63-a8742b9bd080",
+        "name": "Class 7",
+        "sequence": 10,
+        "createdAt": "2026-06-24T10:05:39.801Z",
+        "updatedAt": "2026-06-24T10:05:39.801Z"
+      },
+      {
+        "id": "4d8eb0a9-5624-431d-bf57-45ad1016cc2b",
+        "name": "Class 8",
+        "sequence": 11,
+        "createdAt": "2026-06-24T10:05:39.813Z",
+        "updatedAt": "2026-06-24T10:05:39.813Z"
+      },
+      {
+        "id": "a7c8a54b-d432-4768-aab5-7141072d3e9e",
+        "name": "Class 9",
+        "sequence": 12,
+        "createdAt": "2026-06-24T10:05:39.825Z",
+        "updatedAt": "2026-06-24T10:05:39.825Z"
+      },
+      {
+        "id": "4f370f45-59b2-4505-9966-753471fc51de",
+        "name": "Class 10",
+        "sequence": 13,
+        "createdAt": "2026-06-24T10:05:39.832Z",
+        "updatedAt": "2026-06-24T10:05:39.832Z"
+      },
+      {
+        "id": "267f2695-2fd0-4c6b-b150-705ad16e9389",
+        "name": "Class 11",
+        "sequence": 14,
+        "createdAt": "2026-06-24T10:05:39.842Z",
+        "updatedAt": "2026-06-24T10:05:39.842Z"
+      },
+      {
+        "id": "6998bdc4-e429-4132-8538-3e79f6711cc3",
+        "name": "Class 12",
+        "sequence": 15,
+        "createdAt": "2026-06-24T10:05:39.848Z",
+        "updatedAt": "2026-06-24T10:05:39.848Z"
+      }
+    ],
+    "section": [
+      {
+        "id": "557d21c8-0e62-48f8-87c1-566da2cf7bad",
+        "classId": "12026550-6a89-4d42-9881-ad97640ff224",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.699Z",
+        "updatedAt": "2026-06-24T10:05:39.699Z"
+      },
+      {
+        "id": "62fea7b6-92e2-403b-86ba-db8228d79f09",
+        "classId": "12026550-6a89-4d42-9881-ad97640ff224",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.705Z",
+        "updatedAt": "2026-06-24T10:05:39.705Z"
+      },
+      {
+        "id": "eed1483d-4fd8-40c8-a251-9584fa2c6cb0",
+        "classId": "12026550-6a89-4d42-9881-ad97640ff224",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.708Z",
+        "updatedAt": "2026-06-24T10:05:39.708Z"
+      },
+      {
+        "id": "8c359afc-04ad-45dc-b72b-51f39d089cf2",
+        "classId": "8b299f34-26a9-473d-9ff2-6539e1c9c970",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.718Z",
+        "updatedAt": "2026-06-24T10:05:39.718Z"
+      },
+      {
+        "id": "6e5584e8-e4a7-4d1a-b485-fcc7a9784f9d",
+        "classId": "8b299f34-26a9-473d-9ff2-6539e1c9c970",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.720Z",
+        "updatedAt": "2026-06-24T10:05:39.720Z"
+      },
+      {
+        "id": "28a18af1-be67-4f92-aec5-f00a3d9f938c",
+        "classId": "8b299f34-26a9-473d-9ff2-6539e1c9c970",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.723Z",
+        "updatedAt": "2026-06-24T10:05:39.723Z"
+      },
+      {
+        "id": "289db141-1a91-4876-9a6a-3f857888a390",
+        "classId": "eca706ea-2b82-403b-831a-095fc8c9ae01",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.729Z",
+        "updatedAt": "2026-06-24T10:05:39.729Z"
+      },
+      {
+        "id": "e066cc9a-f7f5-488f-b6aa-4bca980ac2e2",
+        "classId": "eca706ea-2b82-403b-831a-095fc8c9ae01",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.730Z",
+        "updatedAt": "2026-06-24T10:05:39.730Z"
+      },
+      {
+        "id": "361bd03c-9871-4870-814f-d96dd26b37b3",
+        "classId": "eca706ea-2b82-403b-831a-095fc8c9ae01",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.732Z",
+        "updatedAt": "2026-06-24T10:05:39.732Z"
+      },
+      {
+        "id": "5133bc03-1d5e-4a93-9c3a-6844a6bfdd27",
+        "classId": "c82956b2-08f4-4586-a950-40421502874b",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.740Z",
+        "updatedAt": "2026-06-24T10:05:39.740Z"
+      },
+      {
+        "id": "0a45254d-6c51-4cc6-9740-a75e14f533fe",
+        "classId": "c82956b2-08f4-4586-a950-40421502874b",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.742Z",
+        "updatedAt": "2026-06-24T10:05:39.742Z"
+      },
+      {
+        "id": "7088ca4c-e822-47d0-adb2-88afd403c177",
+        "classId": "c82956b2-08f4-4586-a950-40421502874b",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.744Z",
+        "updatedAt": "2026-06-24T10:05:39.744Z"
+      },
+      {
+        "id": "788d90e3-62d3-465b-af5e-5c40cef00ea3",
+        "classId": "b89c3a3e-df19-4dfe-bda8-f3bf2b8cc77c",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.749Z",
+        "updatedAt": "2026-06-24T10:05:39.749Z"
+      },
+      {
+        "id": "f96b2c3b-b642-40d8-9d09-a22365847941",
+        "classId": "b89c3a3e-df19-4dfe-bda8-f3bf2b8cc77c",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.751Z",
+        "updatedAt": "2026-06-24T10:05:39.751Z"
+      },
+      {
+        "id": "4d1819f6-6659-401c-b027-e70c74f67e0b",
+        "classId": "b89c3a3e-df19-4dfe-bda8-f3bf2b8cc77c",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.754Z",
+        "updatedAt": "2026-06-24T10:05:39.754Z"
+      },
+      {
+        "id": "6d3d4a83-19e0-4337-aa0f-f2cfde87bf68",
+        "classId": "67192dee-ee4f-44f9-a7b0-b8d94fe4cef9",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.762Z",
+        "updatedAt": "2026-06-24T10:05:39.762Z"
+      },
+      {
+        "id": "19a74f7d-39c2-4535-a876-1b37c4a662d6",
+        "classId": "67192dee-ee4f-44f9-a7b0-b8d94fe4cef9",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.764Z",
+        "updatedAt": "2026-06-24T10:05:39.764Z"
+      },
+      {
+        "id": "9165a3cc-545b-44dd-b383-73f0b5ac224c",
+        "classId": "67192dee-ee4f-44f9-a7b0-b8d94fe4cef9",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.765Z",
+        "updatedAt": "2026-06-24T10:05:39.765Z"
+      },
+      {
+        "id": "956d21e7-c094-4dae-b494-7e64b53fc120",
+        "classId": "7479ae3c-dd6f-46c0-9f59-f517968240c4",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.773Z",
+        "updatedAt": "2026-06-24T10:05:39.773Z"
+      },
+      {
+        "id": "3a9bbb8a-28a0-4a04-b355-43c18b2e6360",
+        "classId": "7479ae3c-dd6f-46c0-9f59-f517968240c4",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.776Z",
+        "updatedAt": "2026-06-24T10:05:39.776Z"
+      },
+      {
+        "id": "d6035ba8-da2c-4cfa-8430-1580ba0ebdd2",
+        "classId": "7479ae3c-dd6f-46c0-9f59-f517968240c4",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.778Z",
+        "updatedAt": "2026-06-24T10:05:39.778Z"
+      },
+      {
+        "id": "87de9708-5b8b-44d9-9216-8768a797cb79",
+        "classId": "00c8bfd1-f4c8-4a43-a5cf-d89475a21d55",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.783Z",
+        "updatedAt": "2026-06-24T10:05:39.783Z"
+      },
+      {
+        "id": "1183df8d-7f94-40b1-9308-11b8ea8b3cd3",
+        "classId": "00c8bfd1-f4c8-4a43-a5cf-d89475a21d55",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.785Z",
+        "updatedAt": "2026-06-24T10:05:39.785Z"
+      },
+      {
+        "id": "84757f37-e554-4ae2-bbb5-3868246cd659",
+        "classId": "00c8bfd1-f4c8-4a43-a5cf-d89475a21d55",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.787Z",
+        "updatedAt": "2026-06-24T10:05:39.787Z"
+      },
+      {
+        "id": "d7855f92-0df1-4756-8eab-5764980da9cf",
+        "classId": "b54b39b7-c26c-445e-804f-14e0236696a2",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.794Z",
+        "updatedAt": "2026-06-24T10:05:39.794Z"
+      },
+      {
+        "id": "e707b79f-a400-4be5-a698-df6fa299f90c",
+        "classId": "b54b39b7-c26c-445e-804f-14e0236696a2",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.795Z",
+        "updatedAt": "2026-06-24T10:05:39.795Z"
+      },
+      {
+        "id": "38615297-4ce7-4037-b7a2-44ce09fbd3e9",
+        "classId": "b54b39b7-c26c-445e-804f-14e0236696a2",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.797Z",
+        "updatedAt": "2026-06-24T10:05:39.797Z"
+      },
+      {
+        "id": "20b9f95b-d7e8-4c6e-8ae3-f31a9721495d",
+        "classId": "ed80a044-f189-44b3-9e63-a8742b9bd080",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.804Z",
+        "updatedAt": "2026-06-24T10:05:39.804Z"
+      },
+      {
+        "id": "75e1c9d4-69b2-4cca-954c-6ea5fbc5689f",
+        "classId": "ed80a044-f189-44b3-9e63-a8742b9bd080",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.808Z",
+        "updatedAt": "2026-06-24T10:05:39.808Z"
+      },
+      {
+        "id": "b5af0234-d42a-4b99-9138-8c45d76f23d8",
+        "classId": "ed80a044-f189-44b3-9e63-a8742b9bd080",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.809Z",
+        "updatedAt": "2026-06-24T10:05:39.809Z"
+      },
+      {
+        "id": "08cb9146-3f4e-4cc7-a86b-7c7d17621df5",
+        "classId": "4d8eb0a9-5624-431d-bf57-45ad1016cc2b",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.815Z",
+        "updatedAt": "2026-06-24T10:05:39.815Z"
+      },
+      {
+        "id": "1a72a052-204b-4c01-b675-d8edc6a79266",
+        "classId": "4d8eb0a9-5624-431d-bf57-45ad1016cc2b",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.817Z",
+        "updatedAt": "2026-06-24T10:05:39.817Z"
+      },
+      {
+        "id": "66ff0479-ae97-4547-8d73-5c7512bf80c0",
+        "classId": "4d8eb0a9-5624-431d-bf57-45ad1016cc2b",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.819Z",
+        "updatedAt": "2026-06-24T10:05:39.819Z"
+      },
+      {
+        "id": "bd016adb-8949-47bf-b345-54a308052822",
+        "classId": "a7c8a54b-d432-4768-aab5-7141072d3e9e",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.826Z",
+        "updatedAt": "2026-06-24T10:05:39.826Z"
+      },
+      {
+        "id": "37dfcfdc-c2e8-471b-a351-a65a2f60509e",
+        "classId": "a7c8a54b-d432-4768-aab5-7141072d3e9e",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.828Z",
+        "updatedAt": "2026-06-24T10:05:39.828Z"
+      },
+      {
+        "id": "22fa2822-5176-4627-bc03-8587efd2e8dd",
+        "classId": "a7c8a54b-d432-4768-aab5-7141072d3e9e",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.829Z",
+        "updatedAt": "2026-06-24T10:05:39.829Z"
+      },
+      {
+        "id": "1717f876-532d-4b10-a855-38c33ab42f4e",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.833Z",
+        "updatedAt": "2026-06-24T10:05:39.833Z"
+      },
+      {
+        "id": "53e24140-a853-4954-8584-e3669b06c9f8",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.834Z",
+        "updatedAt": "2026-06-24T10:05:39.834Z"
+      },
+      {
+        "id": "52550c00-a144-4a28-9300-05e7fb55fd1d",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.836Z",
+        "updatedAt": "2026-06-24T10:05:39.836Z"
+      },
+      {
+        "id": "65598845-2ab3-4392-a9d3-47599a511d11",
+        "classId": "267f2695-2fd0-4c6b-b150-705ad16e9389",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.843Z",
+        "updatedAt": "2026-06-24T10:05:39.843Z"
+      },
+      {
+        "id": "f1566cbf-4ad1-4e4e-9153-a46a4cd2d455",
+        "classId": "267f2695-2fd0-4c6b-b150-705ad16e9389",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.845Z",
+        "updatedAt": "2026-06-24T10:05:39.845Z"
+      },
+      {
+        "id": "c630fb8b-80b3-4273-a18c-022b539a8834",
+        "classId": "267f2695-2fd0-4c6b-b150-705ad16e9389",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.846Z",
+        "updatedAt": "2026-06-24T10:05:39.846Z"
+      },
+      {
+        "id": "be048340-7e16-425f-a3ba-47f490707557",
+        "classId": "6998bdc4-e429-4132-8538-3e79f6711cc3",
+        "name": "A",
+        "createdAt": "2026-06-24T10:05:39.850Z",
+        "updatedAt": "2026-06-24T10:05:39.850Z"
+      },
+      {
+        "id": "32808b6d-c0fd-472d-b7d7-f1f8f8a7ee97",
+        "classId": "6998bdc4-e429-4132-8538-3e79f6711cc3",
+        "name": "B",
+        "createdAt": "2026-06-24T10:05:39.851Z",
+        "updatedAt": "2026-06-24T10:05:39.851Z"
+      },
+      {
+        "id": "0bd94bfc-f605-4ed5-a2e8-830246e72d8b",
+        "classId": "6998bdc4-e429-4132-8538-3e79f6711cc3",
+        "name": "C",
+        "createdAt": "2026-06-24T10:05:39.852Z",
+        "updatedAt": "2026-06-24T10:05:39.852Z"
+      }
+    ],
+    "classTeacher": [],
+    "classEnrollment": [
+      {
+        "id": "594a9b77-e50e-45aa-9b22-b8a46fe88c86",
+        "studentId": "a4e3a75b-ceb4-47ed-a717-a82b3979e9f4",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "sectionId": "1717f876-532d-4b10-a855-38c33ab42f4e",
+        "isArchived": false,
+        "createdAt": "2026-06-24T10:08:18.473Z",
+        "updatedAt": "2026-06-24T10:08:18.473Z"
+      },
+      {
+        "id": "4579f776-c82d-4949-b4ff-fc0067710362",
+        "studentId": "ca7ec062-961b-4cfa-ab62-68f40454e923",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "sectionId": "1717f876-532d-4b10-a855-38c33ab42f4e",
+        "isArchived": false,
+        "createdAt": "2026-06-24T10:08:18.480Z",
+        "updatedAt": "2026-06-24T10:08:18.480Z"
+      },
+      {
+        "id": "e975de78-2960-4dd8-9140-5a4ec19f7941",
+        "studentId": "625000e6-356a-4367-a6cb-a681c69226ea",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "sectionId": "1717f876-532d-4b10-a855-38c33ab42f4e",
+        "isArchived": false,
+        "createdAt": "2026-06-24T10:08:18.482Z",
+        "updatedAt": "2026-06-24T10:08:18.482Z"
+      },
+      {
+        "id": "52cebff2-618f-4dc5-990e-6151eafd1fb7",
+        "studentId": "b0dda942-d3b7-432d-a996-acaca7c9b697",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "sectionId": "1717f876-532d-4b10-a855-38c33ab42f4e",
+        "isArchived": false,
+        "createdAt": "2026-06-24T10:28:25.283Z",
+        "updatedAt": "2026-06-24T10:28:25.283Z"
+      },
+      {
+        "id": "2b32b457-a12f-4597-a82d-6236e96c2db8",
+        "studentId": "d571c9f6-bcce-48ab-97f8-34556b2355ef",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "sectionId": "1717f876-532d-4b10-a855-38c33ab42f4e",
+        "isArchived": false,
+        "createdAt": "2026-06-24T10:28:42.702Z",
+        "updatedAt": "2026-06-24T10:28:42.702Z"
+      },
+      {
+        "id": "e6479645-5cb5-4b7a-b6c3-9472290ae8a7",
+        "studentId": "7cd51c5a-bcd7-4096-bb23-dbf8a44f5cca",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4d8eb0a9-5624-431d-bf57-45ad1016cc2b",
+        "sectionId": "08cb9146-3f4e-4cc7-a86b-7c7d17621df5",
+        "isArchived": false,
+        "createdAt": "2026-06-24T12:15:47.837Z",
+        "updatedAt": "2026-06-24T12:15:47.837Z"
+      },
+      {
+        "id": "2585cd80-b22b-4443-b808-1ec63c9d6791",
+        "studentId": "d212b7e9-cdef-4a79-93a0-bbada9d558cb",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4d8eb0a9-5624-431d-bf57-45ad1016cc2b",
+        "sectionId": "08cb9146-3f4e-4cc7-a86b-7c7d17621df5",
+        "isArchived": false,
+        "createdAt": "2026-06-24T12:15:47.842Z",
+        "updatedAt": "2026-06-24T12:15:47.842Z"
+      },
+      {
+        "id": "7096625a-8c7a-4f0d-99a1-5cef5a5d5803",
+        "studentId": "db965b8d-285a-4be5-a147-a46a0d577b22",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "12026550-6a89-4d42-9881-ad97640ff224",
+        "sectionId": null,
+        "isArchived": false,
+        "createdAt": "2026-06-24T13:00:04.186Z",
+        "updatedAt": "2026-06-24T13:00:04.186Z"
+      },
+      {
+        "id": "d5743331-df43-4ff2-9893-b2e7ee6fadce",
+        "studentId": "56a65bd3-5c81-4645-806d-47349708496d",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "12026550-6a89-4d42-9881-ad97640ff224",
+        "sectionId": null,
+        "isArchived": false,
+        "createdAt": "2026-06-24T13:03:42.670Z",
+        "updatedAt": "2026-06-24T13:03:42.670Z"
+      },
+      {
+        "id": "72dda8bd-1402-4a23-8680-133f33ac38f1",
+        "studentId": "dd479921-103f-402d-9cec-a26abe982aba",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "c82956b2-08f4-4586-a950-40421502874b",
+        "sectionId": "5133bc03-1d5e-4a93-9c3a-6844a6bfdd27",
+        "isArchived": false,
+        "createdAt": "2026-06-24T13:08:48.166Z",
+        "updatedAt": "2026-06-24T13:08:48.166Z"
+      },
+      {
+        "id": "73e79c21-a2d4-4dbb-a14a-8496f9139c5d",
+        "studentId": "7d7dec31-ea98-4079-9b7d-39c803926263",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "12026550-6a89-4d42-9881-ad97640ff224",
+        "sectionId": "557d21c8-0e62-48f8-87c1-566da2cf7bad",
+        "isArchived": false,
+        "createdAt": "2026-07-14T03:25:57.434Z",
+        "updatedAt": "2026-07-14T03:25:57.434Z"
+      },
+      {
+        "id": "5165feea-8117-4e50-a366-648e07aa93d0",
+        "studentId": "fb650be1-b921-46d4-bb56-9ff5dd75a3dd",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "sectionId": "1717f876-532d-4b10-a855-38c33ab42f4e",
+        "isArchived": false,
+        "createdAt": "2026-07-14T03:31:47.127Z",
+        "updatedAt": "2026-07-14T03:32:33.633Z"
+      },
+      {
+        "id": "51efb72e-81de-4d0e-b416-5edb4e3e9207",
+        "studentId": "be0ff38f-745a-4823-ba20-7c9dac4217bb",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "a7c8a54b-d432-4768-aab5-7141072d3e9e",
+        "sectionId": "37dfcfdc-c2e8-471b-a351-a65a2f60509e",
+        "isArchived": false,
+        "createdAt": "2026-07-14T03:31:47.130Z",
+        "updatedAt": "2026-07-14T03:32:33.635Z"
+      }
+    ],
+    "subject": [
+      {
+        "id": "89309d63-d326-4fdc-9a96-225cf908f36e",
+        "name": "Mathematics",
+        "code": "MATH",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "isOptional": false,
+        "createdAt": "2026-06-24T10:05:39.859Z"
+      },
+      {
+        "id": "067ca685-4420-42da-a0ad-748dd48cea07",
+        "name": "English",
+        "code": "ENG",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "isOptional": false,
+        "createdAt": "2026-06-24T10:05:39.862Z"
+      },
+      {
+        "id": "b57e5233-e2cc-4caa-badd-777a0770361d",
+        "name": "Science",
+        "code": "SCI",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "isOptional": false,
+        "createdAt": "2026-06-24T10:05:39.864Z"
+      },
+      {
+        "id": "83442440-0317-4e9e-bfaf-13a993358e62",
+        "name": "Social Studies",
+        "code": "SST",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "isOptional": false,
+        "createdAt": "2026-06-24T10:05:39.866Z"
+      },
+      {
+        "id": "81722cd0-747e-4689-ad4a-78c314fdb9f0",
+        "name": "Hindi",
+        "code": "HIN",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "isOptional": false,
+        "createdAt": "2026-06-24T10:05:39.868Z"
+      },
+      {
+        "id": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "name": "Advanced Science",
+        "code": "ADSCI10",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "isOptional": false,
+        "createdAt": "2026-06-24T10:08:18.488Z"
+      },
+      {
+        "id": "7d6f7ab6-5459-4a9e-a544-6631e71b8050",
+        "name": "eng",
+        "code": "E",
+        "classId": "00c8bfd1-f4c8-4a43-a5cf-d89475a21d55",
+        "isOptional": false,
+        "createdAt": "2026-07-11T14:55:45.503Z"
+      },
+      {
+        "id": "19e3514b-7b46-48e6-a5e7-e595ee689d23",
+        "name": "punjabi",
+        "code": "PBI",
+        "classId": "00c8bfd1-f4c8-4a43-a5cf-d89475a21d55",
+        "isOptional": false,
+        "createdAt": "2026-07-11T14:55:56.489Z"
+      },
+      {
+        "id": "f874bb70-1e5a-4930-926d-4c4e28273856",
+        "name": "Eng",
+        "code": "E",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "isOptional": false,
+        "createdAt": "2026-07-11T14:57:02.220Z"
+      },
+      {
+        "id": "478217b5-9911-4110-a968-fd7cde118a53",
+        "name": "Mathematics",
+        "code": "MATHS",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "isOptional": false,
+        "createdAt": "2026-07-14T03:32:18.265Z"
+      },
+      {
+        "id": "e88b9920-5699-4178-b022-1327aec5a7e3",
+        "name": "Science",
+        "code": "SCIEN",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "isOptional": false,
+        "createdAt": "2026-07-14T03:32:18.271Z"
+      }
+    ],
+    "timetable": [
+      {
+        "id": "79f37df0-80ec-4172-949f-89cd98bf1bfa",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "sectionId": "1717f876-532d-4b10-a855-38c33ab42f4e",
+        "dayOfWeek": 1,
+        "periodNumber": 2,
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "staffId": "7163d297-56bb-45ce-8f8f-571963c1d5a5",
+        "startTime": "09:45",
+        "endTime": "10:30"
+      }
+    ],
+    "attendance": [
+      {
+        "id": "977fd501-4bcb-434b-b50a-4033b59c289b",
+        "enrollmentId": "e6479645-5cb5-4b7a-b6c3-9472290ae8a7",
+        "date": "2026-06-01T00:00:00.000Z",
+        "status": "PRESENT",
+        "remarks": null,
+        "createdAt": "2026-06-24T12:15:47.938Z",
+        "updatedAt": "2026-06-24T12:15:47.938Z"
+      },
+      {
+        "id": "4a5de6e8-f243-44bf-aa79-f52beec99782",
+        "enrollmentId": "e6479645-5cb5-4b7a-b6c3-9472290ae8a7",
+        "date": "2026-06-02T00:00:00.000Z",
+        "status": "ABSENT",
+        "remarks": null,
+        "createdAt": "2026-06-24T12:15:47.944Z",
+        "updatedAt": "2026-06-24T12:15:47.944Z"
+      },
+      {
+        "id": "1a8d25ac-6184-49c0-bd58-974c4250f465",
+        "enrollmentId": "e6479645-5cb5-4b7a-b6c3-9472290ae8a7",
+        "date": "2026-06-03T00:00:00.000Z",
+        "status": "LATE",
+        "remarks": null,
+        "createdAt": "2026-06-24T12:15:47.945Z",
+        "updatedAt": "2026-06-24T12:15:47.945Z"
+      }
+    ],
+    "attendanceSummary": [],
+    "notice": [
+      {
+        "id": "a2bd39e1-4740-4bbe-bfa1-5477540a2e88",
+        "title": "Expired Announcement",
+        "description": "This is in the past.",
+        "targetRole": null,
+        "targetClass": null,
+        "publishDate": "2026-06-24T08:28:42.758Z",
+        "expiryDate": "2026-06-24T09:28:42.758Z",
+        "status": "EXPIRED",
+        "createdAt": "2026-06-24T10:28:42.759Z",
+        "updatedAt": "2026-06-24T10:28:42.764Z"
+      },
+      {
+        "id": "1333ec1e-eb02-474f-b4ed-85e985dc89ca",
+        "title": "Phase 7 Sports Meet",
+        "description": "Join our sports meet on Friday.",
+        "targetRole": "TEACHER",
+        "targetClass": null,
+        "publishDate": "2026-06-24T10:28:42.756Z",
+        "expiryDate": "2026-06-25T10:28:42.754Z",
+        "status": "EXPIRED",
+        "createdAt": "2026-06-24T10:28:42.755Z",
+        "updatedAt": "2026-07-11T15:38:28.127Z"
+      },
+      {
+        "id": "8dad240c-2acd-461c-a3fc-2027fd7d7407",
+        "title": "Annual Day Celebrations",
+        "description": "Scheduled for December 15th.",
+        "targetRole": null,
+        "targetClass": null,
+        "publishDate": null,
+        "expiryDate": null,
+        "status": "PUBLISHED",
+        "createdAt": "2026-07-14T03:32:18.296Z",
+        "updatedAt": "2026-07-14T03:32:18.296Z"
+      },
+      {
+        "id": "91f537f1-9f11-4fa6-9bcc-326394bc15e5",
+        "title": "Class 10 Syllabus Update",
+        "description": "Chapters 5-8 are included in maths.",
+        "targetRole": null,
+        "targetClass": "Class 10",
+        "publishDate": null,
+        "expiryDate": null,
+        "status": "PUBLISHED",
+        "createdAt": "2026-07-14T03:32:18.301Z",
+        "updatedAt": "2026-07-14T03:32:18.301Z"
+      },
+      {
+        "id": "7e2b52d7-d521-4415-b908-9ad97f3cbfca",
+        "title": "Class 9 Projects",
+        "description": "Science projects due tomorrow.",
+        "targetRole": null,
+        "targetClass": "Class 9",
+        "publishDate": null,
+        "expiryDate": null,
+        "status": "PUBLISHED",
+        "createdAt": "2026-07-14T03:32:18.303Z",
+        "updatedAt": "2026-07-14T03:32:18.303Z"
+      },
+      {
+        "id": "37debc0a-e8d2-4139-8992-5b23aab5465f",
+        "title": "Annual Day Celebrations",
+        "description": "Scheduled for December 15th.",
+        "targetRole": null,
+        "targetClass": null,
+        "publishDate": null,
+        "expiryDate": null,
+        "status": "PUBLISHED",
+        "createdAt": "2026-07-14T03:32:33.650Z",
+        "updatedAt": "2026-07-14T03:32:33.650Z"
+      },
+      {
+        "id": "08a26dee-bc0f-4a30-876c-b118629f729e",
+        "title": "Class 10 Syllabus Update",
+        "description": "Chapters 5-8 are included in maths.",
+        "targetRole": null,
+        "targetClass": "Class 10",
+        "publishDate": null,
+        "expiryDate": null,
+        "status": "PUBLISHED",
+        "createdAt": "2026-07-14T03:32:33.651Z",
+        "updatedAt": "2026-07-14T03:32:33.651Z"
+      },
+      {
+        "id": "b8f07e11-7ac4-4839-a65e-a65735460c08",
+        "title": "Class 9 Projects",
+        "description": "Science projects due tomorrow.",
+        "targetRole": null,
+        "targetClass": "Class 9",
+        "publishDate": null,
+        "expiryDate": null,
+        "status": "PUBLISHED",
+        "createdAt": "2026-07-14T03:32:33.652Z",
+        "updatedAt": "2026-07-14T03:32:33.652Z"
+      }
+    ],
+    "galleryItem": [],
+    "feePlan": [
+      {
+        "id": "bc25ddea-1b14-4358-b580-425a137a01df",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "12026550-6a89-4d42-9881-ad97640ff224",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.711Z",
+        "updatedAt": "2026-06-24T10:05:39.711Z"
+      },
+      {
+        "id": "158a77a3-63b1-4e71-878b-9df2d471f225",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "8b299f34-26a9-473d-9ff2-6539e1c9c970",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.725Z",
+        "updatedAt": "2026-06-24T10:05:39.725Z"
+      },
+      {
+        "id": "e3e55983-fe76-40e4-b414-5f9b0e2921fa",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "eca706ea-2b82-403b-831a-095fc8c9ae01",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.734Z",
+        "updatedAt": "2026-06-24T10:05:39.734Z"
+      },
+      {
+        "id": "d127a3bf-13ec-41cd-9deb-b487364d078c",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "c82956b2-08f4-4586-a950-40421502874b",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.746Z",
+        "updatedAt": "2026-06-24T10:05:39.746Z"
+      },
+      {
+        "id": "e518c731-c575-4fa6-a9bb-fb98836c6e77",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "b89c3a3e-df19-4dfe-bda8-f3bf2b8cc77c",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.757Z",
+        "updatedAt": "2026-06-24T10:05:39.757Z"
+      },
+      {
+        "id": "99fb0082-af65-4bd3-b160-9f518dc0a08e",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "67192dee-ee4f-44f9-a7b0-b8d94fe4cef9",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.767Z",
+        "updatedAt": "2026-06-24T10:05:39.767Z"
+      },
+      {
+        "id": "7cc721fe-62f2-4fa9-9ff9-0667fbf2c364",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "7479ae3c-dd6f-46c0-9f59-f517968240c4",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.779Z",
+        "updatedAt": "2026-06-24T10:05:39.779Z"
+      },
+      {
+        "id": "a28012a6-fb39-48c6-8084-ab02f1649450",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "00c8bfd1-f4c8-4a43-a5cf-d89475a21d55",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.790Z",
+        "updatedAt": "2026-06-24T10:05:39.790Z"
+      },
+      {
+        "id": "4dc0bf7d-4a6a-4c50-9d22-c08a855f9bf7",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "b54b39b7-c26c-445e-804f-14e0236696a2",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.799Z",
+        "updatedAt": "2026-06-24T10:05:39.799Z"
+      },
+      {
+        "id": "52eea7ac-676b-4c48-8527-d9a23b04d3a5",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "ed80a044-f189-44b3-9e63-a8742b9bd080",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.811Z",
+        "updatedAt": "2026-06-24T10:05:39.811Z"
+      },
+      {
+        "id": "3d07f897-5d71-485f-982a-618f0fb91b92",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4d8eb0a9-5624-431d-bf57-45ad1016cc2b",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.823Z",
+        "updatedAt": "2026-06-24T10:05:39.823Z"
+      },
+      {
+        "id": "a71e882b-f2f1-4c17-967c-e73f51822fd7",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "a7c8a54b-d432-4768-aab5-7141072d3e9e",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.830Z",
+        "updatedAt": "2026-06-24T10:05:39.830Z"
+      },
+      {
+        "id": "bbdbe588-15b3-420c-bbaa-949b3e4327de",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "4f370f45-59b2-4505-9966-753471fc51de",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.839Z",
+        "updatedAt": "2026-06-24T10:05:39.839Z"
+      },
+      {
+        "id": "028cf845-cff1-4b47-af57-777dc18922aa",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "267f2695-2fd0-4c6b-b150-705ad16e9389",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.847Z",
+        "updatedAt": "2026-06-24T10:05:39.847Z"
+      },
+      {
+        "id": "4400baae-9be9-4360-b5d0-72536a482742",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "classId": "6998bdc4-e429-4132-8538-3e79f6711cc3",
+        "tuitionFee": "12000",
+        "admissionFee": "5000",
+        "annualCharges": "0",
+        "activityCharges": "0",
+        "createdAt": "2026-06-24T10:05:39.856Z",
+        "updatedAt": "2026-06-24T10:05:39.856Z"
+      }
+    ],
+    "studentFeeAccount": [
+      {
+        "id": "00ae4376-0015-4570-94be-7455a014f0ac",
+        "enrollmentId": "4579f776-c82d-4949-b4ff-fc0067710362",
+        "totalFee": "17000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "0",
+        "remainingFee": "17000",
+        "feeStatus": "UNPAID",
+        "createdAt": "2026-06-24T10:08:18.480Z",
+        "updatedAt": "2026-06-24T10:08:18.480Z"
+      },
+      {
+        "id": "52e2dd65-58ac-42f6-901c-8f0b17df7355",
+        "enrollmentId": "e975de78-2960-4dd8-9140-5a4ec19f7941",
+        "totalFee": "17000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "0",
+        "remainingFee": "17000",
+        "feeStatus": "UNPAID",
+        "createdAt": "2026-06-24T10:08:18.482Z",
+        "updatedAt": "2026-06-24T10:08:18.482Z"
+      },
+      {
+        "id": "036ab3a0-c7dd-417b-a0c4-6c616b37007f",
+        "enrollmentId": "52cebff2-618f-4dc5-990e-6151eafd1fb7",
+        "totalFee": "17000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "0",
+        "remainingFee": "17000",
+        "feeStatus": "UNPAID",
+        "createdAt": "2026-06-24T10:28:25.285Z",
+        "updatedAt": "2026-06-24T10:28:25.310Z"
+      },
+      {
+        "id": "eb4dfed0-6c5a-487f-8d3c-ebe04e76306a",
+        "enrollmentId": "2b32b457-a12f-4597-a82d-6236e96c2db8",
+        "totalFee": "17000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "0",
+        "remainingFee": "17000",
+        "feeStatus": "UNPAID",
+        "createdAt": "2026-06-24T10:28:42.704Z",
+        "updatedAt": "2026-06-24T10:28:42.728Z"
+      },
+      {
+        "id": "da78a86b-9054-4cd5-a9b8-3a002220981a",
+        "enrollmentId": "e6479645-5cb5-4b7a-b6c3-9472290ae8a7",
+        "totalFee": "12000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "0",
+        "remainingFee": "12000",
+        "feeStatus": "UNPAID",
+        "createdAt": "2026-06-24T12:15:47.844Z",
+        "updatedAt": "2026-06-24T12:15:47.844Z"
+      },
+      {
+        "id": "7984e46f-01bb-4c74-a5f1-f38dbfb89bd4",
+        "enrollmentId": "2585cd80-b22b-4443-b808-1ec63c9d6791",
+        "totalFee": "12000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "5000",
+        "remainingFee": "7000",
+        "feeStatus": "PARTIAL",
+        "createdAt": "2026-06-24T12:15:47.847Z",
+        "updatedAt": "2026-06-24T12:15:47.847Z"
+      },
+      {
+        "id": "ca57be36-17a1-458c-a0b2-694da29da41b",
+        "enrollmentId": "7096625a-8c7a-4f0d-99a1-5cef5a5d5803",
+        "totalFee": "17000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "0",
+        "remainingFee": "17000",
+        "feeStatus": "UNPAID",
+        "createdAt": "2026-06-24T13:00:04.188Z",
+        "updatedAt": "2026-06-24T13:00:04.188Z"
+      },
+      {
+        "id": "0677c9b1-3d41-4c1a-9c00-93c182732217",
+        "enrollmentId": "d5743331-df43-4ff2-9893-b2e7ee6fadce",
+        "totalFee": "17000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "0",
+        "remainingFee": "17000",
+        "feeStatus": "UNPAID",
+        "createdAt": "2026-06-24T13:03:42.674Z",
+        "updatedAt": "2026-06-24T13:03:42.674Z"
+      },
+      {
+        "id": "c6f9ba19-fad7-4ade-a90b-fd3021e3ec7d",
+        "enrollmentId": "72dda8bd-1402-4a23-8680-133f33ac38f1",
+        "totalFee": "17000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "0",
+        "remainingFee": "17000",
+        "feeStatus": "UNPAID",
+        "createdAt": "2026-06-24T13:08:48.172Z",
+        "updatedAt": "2026-06-24T13:08:48.172Z"
+      },
+      {
+        "id": "7c714040-6a67-443d-8f7d-a100333e9869",
+        "enrollmentId": "594a9b77-e50e-45aa-9b22-b8a46fe88c86",
+        "totalFee": "17000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "100",
+        "remainingFee": "16900",
+        "feeStatus": "PARTIAL",
+        "createdAt": "2026-06-24T10:08:18.473Z",
+        "updatedAt": "2026-06-24T13:16:45.362Z"
+      },
+      {
+        "id": "163d4da1-1217-43b8-a69b-ac44d915c902",
+        "enrollmentId": "73e79c21-a2d4-4dbb-a14a-8496f9139c5d",
+        "totalFee": "15000",
+        "discount": "500",
+        "waiver": "0",
+        "paidAmount": "5000",
+        "remainingFee": "9500",
+        "feeStatus": "PARTIAL",
+        "createdAt": "2026-07-14T03:25:57.438Z",
+        "updatedAt": "2026-07-14T03:25:57.438Z"
+      },
+      {
+        "id": "eb58ba00-b374-4e33-af82-530f229ce470",
+        "enrollmentId": "5165feea-8117-4e50-a366-648e07aa93d0",
+        "totalFee": "20000",
+        "discount": "0",
+        "waiver": "0",
+        "paidAmount": "15000",
+        "remainingFee": "5000",
+        "feeStatus": "PARTIAL",
+        "createdAt": "2026-07-14T03:31:47.131Z",
+        "updatedAt": "2026-07-14T03:32:33.636Z"
+      }
+    ],
+    "feeTransaction": [
+      {
+        "id": "6a99fbce-f14c-49df-8d2a-2cab3a12e0b9",
+        "feeAccountId": "7984e46f-01bb-4c74-a5f1-f38dbfb89bd4",
+        "amount": "5000",
+        "discountAmount": "0",
+        "waiverAmount": "0",
+        "receiptNumber": "REC-1782303347866-1",
+        "paymentMode": "CASH",
+        "transactionDate": "2026-06-24T12:15:47.868Z",
+        "collectedById": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "notes": null,
+        "isReversed": false,
+        "createdAt": "2026-06-24T12:15:47.868Z"
+      },
+      {
+        "id": "2b5d47ba-ae2f-4d4a-ba08-e4f5e7658204",
+        "feeAccountId": "7984e46f-01bb-4c74-a5f1-f38dbfb89bd4",
+        "amount": "3000",
+        "discountAmount": "0",
+        "waiverAmount": "0",
+        "receiptNumber": "REC-1782303347870-2",
+        "paymentMode": "CASH",
+        "transactionDate": "2026-06-24T12:15:47.873Z",
+        "collectedById": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "notes": null,
+        "isReversed": true,
+        "createdAt": "2026-06-24T12:15:47.873Z"
+      },
+      {
+        "id": "04807f14-66bf-4d31-9945-93f89d28b49c",
+        "feeAccountId": "7c714040-6a67-443d-8f7d-a100333e9869",
+        "amount": "100",
+        "discountAmount": "0",
+        "waiverAmount": "0",
+        "receiptNumber": "SCH-2026-00001",
+        "paymentMode": "CASH",
+        "transactionDate": "2026-06-24T13:16:45.359Z",
+        "collectedById": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "notes": "Test collection",
+        "isReversed": false,
+        "createdAt": "2026-06-24T13:16:45.359Z"
+      },
+      {
+        "id": "a0a287a7-1912-43d6-aeb8-8038b58d0bc2",
+        "feeAccountId": "eb58ba00-b374-4e33-af82-530f229ce470",
+        "amount": "15000",
+        "discountAmount": "0",
+        "waiverAmount": "0",
+        "receiptNumber": "REC-TEST-AAAA",
+        "paymentMode": "BANK",
+        "transactionDate": "2026-07-14T03:32:07.174Z",
+        "collectedById": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "notes": "First installment payment",
+        "isReversed": false,
+        "createdAt": "2026-07-14T03:32:07.174Z"
+      }
+    ],
+    "feeAdjustment": [
+      {
+        "id": "41e48e4f-af2c-4d27-94d2-5186ecc79fe8",
+        "feeAccountId": "036ab3a0-c7dd-417b-a0c4-6c616b37007f",
+        "amount": "1500",
+        "type": "DEBIT",
+        "description": "Transport Linked: Sector 44 Crossing (Route: Route-1782296905248)",
+        "referenceType": "TRANSPORT",
+        "referenceId": "3c747b27-b602-4d72-85db-53e73f47755d",
+        "createdAt": "2026-06-24T10:28:25.299Z"
+      },
+      {
+        "id": "199de3cb-b8cc-476d-8ec4-acf5d21d3c69",
+        "feeAccountId": "036ab3a0-c7dd-417b-a0c4-6c616b37007f",
+        "amount": "1500",
+        "type": "CREDIT",
+        "description": "Transport Unlinked: Stop faec4838-8bf6-4464-8250-82da21fdfffa",
+        "referenceType": "TRANSPORT",
+        "referenceId": "3c747b27-b602-4d72-85db-53e73f47755d",
+        "createdAt": "2026-06-24T10:28:25.310Z"
+      },
+      {
+        "id": "54295028-a82f-4b86-b3ce-3e298dce7b3b",
+        "feeAccountId": "eb4dfed0-6c5a-487f-8d3c-ebe04e76306a",
+        "amount": "1500",
+        "type": "DEBIT",
+        "description": "Transport Linked: Sector 44 Crossing (Route: Route-1782296922675)",
+        "referenceType": "TRANSPORT",
+        "referenceId": "78728685-8807-471c-bc35-443556eeb484",
+        "createdAt": "2026-06-24T10:28:42.718Z"
+      },
+      {
+        "id": "776aeb12-d681-4c7f-92dd-c174f4db001d",
+        "feeAccountId": "eb4dfed0-6c5a-487f-8d3c-ebe04e76306a",
+        "amount": "1500",
+        "type": "CREDIT",
+        "description": "Transport Unlinked: Stop d50febbc-a3d4-4e8e-acce-1afbe319bacc",
+        "referenceType": "TRANSPORT",
+        "referenceId": "78728685-8807-471c-bc35-443556eeb484",
+        "createdAt": "2026-06-24T10:28:42.727Z"
+      },
+      {
+        "id": "492cf450-6ac4-4f73-870b-b61a6ea77190",
+        "feeAccountId": "da78a86b-9054-4cd5-a9b8-3a002220981a",
+        "amount": "1500",
+        "type": "DEBIT",
+        "description": "Transport Linked charge",
+        "referenceType": "TRANSPORT",
+        "referenceId": "6b7cd505-4dbc-4c56-8399-102c1244ce38",
+        "createdAt": "2026-06-24T12:15:47.929Z"
+      },
+      {
+        "id": "455c16f6-7329-48ed-86f1-344066102a81",
+        "feeAccountId": "da78a86b-9054-4cd5-a9b8-3a002220981a",
+        "amount": "500",
+        "type": "CREDIT",
+        "description": "Transport discount adjustment",
+        "referenceType": "TRANSPORT",
+        "referenceId": "6b7cd505-4dbc-4c56-8399-102c1244ce38",
+        "createdAt": "2026-06-24T12:15:47.931Z"
+      },
+      {
+        "id": "8f46cb68-ae36-4a4c-8373-4b13c188f23d",
+        "feeAccountId": "eb58ba00-b374-4e33-af82-530f229ce470",
+        "amount": "2000",
+        "type": "DEBIT",
+        "description": "Annual Library Fee allocation",
+        "referenceType": null,
+        "referenceId": null,
+        "createdAt": "2026-07-14T03:32:07.178Z"
+      },
+      {
+        "id": "2e5084e7-055c-467a-9276-6dc585bb10b3",
+        "feeAccountId": "eb58ba00-b374-4e33-af82-530f229ce470",
+        "amount": "2000",
+        "type": "DEBIT",
+        "description": "Annual Library Fee allocation",
+        "referenceType": null,
+        "referenceId": null,
+        "createdAt": "2026-07-14T03:32:18.262Z"
+      },
+      {
+        "id": "81f27d98-cb58-4b55-afd6-435497854308",
+        "feeAccountId": "eb58ba00-b374-4e33-af82-530f229ce470",
+        "amount": "2000",
+        "type": "DEBIT",
+        "description": "Annual Library Fee allocation",
+        "referenceType": null,
+        "referenceId": null,
+        "createdAt": "2026-07-14T03:32:33.640Z"
+      }
+    ],
+    "route": [
+      {
+        "id": "bce644df-bd22-435a-97ee-63bf14d25737",
+        "name": "Route-1782296905248",
+        "vehicleNumber": "PB-65-Z-9999",
+        "driverName": "Ramesh Singh",
+        "driverMobile": "9876543210",
+        "active": true,
+        "createdAt": "2026-06-24T10:28:25.250Z",
+        "updatedAt": "2026-06-24T10:28:25.250Z"
+      },
+      {
+        "id": "1e77fd14-bff9-41e8-83ba-b888b093ba78",
+        "name": "Route-1782296922675",
+        "vehicleNumber": "PB-65-Z-9999",
+        "driverName": "Ramesh Singh",
+        "driverMobile": "9876543210",
+        "active": true,
+        "createdAt": "2026-06-24T10:28:42.676Z",
+        "updatedAt": "2026-06-24T10:28:42.676Z"
+      },
+      {
+        "id": "7cdc5246-8847-4bb5-b55c-4291092ca713",
+        "name": "Route-1782303347916",
+        "vehicleNumber": "PB-01-XX-9999",
+        "driverName": "Jeet Singh",
+        "driverMobile": "9999999991",
+        "active": true,
+        "createdAt": "2026-06-24T12:15:47.918Z",
+        "updatedAt": "2026-06-24T12:15:47.918Z"
+      }
+    ],
+    "stop": [
+      {
+        "id": "faec4838-8bf6-4464-8250-82da21fdfffa",
+        "routeId": "bce644df-bd22-435a-97ee-63bf14d25737",
+        "name": "Sector 44 Crossing",
+        "fare": "1500",
+        "orderNo": 1,
+        "createdAt": "2026-06-24T10:28:25.255Z",
+        "updatedAt": "2026-06-24T10:28:25.255Z"
+      },
+      {
+        "id": "d50febbc-a3d4-4e8e-acce-1afbe319bacc",
+        "routeId": "1e77fd14-bff9-41e8-83ba-b888b093ba78",
+        "name": "Sector 44 Crossing",
+        "fare": "1500",
+        "orderNo": 1,
+        "createdAt": "2026-06-24T10:28:42.683Z",
+        "updatedAt": "2026-06-24T10:28:42.683Z"
+      },
+      {
+        "id": "4ac71f23-e448-4568-bd5a-9c61b11cc566",
+        "routeId": "7cdc5246-8847-4bb5-b55c-4291092ca713",
+        "name": "Bus Stop Phase 8",
+        "fare": "1500",
+        "orderNo": 1,
+        "createdAt": "2026-06-24T12:15:47.924Z",
+        "updatedAt": "2026-06-24T12:15:47.924Z"
+      }
+    ],
+    "studentTransport": [
+      {
+        "id": "3c747b27-b602-4d72-85db-53e73f47755d",
+        "studentId": "b0dda942-d3b7-432d-a996-acaca7c9b697",
+        "routeId": "bce644df-bd22-435a-97ee-63bf14d25737",
+        "stopId": "faec4838-8bf6-4464-8250-82da21fdfffa",
+        "activeFrom": "2026-06-24T10:28:25.294Z",
+        "activeTo": "2026-06-24T10:28:25.305Z",
+        "monthlyFare": "1500",
+        "status": "INACTIVE",
+        "createdAt": "2026-06-24T10:28:25.296Z",
+        "updatedAt": "2026-06-24T10:28:25.307Z"
+      },
+      {
+        "id": "78728685-8807-471c-bc35-443556eeb484",
+        "studentId": "d571c9f6-bcce-48ab-97f8-34556b2355ef",
+        "routeId": "1e77fd14-bff9-41e8-83ba-b888b093ba78",
+        "stopId": "d50febbc-a3d4-4e8e-acce-1afbe319bacc",
+        "activeFrom": "2026-06-24T10:28:42.716Z",
+        "activeTo": "2026-06-24T10:28:42.724Z",
+        "monthlyFare": "1500",
+        "status": "INACTIVE",
+        "createdAt": "2026-06-24T10:28:42.717Z",
+        "updatedAt": "2026-06-24T10:28:42.725Z"
+      },
+      {
+        "id": "6b7cd505-4dbc-4c56-8399-102c1244ce38",
+        "studentId": "7cd51c5a-bcd7-4096-bb23-dbf8a44f5cca",
+        "routeId": "7cdc5246-8847-4bb5-b55c-4291092ca713",
+        "stopId": "4ac71f23-e448-4568-bd5a-9c61b11cc566",
+        "activeFrom": "2026-06-24T12:15:47.924Z",
+        "activeTo": null,
+        "monthlyFare": "1500",
+        "status": "ACTIVE",
+        "createdAt": "2026-06-24T12:15:47.927Z",
+        "updatedAt": "2026-06-24T12:15:47.927Z"
+      }
+    ],
+    "exam": [
+      {
+        "id": "771a4538-369b-4911-9b69-83737999243d",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "name": "Unit Test 1",
+        "startDate": "2026-07-10T00:00:00.000Z",
+        "endDate": "2026-07-15T00:00:00.000Z",
+        "published": true
+      },
+      {
+        "id": "f0a0435e-c68c-406b-8503-f833abfd136d",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "name": "Draft Exam",
+        "startDate": "2026-08-10T00:00:00.000Z",
+        "endDate": "2026-08-15T00:00:00.000Z",
+        "published": false
+      },
+      {
+        "id": "39179796-b80c-4fc5-a008-f2c4da120533",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "name": "Half Yearly Examination",
+        "startDate": "2026-09-01T00:00:00.000Z",
+        "endDate": "2026-09-15T00:00:00.000Z",
+        "published": true
+      },
+      {
+        "id": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "name": "Final Examination",
+        "startDate": "2026-07-11T00:00:00.000Z",
+        "endDate": "2026-07-11T00:00:00.000Z",
+        "published": true
+      },
+      {
+        "id": "ed3eb951-f16f-440d-a7cd-33f91e8ce7ae",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "name": "Midterm Term 1",
+        "startDate": "2026-07-14T03:32:18.273Z",
+        "endDate": "2026-07-14T03:32:18.273Z",
+        "published": true
+      },
+      {
+        "id": "bb09cf9c-825c-4598-a8f1-c485acdc6b22",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "name": "Midterm Term 1",
+        "startDate": "2026-07-14T03:32:33.643Z",
+        "endDate": "2026-07-14T03:32:33.643Z",
+        "published": true
+      }
+    ],
+    "examMark": [
+      {
+        "id": "e5247970-28d0-4cc5-8e74-7a7a961ff300",
+        "examId": "771a4538-369b-4911-9b69-83737999243d",
+        "studentId": "a4e3a75b-ceb4-47ed-a717-a82b3979e9f4",
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "maxMarks": "100",
+        "obtained": "90"
+      },
+      {
+        "id": "ae0605a7-0cf0-4bac-982c-a4735c56ec66",
+        "examId": "771a4538-369b-4911-9b69-83737999243d",
+        "studentId": "ca7ec062-961b-4cfa-ab62-68f40454e923",
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "maxMarks": "100",
+        "obtained": "90"
+      },
+      {
+        "id": "d9705cc2-482e-4ecc-a5ac-fa6c9a87bb88",
+        "examId": "771a4538-369b-4911-9b69-83737999243d",
+        "studentId": "625000e6-356a-4367-a6cb-a681c69226ea",
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "maxMarks": "100",
+        "obtained": "80"
+      },
+      {
+        "id": "c84c29a9-23c6-4ab4-ac16-317bfbb538f3",
+        "examId": "f0a0435e-c68c-406b-8503-f833abfd136d",
+        "studentId": "a4e3a75b-ceb4-47ed-a717-a82b3979e9f4",
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "maxMarks": "100",
+        "obtained": "85"
+      },
+      {
+        "id": "b90ebdad-e822-453a-b318-e4f94d2b10cd",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "b0dda942-d3b7-432d-a996-acaca7c9b697",
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "maxMarks": "100",
+        "obtained": "40"
+      },
+      {
+        "id": "d31f31a6-2c7d-49e7-9e06-e9bdbba3375b",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "d571c9f6-bcce-48ab-97f8-34556b2355ef",
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "maxMarks": "100",
+        "obtained": "50"
+      },
+      {
+        "id": "479f5319-29f0-4536-91ed-13ac69e119a8",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "a4e3a75b-ceb4-47ed-a717-a82b3979e9f4",
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "maxMarks": "100",
+        "obtained": "60"
+      },
+      {
+        "id": "b284533f-41a3-44cf-b0a9-10bf1c665f76",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "ca7ec062-961b-4cfa-ab62-68f40454e923",
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "maxMarks": "100",
+        "obtained": "79"
+      },
+      {
+        "id": "94c5cc08-fbcc-458f-8236-ae086807e09e",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "625000e6-356a-4367-a6cb-a681c69226ea",
+        "subjectId": "e56d320d-0ca9-4139-9c6f-0bcde0ae449f",
+        "maxMarks": "100",
+        "obtained": "99"
+      },
+      {
+        "id": "76207bcf-82e7-44df-b407-adbab0a81a1b",
+        "examId": "ed3eb951-f16f-440d-a7cd-33f91e8ce7ae",
+        "studentId": "fb650be1-b921-46d4-bb56-9ff5dd75a3dd",
+        "subjectId": "478217b5-9911-4110-a968-fd7cde118a53",
+        "maxMarks": "100",
+        "obtained": "85"
+      },
+      {
+        "id": "ecf4fb12-e1fe-4683-9bdb-f61accce8946",
+        "examId": "ed3eb951-f16f-440d-a7cd-33f91e8ce7ae",
+        "studentId": "fb650be1-b921-46d4-bb56-9ff5dd75a3dd",
+        "subjectId": "e88b9920-5699-4178-b022-1327aec5a7e3",
+        "maxMarks": "100",
+        "obtained": "92"
+      },
+      {
+        "id": "250a7ebf-0e62-4ce0-b313-29af0eb23c04",
+        "examId": "bb09cf9c-825c-4598-a8f1-c485acdc6b22",
+        "studentId": "fb650be1-b921-46d4-bb56-9ff5dd75a3dd",
+        "subjectId": "478217b5-9911-4110-a968-fd7cde118a53",
+        "maxMarks": "100",
+        "obtained": "85"
+      },
+      {
+        "id": "d1228691-2ebd-4892-b456-1a5c71d3e9f2",
+        "examId": "bb09cf9c-825c-4598-a8f1-c485acdc6b22",
+        "studentId": "fb650be1-b921-46d4-bb56-9ff5dd75a3dd",
+        "subjectId": "e88b9920-5699-4178-b022-1327aec5a7e3",
+        "maxMarks": "100",
+        "obtained": "92"
+      }
+    ],
+    "result": [
+      {
+        "id": "b24bf329-d3b0-4742-841f-66870e5de919",
+        "examId": "ed3eb951-f16f-440d-a7cd-33f91e8ce7ae",
+        "studentId": "fb650be1-b921-46d4-bb56-9ff5dd75a3dd",
+        "total": "177",
+        "percentage": "88.5",
+        "finalGrade": "A",
+        "rank": 1,
+        "published": true,
+        "generatedAt": "2026-07-14T03:32:18.288Z",
+        "snapshotJson": {},
+        "createdAt": "2026-07-14T03:32:18.288Z"
+      },
+      {
+        "id": "34c3c64e-03ab-4e26-ab7a-ef64db3ac3ce",
+        "examId": "bb09cf9c-825c-4598-a8f1-c485acdc6b22",
+        "studentId": "fb650be1-b921-46d4-bb56-9ff5dd75a3dd",
+        "total": "177",
+        "percentage": "88.5",
+        "finalGrade": "A",
+        "rank": 1,
+        "published": true,
+        "generatedAt": "2026-07-14T03:32:33.649Z",
+        "snapshotJson": {},
+        "createdAt": "2026-07-14T03:32:33.649Z"
+      },
+      {
+        "id": "e01c5fa8-7bb0-4e26-a9c2-1dd2d7065c45",
+        "examId": "771a4538-369b-4911-9b69-83737999243d",
+        "studentId": "a4e3a75b-ceb4-47ed-a717-a82b3979e9f4",
+        "total": "90",
+        "percentage": "90",
+        "finalGrade": "A+",
+        "rank": 1,
+        "published": true,
+        "generatedAt": "2026-06-24T10:08:18.524Z",
+        "snapshotJson": {
+          "rank": 1,
+          "grade": "A+",
+          "total": 90,
+          "subjects": [
+            {
+              "code": "ADSCI10",
+              "name": "Advanced Science",
+              "maxMarks": 100,
+              "obtained": 90
+            }
+          ],
+          "percentage": 90
+        },
+        "createdAt": "2026-06-24T10:08:18.524Z"
+      },
+      {
+        "id": "e2a67629-4d57-469d-ad68-733723c06f38",
+        "examId": "771a4538-369b-4911-9b69-83737999243d",
+        "studentId": "ca7ec062-961b-4cfa-ab62-68f40454e923",
+        "total": "90",
+        "percentage": "90",
+        "finalGrade": "A+",
+        "rank": 1,
+        "published": true,
+        "generatedAt": "2026-06-24T10:08:18.530Z",
+        "snapshotJson": {
+          "rank": 1,
+          "grade": "A+",
+          "total": 90,
+          "subjects": [
+            {
+              "code": "ADSCI10",
+              "name": "Advanced Science",
+              "maxMarks": 100,
+              "obtained": 90
+            }
+          ],
+          "percentage": 90
+        },
+        "createdAt": "2026-06-24T10:08:18.530Z"
+      },
+      {
+        "id": "d35fa0eb-cb71-4cb2-ae40-b71daec2adc0",
+        "examId": "771a4538-369b-4911-9b69-83737999243d",
+        "studentId": "625000e6-356a-4367-a6cb-a681c69226ea",
+        "total": "80",
+        "percentage": "80",
+        "finalGrade": "A",
+        "rank": 2,
+        "published": true,
+        "generatedAt": "2026-06-24T10:08:18.537Z",
+        "snapshotJson": {
+          "rank": 2,
+          "grade": "A",
+          "total": 80,
+          "subjects": [
+            {
+              "code": "ADSCI10",
+              "name": "Advanced Science",
+              "maxMarks": 100,
+              "obtained": 80
+            }
+          ],
+          "percentage": 80
+        },
+        "createdAt": "2026-06-24T10:08:18.537Z"
+      },
+      {
+        "id": "ed827ec0-6c2f-444c-90e6-b240fc8de2ff",
+        "examId": "39179796-b80c-4fc5-a008-f2c4da120533",
+        "studentId": "7cd51c5a-bcd7-4096-bb23-dbf8a44f5cca",
+        "total": "183",
+        "percentage": "91.5",
+        "finalGrade": "A+",
+        "rank": 1,
+        "published": true,
+        "generatedAt": "2026-06-24T12:15:47.907Z",
+        "snapshotJson": {
+          "rank": 1,
+          "grade": "A+",
+          "total": 183,
+          "subjects": [
+            {
+              "code": "MATH",
+              "name": "Mathematics",
+              "maxMarks": 100,
+              "obtained": 95
+            },
+            {
+              "code": "SCI",
+              "name": "Science",
+              "maxMarks": 100,
+              "obtained": 88
+            }
+          ],
+          "percentage": 91.5
+        },
+        "createdAt": "2026-06-24T12:15:47.907Z"
+      },
+      {
+        "id": "8518c41a-c6ae-4a9e-8ba5-e9bc4e066c9a",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "d571c9f6-bcce-48ab-97f8-34556b2355ef",
+        "total": "50",
+        "percentage": "50",
+        "finalGrade": "C",
+        "rank": 4,
+        "published": true,
+        "generatedAt": "2026-07-11T15:10:04.678Z",
+        "snapshotJson": {
+          "rank": 4,
+          "grade": "C",
+          "total": 50,
+          "subjects": [
+            {
+              "code": "ADSCI10",
+              "name": "Advanced Science",
+              "maxMarks": 100,
+              "obtained": 50
+            }
+          ],
+          "percentage": 50
+        },
+        "createdAt": "2026-07-11T15:10:04.678Z"
+      },
+      {
+        "id": "e3514ecf-b2da-4596-b06b-067a40a9e384",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "a4e3a75b-ceb4-47ed-a717-a82b3979e9f4",
+        "total": "60",
+        "percentage": "60",
+        "finalGrade": "B",
+        "rank": 3,
+        "published": true,
+        "generatedAt": "2026-07-11T15:10:04.698Z",
+        "snapshotJson": {
+          "rank": 3,
+          "grade": "B",
+          "total": 60,
+          "subjects": [
+            {
+              "code": "ADSCI10",
+              "name": "Advanced Science",
+              "maxMarks": 100,
+              "obtained": 60
+            }
+          ],
+          "percentage": 60
+        },
+        "createdAt": "2026-07-11T15:10:04.698Z"
+      },
+      {
+        "id": "ba465809-dc7f-4449-9636-5cda76a2359d",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "ca7ec062-961b-4cfa-ab62-68f40454e923",
+        "total": "79",
+        "percentage": "79",
+        "finalGrade": "B+",
+        "rank": 2,
+        "published": true,
+        "generatedAt": "2026-07-11T15:10:04.719Z",
+        "snapshotJson": {
+          "rank": 2,
+          "grade": "B+",
+          "total": 79,
+          "subjects": [
+            {
+              "code": "ADSCI10",
+              "name": "Advanced Science",
+              "maxMarks": 100,
+              "obtained": 79
+            }
+          ],
+          "percentage": 79
+        },
+        "createdAt": "2026-07-11T15:10:04.719Z"
+      },
+      {
+        "id": "11f39c03-e325-4ec2-be14-8969605ea543",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "625000e6-356a-4367-a6cb-a681c69226ea",
+        "total": "99",
+        "percentage": "99",
+        "finalGrade": "A+",
+        "rank": 1,
+        "published": true,
+        "generatedAt": "2026-07-11T15:10:04.744Z",
+        "snapshotJson": {
+          "rank": 1,
+          "grade": "A+",
+          "total": 99,
+          "subjects": [
+            {
+              "code": "ADSCI10",
+              "name": "Advanced Science",
+              "maxMarks": 100,
+              "obtained": 99
+            }
+          ],
+          "percentage": 99
+        },
+        "createdAt": "2026-07-11T15:10:04.744Z"
+      },
+      {
+        "id": "9947e3ba-208e-48bc-96d1-af46543fb146",
+        "examId": "f861b8bf-8b92-45c8-b8f0-89acfd1016c3",
+        "studentId": "b0dda942-d3b7-432d-a996-acaca7c9b697",
+        "total": "40",
+        "percentage": "40",
+        "finalGrade": "D",
+        "rank": 5,
+        "published": true,
+        "generatedAt": "2026-07-11T15:10:04.647Z",
+        "snapshotJson": {
+          "rank": 5,
+          "grade": "D",
+          "total": 40,
+          "subjects": [
+            {
+              "code": "ADSCI10",
+              "name": "Advanced Science",
+              "maxMarks": 100,
+              "obtained": 40
+            }
+          ],
+          "percentage": 40
+        },
+        "createdAt": "2026-07-11T15:10:04.647Z"
+      }
+    ],
+    "staff": [
+      {
+        "id": "7163d297-56bb-45ce-8f8f-571963c1d5a5",
+        "employeeCode": "EMP-T3949",
+        "name": "Teacher Staff One",
+        "mobile": "9999888877",
+        "email": null,
+        "gender": "MALE",
+        "dob": "1985-05-12T00:00:00.000Z",
+        "joiningDate": "2020-08-01T00:00:00.000Z",
+        "designation": "Senior Teacher",
+        "qualification": "M.Sc. B.Ed.",
+        "monthlySalary": "45000",
+        "status": "ACTIVE",
+        "remarks": null,
+        "createdAt": "2026-06-24T10:08:18.467Z",
+        "updatedAt": "2026-06-24T10:08:18.467Z"
+      },
+      {
+        "id": "e6f7045f-bffb-499b-a813-a0b61e90aaa8",
+        "employeeCode": "EMP-3198",
+        "name": "Salary Test Staff",
+        "mobile": "9888877777",
+        "email": null,
+        "gender": "MALE",
+        "dob": "1990-01-01T00:00:00.000Z",
+        "joiningDate": "2025-01-01T00:00:00.000Z",
+        "designation": "Teacher",
+        "qualification": "B.Ed",
+        "monthlySalary": "30000",
+        "status": "ACTIVE",
+        "remarks": null,
+        "createdAt": "2026-06-24T12:15:47.889Z",
+        "updatedAt": "2026-06-24T12:15:47.889Z"
+      }
+    ],
+    "salaryPayment": [
+      {
+        "id": "ae87f0a4-bfac-41a8-aabb-a4f069674327",
+        "staffId": "e6f7045f-bffb-499b-a813-a0b61e90aaa8",
+        "month": 6,
+        "year": 2026,
+        "grossSalary": "30000",
+        "paymentMethod": "BANK",
+        "remarks": null,
+        "receiptNumber": "SAL-2026-70525",
+        "createdById": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "createdAt": "2026-06-24T12:15:47.893Z"
+      }
+    ],
+    "salaryAdjustment": [
+      {
+        "id": "17fe3ada-90a8-4293-bdb1-64dfbc74de27",
+        "salaryPaymentId": "ae87f0a4-bfac-41a8-aabb-a4f069674327",
+        "amount": "1500",
+        "reason": "Bonus allowance",
+        "createdById": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "createdAt": "2026-06-24T12:15:47.897Z"
+      },
+      {
+        "id": "494e4f86-572f-4e6c-829d-bae299879c8e",
+        "salaryPaymentId": "ae87f0a4-bfac-41a8-aabb-a4f069674327",
+        "amount": "-500",
+        "reason": "Tax deduction",
+        "createdById": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "createdAt": "2026-06-24T12:15:47.899Z"
+      }
+    ],
+    "uatTestCase": [],
+    "auditLog": [
+      {
+        "id": "a436c6e6-f449-4ec1-a1e3-0bb29080867e",
+        "userId": null,
+        "role": null,
+        "action": "ADMIT_STUDENT",
+        "details": "Admitted student Phase 7 Student with Admission Number SCH/2026/C10/0001 into Class ID 4f370f45-59b2-4505-9966-753471fc51de",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-06-24T10:28:25.287Z"
+      },
+      {
+        "id": "1ea61a97-b69d-4abd-8204-44e9539b4de7",
+        "userId": null,
+        "role": null,
+        "action": "ADMIT_STUDENT",
+        "details": "Admitted student Phase 7 Student with Admission Number SCH/2026/C10/0002 into Class ID 4f370f45-59b2-4505-9966-753471fc51de",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-06-24T10:28:42.706Z"
+      },
+      {
+        "id": "20f65684-1046-4257-99a3-fb817a48d360",
+        "userId": null,
+        "role": null,
+        "action": "ADMIT_STUDENT",
+        "details": "Admitted student Test Student with Admission Number SCH/2026/NUR/0003 into Class ID 12026550-6a89-4d42-9881-ad97640ff224",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-06-24T13:00:04.192Z"
+      },
+      {
+        "id": "0281a3b3-cc3c-4aa8-8002-57ac9d19c4a0",
+        "userId": null,
+        "role": null,
+        "action": "ADMIT_STUDENT",
+        "details": "Admitted student Test Student with Admission Number SCH/2026/NUR/0004 into Class ID 12026550-6a89-4d42-9881-ad97640ff224",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-06-24T13:03:42.679Z"
+      },
+      {
+        "id": "642a71bd-2d72-43ce-8638-57c64d4f699a",
+        "userId": null,
+        "role": null,
+        "action": "ADMIT_STUDENT",
+        "details": "Admitted student Azeej Kaur with Admission Number SCH/2026/C1/0005 into Class ID c82956b2-08f4-4586-a950-40421502874b",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-06-24T13:08:48.176Z"
+      },
+      {
+        "id": "fba2079f-388a-4bc1-880a-73c2d17bb682",
+        "userId": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "role": null,
+        "action": "COLLECT_FEE",
+        "details": "Collected fee amount: $100.00 (Receipt: SCH-2026-00001) for enrollment ID 594a9b77-e50e-45aa-9b22-b8a46fe88c86",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-06-24T13:16:45.365Z"
+      },
+      {
+        "id": "be2d4fad-72d5-4def-96ea-ce4e7ac11fbd",
+        "userId": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "role": null,
+        "action": "PUBLISH_EXAM_RESULTS",
+        "details": "Published results for exam ID f861b8bf-8b92-45c8-b8f0-89acfd1016c3 with dense ranking and immutable snapshots.",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-07-11T15:10:04.841Z"
+      },
+      {
+        "id": "54922b7e-2773-4db0-9bd8-360dece44aa7",
+        "userId": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "role": null,
+        "action": "DISABLE_MODULE",
+        "details": "Disabled Examinations module. Recursively disabled dependents: RESULTS",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-07-11T15:34:49.462Z"
+      },
+      {
+        "id": "0dcdf403-eff8-4262-a45c-b9ad6d6f6b43",
+        "userId": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "role": null,
+        "action": "ENABLE_MODULE",
+        "details": "Enabled Examinations module.",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-07-11T15:34:49.562Z"
+      },
+      {
+        "id": "c1811c1f-1dea-42a0-9011-68e4d3f7dea3",
+        "userId": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "role": null,
+        "action": "APPLY_PRESET",
+        "details": "Applied academic preset \"Coaching Institute\", configuring optional modules.",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-07-11T15:34:49.624Z"
+      },
+      {
+        "id": "9763a312-0117-4d46-a0c5-ebad675cf324",
+        "userId": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "role": null,
+        "action": "APPLY_PRESET",
+        "details": "Applied academic preset \"High School\", configuring optional modules.",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-07-11T15:34:49.688Z"
+      },
+      {
+        "id": "7400d839-7088-4e15-85b1-d7748d22d0df",
+        "userId": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "role": null,
+        "action": "DISABLE_MODULE",
+        "details": "Disabled Attendance module.",
+        "entity": null,
+        "beforeJson": null,
+        "afterJson": null,
+        "ipAddress": null,
+        "browser": null,
+        "requestId": null,
+        "createdAt": "2026-07-11T15:37:38.881Z"
+      }
+    ],
+    "errorLog": [],
+    "importHistory": [],
+    "exportHistory": [],
+    "lead": [],
+    "expense": [],
+    "promotionHistory": [],
+    "admissionSequence": [
+      {
+        "id": "b5391ae1-3987-43cd-9039-b5d55b3fda00",
+        "sessionId": "1700bf36-8c84-4581-976f-32c5cef08dab",
+        "year": 2026,
+        "currentValue": 5
+      }
+    ],
+    "receiptSequence": [
+      {
+        "id": "a137b0be-1db7-44fb-af90-96d9c118d736",
+        "prefix": "REC-",
+        "currentValue": 0
+      },
+      {
+        "id": "f66833ce-7b15-492c-84e0-ddcbd62d1861",
+        "prefix": "SCH-2026-",
+        "currentValue": 1
+      }
+    ],
+    "employeeSequence": [],
+    "salaryReceiptSequence": [],
+    "reportAudit": [
+      {
+        "id": "9e73ffa1-9d07-48f2-ba42-d713bc30fc25",
+        "userId": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "reportType": "STAFF_REGISTER",
+        "filters": "{}",
+        "exported": false,
+        "createdAt": "2026-07-11T15:38:00.656Z"
+      },
+      {
+        "id": "48afed5c-2ea9-4c9c-804c-bd80c602b3f0",
+        "userId": "447081dc-35a1-44d0-9915-16edb4a5b86a",
+        "reportType": "STAFF_REGISTER",
+        "filters": "{}",
+        "exported": false,
+        "createdAt": "2026-07-11T15:38:00.657Z"
+      }
+    ]
+  },
+  "files": {}
+}
