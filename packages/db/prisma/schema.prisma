@@ -93,6 +93,7 @@ model Parent {
   updatedAt         DateTime  @updatedAt
 
   students Student[]
+  devices  ParentDevice[]
 }
 
 model Student {
@@ -845,4 +846,29 @@ model UatTestCase {
   executionTime Int           @default(0) // In milliseconds
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
+}
+
+model AppVersion {
+  id                  String   @id @default(uuid())
+  version             String   @unique
+  minSupportedVersion String
+  latestVersion       String
+  forceUpdate         Boolean  @default(false)
+  releaseNotes        String?
+  releaseDate         DateTime @default(now())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model ParentDevice {
+  id          String   @id @default(uuid())
+  deviceId    String   @unique
+  platform    String   // "android" | "ios"
+  appVersion  String
+  fcmToken    String
+  lastSeenAt  DateTime @default(now())
+  parentId    String
+  parent      Parent   @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

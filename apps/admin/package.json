@@ -6,11 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "cap:sync": "next build && cap sync",
+    "cap:android": "cap open android",
+    "cap:ios": "cap open ios"
   },
   "dependencies": {
+    "@aparajita/capacitor-biometric-auth": "^10.0.0",
+    "@capacitor-community/fcm": "^8.1.0",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/device": "^8.0.2",
+    "@capacitor/network": "^8.0.1",
+    "@capacitor/preferences": "^8.0.1",
+    "@capacitor/push-notifications": "^8.1.1",
     "@school-erp/db": "*",
     "@school-erp/utils": "*",
+    "capacitor-secure-storage-plugin": "^0.13.0",
     "lucide-react": "^0.395.0",
     "next": "^16.0.0",
     "next-auth": "^4.24.7",
@@ -21,6 +32,9 @@
     "zod": "^3.22.0"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/ios": "^8.4.1",
     "@types/node": "^20.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
