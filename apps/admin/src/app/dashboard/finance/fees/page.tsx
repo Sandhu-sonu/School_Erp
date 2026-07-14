@@ -92,7 +92,7 @@ export default function FeeCollectionDesk() {
 
   // Search debounce/fetch
   useEffect(() => {
-    if (searchQuery.trim().length < 2) {
+    if (searchQuery.trim().length < 1) {
       setSearchResults([]);
       return;
     }
