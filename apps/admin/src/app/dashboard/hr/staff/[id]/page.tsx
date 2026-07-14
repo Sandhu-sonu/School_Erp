@@ -361,14 +361,15 @@ export default function StaffProfilePage() {
                         </tr>
                       ) : (
                         staff.salaryPayments.map((pmt) => {
-                          const net = Number(pmt.grossSalary) + Number(pmt.adjustment);
+                          const totalAdjustment = pmt.adjustments?.reduce((sum: number, adj: any) => sum + Number(adj.amount), 0) || 0;
+                          const net = Number(pmt.grossSalary) + totalAdjustment;
                           return (
                             <tr key={pmt.id}>
                               <td className="px-4 py-2.5 font-mono">{pmt.month}/{pmt.year}</td>
                               <td className="px-4 py-2.5 font-mono text-slate-500">{pmt.receiptNumber}</td>
-                              <td className="px-4 py-2.5 font-mono">{formatINR(pmt.grossSalary)}</td>
+                              <td className="px-4 py-2.5 font-mono">{formatINR(Number(pmt.grossSalary))}</td>
                               <td className="px-4 py-2.5 font-mono text-slate-655">
-                                {pmt.adjustment >= 0 ? '+' : ''}{formatINR(pmt.adjustment)}
+                                {totalAdjustment >= 0 ? '+' : ''}{formatINR(totalAdjustment)}
                               </td>
                               <td className="px-4 py-2.5 font-bold font-mono text-green-700">{formatINR(net)}</td>
                               <td className="px-4 py-2.5">
