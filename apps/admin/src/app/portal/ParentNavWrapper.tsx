@@ -95,6 +95,15 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
           });
           setEnabledModules(mapped);
         }
+
+        // Register Service Worker for offline capability
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js').then((reg) => {
+            console.log('Service Worker registered successfully:', reg.scope);
+          }).catch((err) => {
+            console.error('Service Worker registration failed:', err);
+          });
+        }
       } catch (err) {
         console.error('Failed to load branding / module configs:', err);
       }
