@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full bg-slate-50" suppressHydrationWarning>
-      <body className={`${inter.className} h-full antialiased text-slate-900`}>
+      <body className={`${inter.className} h-full antialiased text-slate-900`} suppressHydrationWarning>
         <Providers>
           {children}
           <CommandPalette />
