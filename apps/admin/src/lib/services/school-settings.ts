@@ -22,7 +22,12 @@ export async function getSchoolSettings() {
         dateFormat: 'DD/MM/YYYY',
         language: 'English',
         workingDays: 220,
-        passingPercent: 40.0
+        passingPercent: 40.0,
+        enableAutoTimetable: false,
+        timetableWorkingDays: 6,
+        timetablePeriodsPerDay: 7,
+        timetableBreaks: '5',
+        timetableDailySubjectLimit: 2
       }
     });
   }
@@ -50,7 +55,17 @@ export async function updateSchoolSettings(id: string, data: any) {
       dateFormat: data.dateFormat,
       language: data.language,
       workingDays: data.workingDays ? Number(data.workingDays) : undefined,
-      passingPercent: data.passingPercent ? Number(data.passingPercent) : undefined
+      passingPercent: data.passingPercent ? Number(data.passingPercent) : undefined,
+      enableAutoTimetable: data.enableAutoTimetable !== undefined ? Boolean(data.enableAutoTimetable) : undefined,
+      preferClassTeacher: data.preferClassTeacher !== undefined ? Boolean(data.preferClassTeacher) : undefined,
+      enableClassTeacherPeriod: data.enableClassTeacherPeriod !== undefined ? Boolean(data.enableClassTeacherPeriod) : undefined,
+      classTeacherPeriodFreq: data.classTeacherPeriodFreq !== undefined ? String(data.classTeacherPeriodFreq) : undefined,
+      classTeacherPeriodDay: data.classTeacherPeriodDay !== undefined ? Number(data.classTeacherPeriodDay) : undefined,
+      classTeacherPeriodNumber: data.classTeacherPeriodNumber !== undefined ? Number(data.classTeacherPeriodNumber) : undefined,
+      timetableWorkingDays: data.timetableWorkingDays ? Number(data.timetableWorkingDays) : undefined,
+      timetablePeriodsPerDay: data.timetablePeriodsPerDay ? Number(data.timetablePeriodsPerDay) : undefined,
+      timetableBreaks: data.timetableBreaks !== undefined ? String(data.timetableBreaks) : undefined,
+      timetableDailySubjectLimit: data.timetableDailySubjectLimit ? Number(data.timetableDailySubjectLimit) : undefined
     }
   });
 }

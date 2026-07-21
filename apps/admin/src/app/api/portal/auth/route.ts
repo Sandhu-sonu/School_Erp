@@ -4,7 +4,7 @@ import { verifyPassword } from '@school-erp/utils';
 
 export async function POST(request: NextRequest) {
   try {
-    const { mobile, password } = await request.json();
+    const { mobile, password } = (await request.json()) as any;
 
     if (!mobile || !password) {
       return NextResponse.json({ error: 'Mobile and password are required' }, { status: 400 });
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     
     response.cookies.set('parent_session', parent.id, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: false,
       sameSite: 'strict',
       maxAge: 60 * 60 * 24 * 7, // 1 week
       path: '/'
@@ -55,7 +55,7 @@ export async function DELETE() {
   const response = NextResponse.json({ success: true });
   response.cookies.set('parent_session', '', {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: false,
     sameSite: 'strict',
     maxAge: 0, // Invalidate immediately
     path: '/'

@@ -75,6 +75,9 @@ model User {
   salaryAdjustments     SalaryAdjustment[]
   reportAudits          ReportAudit[]
   errorLogs             ErrorLog[]
+  employeeAdvancesCreated EmployeeAdvance[]
+  employeeLoansCreated   EmployeeLoan[]
+  salaryRevisionsCreated SalaryRevision[]
 }
 
 model Parent {
@@ -175,16 +178,21 @@ model Section {
 }
 
 model Subject {
-  id         String   @id @default(uuid())
-  name       String
-  code       String
-  classId    String
-  isOptional Boolean  @default(false)
-  createdAt  DateTime @default(now())
+  id                 String   @id @default(uuid())
+  name               String
+  code               String
+  classId            String
+  isOptional         Boolean  @default(false)
+  weeklyPeriods      Int      @default(6)
+  teacherId          String?
+  consecutivePeriods Int      @default(1)
+  preferredTime      String   @default("ANY")
+  createdAt          DateTime @default(now())
 
   class      Class      @relation(fields: [classId], references: [id], onDelete: Cascade)
   timetables Timetable[]
   examMarks  ExamMark[]
+  teacher    Staff?     @relation(fields: [teacherId], references: [id], onDelete: SetNull)
 
   @@unique([classId, code])
 }
@@ -434,6 +442,9 @@ model Timetable {
   staffId      String?
   startTime    String
   endTime      String
+  isLocked     Boolean @default(false)
+  lockType     String  @default("NONE")
+  allocationSource String @default("MANUAL")
 
   session AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   class   Class           @relation(fields: [classId], references: [id], onDelete: Cascade)
@@ -443,6 +454,17 @@ model Timetable {
 
   @@unique([classId, sectionId, sessionId, dayOfWeek, periodNumber])
   @@unique([staffId, sessionId, dayOfWeek, periodNumber])
+}
+
+model TimetableAudit {
+  id          String   @id @default(uuid())
+  generatedBy String
+  date        DateTime @default(now())
+  mode        String
+  durationMs  Int
+  classId     String?
+  sectionId   String?
+  sessionId   String
 }
 
 enum NoticeStatus {
@@ -539,30 +561,146 @@ model Staff {
   monthlySalary Decimal         @db.Decimal(10, 2)
   status        StaffStatus     @default(ACTIVE)
   remarks       String?
+  teacherPriority Int           @default(2)
+  unavailableSlots String        @default("")
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
   salaryPayments SalaryPayment[]
   timetables     Timetable[]
+  advances       EmployeeAdvance[]
+  loans          EmployeeLoan[]
+  revisions      SalaryRevision[]
+  subjects       Subject[]
+}
+
+model PayrollCycle {
+  id          String             @id @default(uuid())
+  name        String             // "July 2026"
+  month       Int
+  year        Int
+  startDate   DateTime
+  endDate     DateTime
+  status      PayrollCycleStatus @default(OPEN)
+  createdAt   DateTime           @default(now())
+
+  salaryPayments SalaryPayment[]
+
+  @@unique([month, year])
 }
 
 model SalaryPayment {
-  id            String             @id @default(uuid())
-  staffId       String
-  month         Int
-  year          Int
-  grossSalary   Decimal            @db.Decimal(10, 2)
-  paymentMethod PaymentMode
-  remarks       String?
-  receiptNumber String             @unique
-  createdById   String
-  createdAt     DateTime           @default(now())
+  id                     String                 @id @default(uuid())
+  staffId                String
+  payrollCycleId         String?
+  paymentType            SalaryPaymentType      @default(INSTALLMENT)
+  status                 SalaryPaymentStatus    @default(COMPLETED)
+  salarySlipNo           String                 @unique
+  installmentNumber      Int?
+  transactionReference   String?
+  advanceId              String?
+  loanId                 String?
+  paymentMode            PaymentMode            @default(CASH)
+  paymentDate            DateTime               @default(now())
+  finalSettlementReason  FinalSettlementReason?
+  grossSalary            Decimal                @db.Decimal(10, 2)
+  remarks                String?
+  createdById            String
+  createdAt              DateTime               @default(now())
 
-  staff         Staff              @relation(fields: [staffId], references: [id])
-  createdBy     User               @relation(fields: [createdById], references: [id])
-  adjustments   SalaryAdjustment[]
+  // Snapshot Components
+  basicSalary            Decimal                @db.Decimal(10, 2)
+  da                     Decimal                @db.Decimal(10, 2) @default(0)
+  hra                    Decimal                @db.Decimal(10, 2) @default(0)
+  medical                Decimal                @db.Decimal(10, 2) @default(0)
+  specialAllowance       Decimal                @db.Decimal(10, 2) @default(0)
+  grossAmount            Decimal                @db.Decimal(10, 2)
+  netAmount              Decimal                @db.Decimal(10, 2)
 
-  @@unique([staffId, month, year])
+  staff                  Staff                  @relation(fields: [staffId], references: [id])
+  payrollCycle           PayrollCycle?          @relation(fields: [payrollCycleId], references: [id])
+  createdBy              User                   @relation(fields: [createdById], references: [id])
+  adjustments            SalaryAdjustment[]
+  recoveries             PayrollRecovery[]
+  advance                EmployeeAdvance?       @relation(fields: [advanceId], references: [id])
+  loan                   EmployeeLoan?          @relation(fields: [loanId], references: [id])
+}
+
+model EmployeeAdvance {
+  id                String            @id @default(uuid())
+  staffId           String
+  amount            Decimal           @db.Decimal(10, 2)
+  reason            String?
+  issuedDate        DateTime          @default(now())
+  outstandingAmount Decimal           @db.Decimal(10, 2)
+  recoveredAmount   Decimal           @db.Decimal(10, 2) @default(0)
+  status            AdvanceStatus     @default(ACTIVE)
+  recoveredAt       DateTime?
+  createdAt         DateTime          @default(now())
+  paymentMode       PaymentMode       @default(CASH)
+  createdById       String?
+
+  staff             Staff             @relation(fields: [staffId], references: [id])
+  createdBy         User?             @relation(fields: [createdById], references: [id])
+  payments          SalaryPayment[]
+}
+
+model EmployeeLoan {
+  id                String            @id @default(uuid())
+  staffId           String
+  principal         Decimal           @db.Decimal(10, 2)
+  interestRate      Decimal           @db.Decimal(5, 2) @default(0)
+  interestType      InterestType      @default(FLAT)
+  monthlyEmi        Decimal           @db.Decimal(10, 2)
+  outstandingAmount Decimal           @db.Decimal(10, 2)
+  reason            String?
+  status            LoanStatus        @default(ACTIVE)
+  createdAt         DateTime          @default(now())
+  paymentMode       PaymentMode       @default(CASH)
+  createdById       String?
+
+  staff             Staff             @relation(fields: [staffId], references: [id])
+  createdBy         User?             @relation(fields: [createdById], references: [id])
+  installments      EmployeeLoanInstallment[]
+  payments          SalaryPayment[]
+}
+
+model EmployeeLoanInstallment {
+  id                String            @id @default(uuid())
+  loanId            String
+  dueDate           DateTime
+  amount            Decimal           @db.Decimal(10, 2)
+  paidAmount        Decimal           @db.Decimal(10, 2) @default(0)
+  status            LoanInstallmentStatus @default(UNPAID)
+  createdAt         DateTime          @default(now())
+
+  loan              EmployeeLoan      @relation(fields: [loanId], references: [id], onDelete: Cascade)
+}
+
+model PayrollRecovery {
+  id              String       @id @default(uuid())
+  salaryPaymentId String
+  recoveryType    RecoveryType
+  referenceId     String       // ID of EmployeeAdvance or EmployeeLoan
+  amount          Decimal      @db.Decimal(10, 2)
+  createdAt       DateTime     @default(now())
+
+  salaryPayment   SalaryPayment @relation(fields: [salaryPaymentId], references: [id], onDelete: Cascade)
+}
+
+model SalaryRevision {
+  id             String    @id @default(uuid())
+  staffId        String
+  previousSalary Decimal   @db.Decimal(10, 2)
+  newSalary      Decimal   @db.Decimal(10, 2)
+  effectiveFrom  DateTime
+  effectiveTo    DateTime?
+  reason         String?
+  createdAt      DateTime  @default(now())
+  createdById    String?
+
+  staff          Staff     @relation(fields: [staffId], references: [id])
+  createdBy      User?     @relation(fields: [createdById], references: [id])
 }
 
 model SalaryAdjustment {
@@ -575,6 +713,64 @@ model SalaryAdjustment {
 
   salaryPayment   SalaryPayment @relation(fields: [salaryPaymentId], references: [id], onDelete: Cascade)
   createdBy       User          @relation(fields: [createdById], references: [id])
+}
+
+enum SalaryPaymentType {
+  ADVANCE
+  INSTALLMENT
+  FINAL_SETTLEMENT
+  ADJUSTMENT
+}
+
+enum SalaryPaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum AdvanceStatus {
+  ACTIVE
+  PARTIALLY_RECOVERED
+  RECOVERED
+  CANCELLED
+}
+
+enum LoanStatus {
+  ACTIVE
+  RECOVERED
+  CANCELLED
+}
+
+enum InterestType {
+  FLAT
+  REDUCING
+}
+
+enum LoanInstallmentStatus {
+  UNPAID
+  PAID
+}
+
+enum PayrollCycleStatus {
+  OPEN
+  PROCESSING
+  LOCKED
+  ARCHIVED
+}
+
+enum RecoveryType {
+  ADVANCE
+  LOAN
+  OTHER
+}
+
+enum FinalSettlementReason {
+  RESIGNATION
+  RETIREMENT
+  CONTRACT_COMPLETION
+  TERMINATION
+  DEATH_CASE
 }
 
 model Exam {
@@ -728,6 +924,16 @@ model SchoolSettings {
   passwordMinLength         Int         @default(8)
   passwordRequireMixedCase  Boolean     @default(true)
   passwordRequireSymbols     Boolean     @default(true)
+  enableAutoTimetable        Boolean     @default(false)
+  preferClassTeacher         Boolean     @default(false)
+  enableClassTeacherPeriod   Boolean     @default(false)
+  classTeacherPeriodFreq     String      @default("WEEKLY")
+  classTeacherPeriodDay      Int         @default(1)
+  classTeacherPeriodNumber   Int         @default(1)
+  timetableWorkingDays       Int         @default(6)
+  timetablePeriodsPerDay     Int         @default(7)
+  timetableBreaks            String      @default("5")
+  timetableDailySubjectLimit Int         @default(2)
   createdAt                 DateTime    @default(now())
   updatedAt                 DateTime    @updatedAt
 }

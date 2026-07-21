@@ -45,6 +45,87 @@ interface SchoolSettings {
   logoUrl: string | null;
 }
 
+const TRANSLATIONS: Record<string, Record<string, string>> = {
+  English: {
+    home: 'Home',
+    fees: 'Fees',
+    results: 'Results',
+    calendar: 'Calendar',
+    more: 'More',
+    menuOptions: 'Menu Options',
+    parentProfile: 'Parent Profile',
+    notifications: 'Notifications',
+    downloadsManager: 'Downloads Manager',
+    contactSchool: 'Contact School',
+    systemDiagnostics: 'System Diagnostics',
+    profile: 'Profile',
+    notices: 'Notices',
+    downloads: 'Downloads',
+    contact: 'Contact',
+    language: 'Language',
+    version: 'Version 1.0.0-release',
+    logoutSession: 'Logout Session',
+    back: '← Back',
+    fathersDetails: "Father's details",
+    mothersDetails: "Mother's details",
+    mobile: 'Mobile',
+    address: 'Address',
+    dismissLogs: 'Dismiss Logs'
+  },
+  Hindi: {
+    home: 'होम',
+    fees: 'शुल्क',
+    results: 'परिणाम',
+    calendar: 'कैलेंडर',
+    more: 'अधिक',
+    menuOptions: 'मेनू विकल्प',
+    parentProfile: 'अभिभावक प्रोफ़ाइल',
+    notifications: 'सूचनाएं',
+    downloadsManager: 'डाउनलोड प्रबंधक',
+    contactSchool: 'स्कूल से संपर्क करें',
+    systemDiagnostics: 'सिस्टम निदान',
+    profile: 'प्रोफ़ाइल',
+    notices: 'नोटिस',
+    downloads: 'डाउनलोड',
+    contact: 'संपर्क',
+    language: 'भाषा',
+    version: 'संस्करण 1.0.0-रिलीज़',
+    logoutSession: 'सत्र लॉगआउट',
+    back: '← वापस',
+    fathersDetails: 'पिता का विवरण',
+    mothersDetails: 'माता का विवरण',
+    mobile: 'मोबाइल',
+    address: 'पता',
+    dismissLogs: 'लॉग हटाएं'
+  },
+  Punjabi: {
+    home: 'ਮੁੱਖ ਪੰਨਾ',
+    fees: 'ਫੀਸਾਂ',
+    results: 'ਨਤੀਜੇ',
+    calendar: 'ਕੈਲੰਡਰ',
+    more: 'ਹੋਰ',
+    menuOptions: 'ਮੇਨੂ ਵਿਕਲਪ',
+    parentProfile: 'ਮਾਪਿਆਂ ਦੀ ਪ੍ਰੋਫਾਈਲ',
+    notifications: 'ਨੋਟਿਸ / ਸੂਚਨਾਵਾਂ',
+    downloadsManager: 'ਡਾਊਨਲۆਡ ਮੈਨੇਜਰ',
+    contactSchool: 'ਸਕੂਲ ਨਾਲ ਸੰਪਰਕ',
+    systemDiagnostics: 'ਸਿਸਟਮ ਡਾਇਗਨੌਸਟਿਕਸ',
+    profile: 'ਪ੍ਰੋਫਾਈਲ',
+    notices: 'ਨੋਟਿਸ',
+    downloads: 'ਡਾਊਨਲੋਡ',
+    contact: 'ਸੰਪਰਕ',
+    language: 'ਭਾਸ਼ਾ',
+    version: 'ਵਰਜਨ 1.0.0-ਰੀਲੀਜ਼',
+    logoutSession: 'ਲਾਗਆਉਟ ਕਰੋ',
+    back: '← ਪਿੱਛੇ',
+    fathersDetails: 'ਪਿਤਾ ਦਾ ਵੇਰਵਾ',
+    mothersDetails: 'ਮਾਤਾ ਦਾ ਵੇਰਵਾ',
+    mobile: 'ਮੋਬਾਈਲ',
+    address: 'ਪਤਾ',
+    dismissLogs: 'ਲੌਗਸ ਹਟਾਓ'
+  }
+};
+
 export default function ParentNavWrapper({ parent, children }: ParentNavWrapperProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -62,6 +143,32 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
   const [language, setLanguage] = useState('English');
   const [networkStatus, setNetworkStatus] = useState<'online' | 'offline' | 'syncing'>('online');
   const [showOnlineStatus, setShowOnlineStatus] = useState(false);
+
+  const t = (key: string) => {
+    return TRANSLATIONS[language]?.[key] || TRANSLATIONS['English']?.[key] || key;
+  };
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const cookiesObj = document.cookie.split('; ').reduce((acc, current) => {
+      const [name, value] = current.split('=');
+      if (name && value) {
+        acc[name] = value;
+      }
+      return acc;
+    }, {} as Record<string, string>);
+    if (cookiesObj.language) {
+      setLanguage(cookiesObj.language);
+    }
+  }, []);
+
+  const handleLanguageChange = (lang: string) => {
+    setLanguage(lang);
+    if (typeof document !== 'undefined') {
+      document.cookie = `language=${lang}; path=/; max-age=${60 * 60 * 24 * 365}`;
+    }
+    router.refresh();
+  };
 
   // Dynamic config states
   const [schoolSettings, setSchoolSettings] = useState<SchoolSettings | null>(null);
@@ -280,16 +387,16 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
                     onClick={() => setActiveMoreTab('menu')}
                     className="text-[10px] text-slate-400 hover:text-white font-bold mr-1 uppercase tracking-wider"
                   >
-                    ← Back
+                    {t('back')}
                   </button>
                 )}
                 <h3 className="text-xs font-black uppercase tracking-wider text-white">
-                  {activeMoreTab === 'menu' && 'Menu Options'}
-                  {activeMoreTab === 'profile' && 'Parent Profile'}
-                  {activeMoreTab === 'notifications' && 'Notifications'}
-                  {activeMoreTab === 'downloads' && 'Downloads Manager'}
-                  {activeMoreTab === 'contact' && 'Contact School'}
-                  {activeMoreTab === 'diagnostics' && 'System Diagnostics'}
+                  {activeMoreTab === 'menu' && t('menuOptions')}
+                  {activeMoreTab === 'profile' && t('parentProfile')}
+                  {activeMoreTab === 'notifications' && t('notifications')}
+                  {activeMoreTab === 'downloads' && t('downloadsManager')}
+                  {activeMoreTab === 'contact' && t('contactSchool')}
+                  {activeMoreTab === 'diagnostics' && t('systemDiagnostics')}
                 </h3>
               </div>
               <button 
@@ -311,28 +418,28 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
                     className="p-3.5 bg-slate-900 border border-slate-850 hover:border-slate-800 rounded-2xl flex flex-col items-center gap-2 text-center"
                   >
                     <User className="h-5 w-5 text-blue-400" />
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Profile</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider">{t('profile')}</span>
                   </button>
                   <button 
                     onClick={() => setActiveMoreTab('notifications')}
                     className="p-3.5 bg-slate-900 border border-slate-850 hover:border-slate-800 rounded-2xl flex flex-col items-center gap-2 text-center"
                   >
                     <Bell className="h-5 w-5 text-indigo-400" />
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Notices</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider">{t('notices')}</span>
                   </button>
                   <button 
                     onClick={() => setActiveMoreTab('downloads')}
                     className="p-3.5 bg-slate-900 border border-slate-850 hover:border-slate-800 rounded-2xl flex flex-col items-center gap-2 text-center"
                   >
                     <Download className="h-5 w-5 text-emerald-400" />
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Downloads</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider">{t('downloads')}</span>
                   </button>
                   <button 
                     onClick={() => setActiveMoreTab('contact')}
                     className="p-3.5 bg-slate-900 border border-slate-850 hover:border-slate-800 rounded-2xl flex flex-col items-center gap-2 text-center"
                   >
                     <Phone className="h-5 w-5 text-purple-400" />
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Contact</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider">{t('contact')}</span>
                   </button>
                 </div>
               )}
@@ -341,13 +448,13 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
               {activeMoreTab === 'profile' && (
                 <div className="space-y-4 text-[11px]">
                   <div className="bg-slate-900 border border-slate-850 p-4 rounded-2xl space-y-2">
-                    <span className="text-[8px] text-slate-500 font-bold uppercase tracking-widest block">Father's details</span>
+                    <span className="text-[8px] text-slate-500 font-bold uppercase tracking-widest block">{t('fathersDetails')}</span>
                     <span className="block text-xs font-bold text-white">{parent.fatherName}</span>
-                    <span className="block text-slate-400">Mobile: {parent.mobile}</span>
+                    <span className="block text-slate-400">{t('mobile')}: {parent.mobile}</span>
                   </div>
                   {parent.motherName && (
                     <div className="bg-slate-900 border border-slate-850 p-4 rounded-2xl space-y-2">
-                      <span className="text-[8px] text-slate-500 font-bold uppercase tracking-widest block">Mother's details</span>
+                      <span className="text-[8px] text-slate-500 font-bold uppercase tracking-widest block">{t('mothersDetails')}</span>
                       <span className="block text-xs font-bold text-white">{parent.motherName}</span>
                     </div>
                   )}
@@ -441,7 +548,7 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
                     onClick={() => setActiveMoreTab('menu')}
                     className="w-full py-1.5 bg-slate-800 hover:bg-slate-750 text-white rounded-lg transition-colors font-bold uppercase tracking-wider text-[8px]"
                   >
-                    Dismiss Logs
+                    {t('dismissLogs')}
                   </button>
                 </div>
               )}
@@ -451,12 +558,12 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
                 <div className="border-t border-slate-850 pt-4 flex flex-col gap-3">
                   {/* Language Selector */}
                   <div className="flex justify-between items-center text-[10px] font-bold text-slate-400">
-                    <span>Language</span>
+                    <span>{t('language')}</span>
                     <div className="flex gap-2">
                       {['English', 'Hindi', 'Punjabi'].map(lang => (
                         <button
                           key={lang}
-                          onClick={() => setLanguage(lang)}
+                          onClick={() => handleLanguageChange(lang)}
                           className={`px-2 py-0.5 rounded transition-all ${
                             language === lang ? 'bg-blue-600 text-white font-extrabold' : 'bg-slate-900 text-slate-500 hover:bg-slate-850'
                           }`}
@@ -468,14 +575,14 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
                   </div>
 
                   <div className="flex justify-between items-center pt-2 text-[9px] text-slate-500 font-bold uppercase font-mono">
-                    <span onClick={handleVersionTap} className="cursor-pointer hover:text-slate-300">Version 1.0.0-release</span>
+                    <span onClick={handleVersionTap} className="cursor-pointer hover:text-slate-300">{t('version')}</span>
                     <button 
                       onClick={handleLogout}
                       disabled={loggingOut}
                       className="text-red-500 hover:underline flex items-center gap-1 focus:outline-none"
                     >
                       <LogOut className="h-3 w-3" />
-                      <span>Logout Session</span>
+                      <span>{t('logoutSession')}</span>
                     </button>
                   </div>
                 </div>
@@ -495,7 +602,7 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
           }`}
         >
           <Home className="h-5 w-5" />
-          <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">Home</span>
+          <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">{t('home')}</span>
         </Link>
 
         {/* Dynamic Fees Tab based on module settings */}
@@ -507,7 +614,7 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
             }`}
           >
             <CreditCard className="h-5 w-5" />
-            <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">Fees</span>
+            <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">{t('fees')}</span>
           </Link>
         )}
 
@@ -520,7 +627,7 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
             }`}
           >
             <Award className="h-5 w-5" />
-            <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">Results</span>
+            <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">{t('results')}</span>
           </Link>
         )}
 
@@ -531,7 +638,7 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
           }`}
         >
           <Calendar className="h-5 w-5" />
-          <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">Calendar</span>
+          <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">{t('calendar')}</span>
         </Link>
 
         {/* More Options Drawer Trigger */}
@@ -542,7 +649,7 @@ export default function ParentNavWrapper({ parent, children }: ParentNavWrapperP
           }`}
         >
           <User className="h-5 w-5" />
-          <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">More</span>
+          <span className="text-[9px] mt-0.5 font-bold uppercase tracking-wider">{t('more')}</span>
         </button>
       </nav>
     </div>

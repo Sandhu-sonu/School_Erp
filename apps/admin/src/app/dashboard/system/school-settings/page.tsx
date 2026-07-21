@@ -288,6 +288,156 @@ export default function SchoolSettingsPage() {
           </div>
         </div>
 
+        {/* Section 4: Timetable Options */}
+        <div className="erp-card space-y-4">
+          <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-100 pb-2">
+            Academic Timetable Options
+          </h2>
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="enableAutoTimetable"
+              className="h-4 w-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 cursor-pointer"
+              checked={settings.enableAutoTimetable || false}
+              onChange={(e) => handleChange('enableAutoTimetable', e.target.checked)}
+            />
+            <label htmlFor="enableAutoTimetable" className="text-xs font-bold text-slate-700 cursor-pointer">
+              Enable Automatic Timetable Generation
+            </label>
+          </div>
+          <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider ml-7">
+            When enabled, an "Auto Generate" button will be displayed on the Class Timetable screen.
+          </p>
+
+          {settings.enableAutoTimetable && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+              <div>
+                <label className="erp-label">Default Timetable Working Days</label>
+                <select
+                  className="erp-input text-xs"
+                  value={settings.timetableWorkingDays || 6}
+                  onChange={(e) => handleChange('timetableWorkingDays', Number(e.target.value))}
+                >
+                  <option value={5}>5 Days (Monday - Friday)</option>
+                  <option value={6}>6 Days (Monday - Saturday)</option>
+                  <option value={7}>7 Days (Monday - Sunday)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="erp-label">Default Periods per Day</label>
+                <input
+                  type="number"
+                  required
+                  min={1}
+                  max={12}
+                  className="erp-input text-xs"
+                  value={settings.timetablePeriodsPerDay || 7}
+                  onChange={(e) => handleChange('timetablePeriodsPerDay', Number(e.target.value))}
+                />
+              </div>
+
+              <div>
+                <label className="erp-label">Break Period Numbers (comma separated)</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. 5"
+                  className="erp-input text-xs"
+                  value={settings.timetableBreaks || ''}
+                  onChange={(e) => handleChange('timetableBreaks', e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="erp-label">Max Same Subject Periods per Day</label>
+                <input
+                  type="number"
+                  required
+                  min={1}
+                  max={4}
+                  className="erp-input text-xs"
+                  value={settings.timetableDailySubjectLimit || 2}
+                  onChange={(e) => handleChange('timetableDailySubjectLimit', Number(e.target.value))}
+                />
+              </div>
+
+              <div className="md:col-span-2 pt-2 border-t border-slate-100 space-y-4">
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    id="preferClassTeacher"
+                    className="h-4 w-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 cursor-pointer"
+                    checked={settings.preferClassTeacher || false}
+                    onChange={(e) => handleChange('preferClassTeacher', e.target.checked)}
+                  />
+                  <label htmlFor="preferClassTeacher" className="text-xs font-bold text-slate-700 cursor-pointer">
+                    Prefer Class Teacher's Subject in Own Class
+                  </label>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    id="enableClassTeacherPeriod"
+                    className="h-4 w-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 cursor-pointer"
+                    checked={settings.enableClassTeacherPeriod || false}
+                    onChange={(e) => handleChange('enableClassTeacherPeriod', e.target.checked)}
+                  />
+                  <label htmlFor="enableClassTeacherPeriod" className="text-xs font-bold text-slate-700 cursor-pointer">
+                    Enable Dedicated Class Teacher Period
+                  </label>
+                </div>
+
+                {settings.enableClassTeacherPeriod && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pl-7 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                    <div>
+                      <label className="erp-label">Frequency</label>
+                      <select
+                        className="erp-input text-xs"
+                        value={settings.classTeacherPeriodFreq || 'WEEKLY'}
+                        onChange={(e) => handleChange('classTeacherPeriodFreq', e.target.value)}
+                      >
+                        <option value="WEEKLY">Weekly</option>
+                        <option value="BIWEEKLY">Biweekly</option>
+                        <option value="MONTHLY">Monthly</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="erp-label">Day of Week</label>
+                      <select
+                        className="erp-input text-xs"
+                        value={settings.classTeacherPeriodDay || 1}
+                        onChange={(e) => handleChange('classTeacherPeriodDay', Number(e.target.value))}
+                      >
+                        <option value={1}>Monday</option>
+                        <option value={2}>Tuesday</option>
+                        <option value={3}>Wednesday</option>
+                        <option value={4}>Thursday</option>
+                        <option value={5}>Friday</option>
+                        <option value={6}>Saturday</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="erp-label">Period Number</label>
+                      <input
+                        type="number"
+                        min={1}
+                        max={10}
+                        className="erp-input text-xs"
+                        value={settings.classTeacherPeriodNumber || 1}
+                        onChange={(e) => handleChange('classTeacherPeriodNumber', Number(e.target.value))}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Submit */}
         <div className="flex justify-end">
           <button

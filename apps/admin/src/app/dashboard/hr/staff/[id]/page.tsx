@@ -22,15 +22,14 @@ interface Adjustment {
 
 interface Payment {
   id: string;
-  month: number;
-  year: number;
   grossSalary: number;
-  adjustment: number;
-  paymentMethod: string;
-  receiptNumber: string;
+  paymentMode: string;
+  salarySlipNo: string;
   remarks: string | null;
   createdBy: { name: string };
   createdAt: string;
+  paymentDate?: string;
+  payrollCycle?: { name: string };
   adjustments: Adjustment[];
 }
 
@@ -325,8 +324,8 @@ export default function StaffProfilePage() {
                           const net = Number(pmt.grossSalary) + totalAdjustment;
                           return (
                             <tr key={pmt.id}>
-                              <td className="px-4 py-2.5 font-mono">{pmt.month}/{pmt.year}</td>
-                              <td className="px-4 py-2.5 font-mono text-slate-500">{pmt.receiptNumber}</td>
+                              <td className="px-4 py-2.5 font-mono">{pmt.payrollCycle?.name || 'N/A'}</td>
+                              <td className="px-4 py-2.5 font-mono text-slate-500">{pmt.salarySlipNo}</td>
                               <td className="px-4 py-2.5 font-mono">{formatINR(Number(pmt.grossSalary))}</td>
                               <td className="px-4 py-2.5 font-mono text-slate-655">
                                 {totalAdjustment >= 0 ? '+' : ''}{formatINR(totalAdjustment)}
@@ -369,11 +368,11 @@ export default function StaffProfilePage() {
                         </div>
 
                         <div className="space-y-1.5 border-b border-dashed pb-3 mb-3">
-                          <p>Receipt: <strong>{selectedPayment.receiptNumber}</strong></p>
-                          <p>Date: {new Date(selectedPayment.createdAt).toLocaleString()}</p>
+                          <p>Slip No: <strong>{selectedPayment.salarySlipNo}</strong></p>
+                          <p>Date: {new Date(selectedPayment.paymentDate || selectedPayment.createdAt).toLocaleString()}</p>
                           <p>Staff: {staff?.name} ({staff?.employeeCode})</p>
                           <p>Designation: {staff?.designation}</p>
-                          <p>Salary Period: {selectedPayment.month}/{selectedPayment.year}</p>
+                          <p>Salary Period: {selectedPayment.payrollCycle?.name || 'N/A'}</p>
                         </div>
 
                         <div className="space-y-1.5">
@@ -399,7 +398,7 @@ export default function StaffProfilePage() {
                         </div>
 
                         <div className="pt-6 flex justify-between text-[9px] text-slate-500">
-                          <span>Method: {selectedPayment.paymentMethod}</span>
+                          <span>Method: {selectedPayment.paymentMode}</span>
                           <span>Audit trail sequence locked</span>
                         </div>
                       </div>

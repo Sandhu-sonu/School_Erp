@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { sessionId, classId, sectionId, dayOfWeek, periodNumber, subjectId, staffId, startTime, endTime } = body;
+    const { sessionId, classId, sectionId, dayOfWeek, periodNumber, subjectId, staffId, startTime, endTime, lockType, allocationSource } = body;
 
     if (!sessionId || !classId || !dayOfWeek || !periodNumber || !subjectId || !startTime || !endTime) {
       return NextResponse.json({ error: 'Missing required parameters' }, { status: 400 });
@@ -84,6 +84,8 @@ export async function POST(request: NextRequest) {
       staffId,
       startTime,
       endTime,
+      lockType: lockType || 'NONE',
+      allocationSource: allocationSource || 'MANUAL'
     });
 
     return NextResponse.json(slot, { status: 201 });

@@ -660,7 +660,7 @@ export async function getExpenseSummaryReport(startDate?: Date, endDate?: Date) 
 
 export async function getSalarySummaryReport() {
   const payments = await prisma.salaryPayment.findMany({
-    include: { adjustments: true },
+    include: { adjustments: true, payrollCycle: true },
   });
 
   let totalGross = 0;
@@ -678,9 +678,9 @@ export async function getSalarySummaryReport() {
 
     return {
       id: p.id,
-      receiptNumber: p.receiptNumber,
-      month: p.month,
-      year: p.year,
+      receiptNumber: p.salarySlipNo,
+      month: p.payrollCycle?.month || 0,
+      year: p.payrollCycle?.year || 0,
       grossSalary: gross,
       adjustments: adjustmentsSum,
       effectivePaid,
@@ -1065,8 +1065,8 @@ export async function getSalaryHistory(
 ) {
   const where: any = {};
   if (filters.staffId) where.staffId = filters.staffId;
-  if (filters.year) where.year = filters.year;
-  if (filters.month) where.month = filters.month;
+  if (filters.month) where.payrollCycle = { month: filters.month };
+  if (filters.year) where.payrollCycle = { ...(where.payrollCycle || {}), year: filters.year };
 
   const total = await prisma.salaryPayment.count({ where });
   const skip = exportMode ? 0 : (page - 1) * limit;
@@ -1078,6 +1078,7 @@ export async function getSalaryHistory(
       staff: true,
       createdBy: true,
       adjustments: true,
+      payrollCycle: true,
     },
     orderBy: { createdAt: 'desc' },
     skip,
@@ -1091,16 +1092,16 @@ export async function getSalaryHistory(
 
     return {
       id: p.id,
-      receiptNumber: p.receiptNumber,
+      receiptNumber: p.salarySlipNo,
       employeeCode: p.staff.employeeCode,
       staffName: p.staff.name,
       designation: p.staff.designation,
-      month: p.month,
-      year: p.year,
+      month: p.payrollCycle?.month || 0,
+      year: p.payrollCycle?.year || 0,
       grossSalary: gross,
       adjustmentTotal: adjustmentsSum,
       effectivePaid,
-      paymentMethod: p.paymentMethod,
+      paymentMethod: p.paymentMode,
       paidDate: p.createdAt,
     };
   });
@@ -1146,7 +1147,7 @@ export async function getAdjustmentHistory(
 
   const data = adjustments.map((adj) => ({
     id: adj.id,
-    receiptNumber: adj.salaryPayment.receiptNumber,
+    receiptNumber: adj.salaryPayment.salarySlipNo,
     employeeCode: adj.salaryPayment.staff.employeeCode,
     staffName: adj.salaryPayment.staff.name,
     amount: Number(adj.amount),
@@ -1166,13 +1167,15 @@ export async function getAdjustmentHistory(
 
 export async function getMonthlySalarySummary() {
   const payments = await prisma.salaryPayment.findMany({
-    include: { adjustments: true },
+    include: { adjustments: true, payrollCycle: true },
   });
 
   const monthlySums: Record<string, { gross: number; adj: number; effective: number }> = {};
 
   for (const p of payments) {
-    const key = `${p.year}-${String(p.month).padStart(2, '0')}`;
+    const m = p.payrollCycle?.month || 0;
+    const y = p.payrollCycle?.year || 0;
+    const key = `${y}-${String(m).padStart(2, '0')}`;
     if (!monthlySums[key]) {
       monthlySums[key] = { gross: 0, adj: 0, effective: 0 };
     }

@@ -11,7 +11,18 @@ interface Subject {
   code: string;
   classId: string;
   isOptional: boolean;
+  weeklyPeriods: number;
+  teacherId: string | null;
+  consecutivePeriods: number;
+  preferredTime: string;
   class: { name: string };
+  teacher?: { name: string; employeeCode: string } | null;
+}
+
+interface Teacher {
+  id: string;
+  name: string;
+  employeeCode: string;
 }
 
 interface ClassItem {
@@ -35,6 +46,11 @@ export default function SubjectsMatrixPage() {
   const [name, setName] = useState('');
   const [code, setCode] = useState('');
   const [isOptional, setIsOptional] = useState(false);
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const [weeklyPeriods, setWeeklyPeriods] = useState<number>(6);
+  const [teacherId, setTeacherId] = useState<string>('');
+  const [consecutivePeriods, setConsecutivePeriods] = useState<number>(1);
+  const [preferredTime, setPreferredTime] = useState<string>('ANY');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
@@ -70,8 +86,21 @@ export default function SubjectsMatrixPage() {
     }
   };
 
+  const loadTeachers = async () => {
+    try {
+      const res = await fetch('/api/hr/staff');
+      if (res.ok) {
+        const data = await res.json();
+        setTeachers(data.filter((t: any) => t.status === 'ACTIVE'));
+      }
+    } catch (err) {
+      console.error('Failed to load teachers list:', err);
+    }
+  };
+
   useEffect(() => {
     loadClasses();
+    loadTeachers();
   }, []);
 
   useEffect(() => {
@@ -98,6 +127,10 @@ export default function SubjectsMatrixPage() {
           code: code.toUpperCase().trim(),
           classId: selectedClass,
           isOptional,
+          weeklyPeriods,
+          teacherId: teacherId || null,
+          consecutivePeriods,
+          preferredTime,
         }),
       });
 
@@ -106,6 +139,10 @@ export default function SubjectsMatrixPage() {
         setName('');
         setCode('');
         setIsOptional(false);
+        setWeeklyPeriods(6);
+        setTeacherId('');
+        setConsecutivePeriods(1);
+        setPreferredTime('ANY');
         await loadSubjects();
       } else {
         const data = await res.json();
@@ -171,17 +208,21 @@ export default function SubjectsMatrixPage() {
                     <th className="erp-table-header">Subject Code</th>
                     <th className="erp-table-header">Subject Name</th>
                     <th className="erp-table-header">Classification</th>
+                    <th className="erp-table-header">Weekly Periods</th>
+                    <th className="erp-table-header">Teacher</th>
+                    <th className="erp-table-header">Consecutive</th>
+                    <th className="erp-table-header">Timing Pref</th>
                     <th className="erp-table-header">Class Owner</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 bg-white">
                   {isLoading ? (
                     <tr>
-                      <td colSpan={4} className="text-center py-10 text-xs text-slate-400">Loading subjects list...</td>
+                      <td colSpan={8} className="text-center py-10 text-xs text-slate-400">Loading subjects list...</td>
                     </tr>
                   ) : subjects.length === 0 ? (
                     <tr>
-                      <td colSpan={4} className="text-center py-10 text-xs text-slate-400">No subjects registered for this class.</td>
+                      <td colSpan={8} className="text-center py-10 text-xs text-slate-400">No subjects registered for this class.</td>
                     </tr>
                   ) : (
                     subjects.map((sub) => (
@@ -192,6 +233,16 @@ export default function SubjectsMatrixPage() {
                           <span className={`erp-badge ${sub.isOptional ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-green-50 text-green-700 border-green-200'}`}>
                             {sub.isOptional ? 'Elective / Optional' : 'Core / Compulsory'}
                           </span>
+                        </td>
+                        <td className="erp-table-cell font-bold text-slate-800 text-center">{sub.weeklyPeriods}</td>
+                        <td className="erp-table-cell font-semibold text-slate-700">
+                          {sub.teacher ? `${sub.teacher.name} (${sub.teacher.employeeCode})` : <span className="text-slate-400">Unassigned</span>}
+                        </td>
+                        <td className="erp-table-cell font-semibold text-slate-600 text-center">
+                          {sub.consecutivePeriods === 1 ? 'None' : `${sub.consecutivePeriods} Periods`}
+                        </td>
+                        <td className="erp-table-cell font-semibold text-slate-600 font-mono text-[10px]">
+                          {sub.preferredTime}
                         </td>
                         <td className="erp-table-cell">{sub.class?.name}</td>
                       </tr>
@@ -259,6 +310,60 @@ export default function SubjectsMatrixPage() {
                     onChange={(e) => setCode(e.target.value)}
                     required
                   />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase">Weekly Periods Required</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={20}
+                    className="erp-input text-xs font-semibold"
+                    value={weeklyPeriods}
+                    onChange={(e) => setWeeklyPeriods(Number(e.target.value))}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase">Assigned Teacher</label>
+                  <select
+                    className="erp-input text-xs font-semibold"
+                    value={teacherId}
+                    onChange={(e) => setTeacherId(e.target.value)}
+                  >
+                    <option value="">-- Select Teacher (Optional) --</option>
+                    {teachers.map((t) => (
+                      <option key={t.id} value={t.id}>{t.name} ({t.employeeCode})</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase">Consecutive Block Requirements</label>
+                  <select
+                    className="erp-input text-xs font-semibold"
+                    value={consecutivePeriods}
+                    onChange={(e) => setConsecutivePeriods(Number(e.target.value))}
+                  >
+                    <option value={1}>None (Single Periods)</option>
+                    <option value={2}>2 Periods Consecutive</option>
+                    <option value={3}>3 Periods Consecutive</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase">Timing Preference</label>
+                  <select
+                    className="erp-input text-xs font-semibold"
+                    value={preferredTime}
+                    onChange={(e) => setPreferredTime(e.target.value)}
+                  >
+                    <option value="ANY">Any Time / No Preference</option>
+                    <option value="MORNING">Morning (Periods 1 - 3)</option>
+                    <option value="AVOID_LAST">Avoid Last Period</option>
+                    <option value="LAST_TWO">Last Two Periods</option>
+                  </select>
                 </div>
 
                 <div className="flex items-center gap-2 py-1">

@@ -1,5 +1,7 @@
 import { prisma, Prisma } from '@school-erp/db';
 import { StaffStatus, PaymentMode } from '@prisma/client';
+import { processSalaryPayment } from './payroll';
+
 
 /**
  * Generate a transaction-safe sequential Employee Code (e.g. EMP-0001)
@@ -129,9 +131,11 @@ export async function getStaffById(id: string) {
     where: { id },
     include: {
       salaryPayments: {
-        orderBy: [{ year: 'desc' }, { month: 'desc' }],
+        orderBy: { createdAt: 'desc' },
         include: {
           createdBy: { select: { name: true } },
+          payrollCycle: { select: { name: true } },
+          recoveries: true,
           adjustments: {
             orderBy: { createdAt: 'desc' },
             include: { createdBy: { select: { name: true } } },
@@ -181,88 +185,32 @@ export async function createSalaryPayment(data: {
   remarks?: string;
   createdById: string;
 }) {
-  return await prisma.$transaction(async (tx) => {
-    // 1. Validate Staff ACTIVE status
-    const staff = await tx.staff.findUniqueOrThrow({
-      where: { id: data.staffId },
-    });
+  const cycleName = `${new Date(2000, data.month - 1).toLocaleString('en-US', { month: 'long' })} ${data.year}`;
+  let cycle = await prisma.payrollCycle.findFirst({
+    where: { month: data.month, year: data.year },
+  });
 
-    if (staff.status !== StaffStatus.ACTIVE) {
-      throw new Error(`Salary cannot be processed for INACTIVE or DELETED staff member: ${staff.name} (${staff.employeeCode})`);
-    }
-
-    // 2. Validate month/year uniqueness to prevent duplicate entries
-    const existing = await tx.salaryPayment.findUnique({
-      where: {
-        staffId_month_year: {
-          staffId: data.staffId,
-          month: data.month,
-          year: data.year,
-        },
-      },
-    });
-
-    if (existing) {
-      throw new Error(`Salary payment for ${staff.name} is already registered for month ${data.month}/${data.year}`);
-    }
-
-    // 3. Generate transaction-safe receipt number
-    const receiptNumber = await generateSalaryReceiptNumber(data.year);
-
-    // 4. Create SalaryPayment (immutable)
-    const payment = await tx.salaryPayment.create({
+  if (!cycle) {
+    cycle = await prisma.payrollCycle.create({
       data: {
-        staffId: data.staffId,
+        name: cycleName,
         month: data.month,
         year: data.year,
-        grossSalary: data.grossSalary,
-        paymentMethod: data.paymentMethod,
-        remarks: data.remarks || null,
-        receiptNumber,
-        createdById: data.createdById,
+        startDate: new Date(data.year, data.month - 1, 1),
+        endDate: new Date(data.year, data.month, 0),
       },
     });
+  }
 
-    // Create initial SalaryAdjustment if adjustment !== 0
-    if (data.adjustment !== 0) {
-      await tx.salaryAdjustment.create({
-        data: {
-          salaryPaymentId: payment.id,
-          amount: data.adjustment,
-          reason: 'Initial adjustment on creation',
-          createdById: data.createdById,
-        },
-      });
-    }
-
-    // 5. Create locked Expense record mapping back to SalaryPayment
-    const finalAmount = Number(data.grossSalary) + Number(data.adjustment);
-    
-    await tx.expense.create({
-      data: {
-        title: `Salary Paid - ${staff.name} (${staff.employeeCode})`,
-        amount: finalAmount,
-        category: 'Salary',
-        expenseDate: new Date(),
-        paidTo: staff.name,
-        paymentMode: data.paymentMethod,
-        notes: `Salary Receipt: ${receiptNumber}. Remarks: ${data.remarks || 'None'}`,
-        referenceType: 'SALARY',
-        referenceId: payment.id,
-        isLocked: true,
-      },
-    });
-
-    // 6. Write Audit Log
-    await tx.auditLog.create({
-      data: {
-        userId: data.createdById,
-        action: 'CREATE_SALARY',
-        details: `Generated manual salary payment of ₹${finalAmount.toFixed(2)} for ${staff.name} (${receiptNumber})`,
-      },
-    });
-
-    return payment;
+  return await processSalaryPayment({
+    staffId: data.staffId,
+    payrollCycleId: cycle.id,
+    paymentType: 'INSTALLMENT',
+    installmentAmount: data.grossSalary,
+    paymentMode: data.paymentMethod,
+    remarks: data.remarks,
+    adjustments: data.adjustment !== 0 ? [{ amount: data.adjustment, reason: 'Initial adjustment on creation' }] : [],
+    createdById: data.createdById,
   });
 }
 
@@ -325,7 +273,7 @@ export async function adjustSalaryPayment(
       data: {
         userId: createdById,
         action: 'ADJUST_SALARY',
-        details: `Applied salary adjustment of ₹${amount.toFixed(2)} on slip ${payment.receiptNumber} (${reason})`,
+        details: `Applied salary adjustment of ₹${amount.toFixed(2)} on slip ${payment.salarySlipNo} (${reason})`,
       },
     });
 
@@ -339,12 +287,12 @@ export async function adjustSalaryPayment(
 export async function getSalaryHistory(filters: { staffId?: string; month?: number; year?: number }) {
   const where: any = {};
   if (filters.staffId) where.staffId = filters.staffId;
-  if (filters.month) where.month = filters.month;
-  if (filters.year) where.year = filters.year;
+  if (filters.month) where.payrollCycle = { month: filters.month };
+  if (filters.year) where.payrollCycle = { ...(where.payrollCycle || {}), year: filters.year };
 
   return await prisma.salaryPayment.findMany({
     where,
-    orderBy: [{ year: 'desc' }, { month: 'desc' }],
+    orderBy: { createdAt: 'desc' },
     include: {
       staff: { select: { name: true, employeeCode: true, designation: true } },
       createdBy: { select: { name: true } },

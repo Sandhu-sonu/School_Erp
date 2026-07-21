@@ -22,6 +22,10 @@ export async function createSubject(data: {
   code: string;
   classId: string;
   isOptional?: boolean;
+  weeklyPeriods?: number;
+  teacherId?: string | null;
+  consecutivePeriods?: number;
+  preferredTime?: string;
 }) {
   // Validate name & code
   if (!data.name || !data.code || !data.classId) {
@@ -48,6 +52,10 @@ export async function createSubject(data: {
       code: data.code,
       classId: data.classId,
       isOptional: data.isOptional || false,
+      weeklyPeriods: data.weeklyPeriods ? Number(data.weeklyPeriods) : undefined,
+      teacherId: data.teacherId || null,
+      consecutivePeriods: data.consecutivePeriods ? Number(data.consecutivePeriods) : undefined,
+      preferredTime: data.preferredTime || undefined
     },
   });
 }
@@ -73,6 +81,8 @@ export async function generateTimetable(data: {
   staffId?: string | null;
   startTime: string;
   endTime: string;
+  lockType?: string;
+  allocationSource?: string;
 }) {
   const sectionId = data.sectionId || null;
 
@@ -98,7 +108,6 @@ export async function generateTimetable(data: {
 
   // 2. Class/section boundary collision check
   if (sectionId) {
-    // If scheduling for a section, make sure the whole class is not already scheduled (e.g. sectionId is null)
     const classCollision = await prisma.timetable.findFirst({
       where: {
         classId: data.classId,
@@ -112,7 +121,6 @@ export async function generateTimetable(data: {
       throw new Error('The entire class is already scheduled for a general period at this time.');
     }
   } else {
-    // If scheduling for the whole class (sectionId is null), make sure no section of this class is already scheduled
     const sectionCollision = await prisma.timetable.findFirst({
       where: {
         classId: data.classId,
@@ -127,7 +135,9 @@ export async function generateTimetable(data: {
     }
   }
 
-  // 2. Class/section collision check (upsert)
+  const isLocked = data.lockType === 'HARD' || data.lockType === 'RESERVED';
+
+  // 3. Class/section collision check (upsert)
   return await prisma.timetable.upsert({
     where: {
       classId_sectionId_sessionId_dayOfWeek_periodNumber: {
@@ -143,6 +153,9 @@ export async function generateTimetable(data: {
       staffId: data.staffId || null,
       startTime: data.startTime,
       endTime: data.endTime,
+      lockType: data.lockType || 'NONE',
+      isLocked,
+      allocationSource: data.allocationSource || 'MANUAL'
     },
     create: {
       sessionId: data.sessionId,
@@ -154,6 +167,9 @@ export async function generateTimetable(data: {
       staffId: data.staffId || null,
       startTime: data.startTime,
       endTime: data.endTime,
+      lockType: data.lockType || 'NONE',
+      isLocked,
+      allocationSource: data.allocationSource || 'MANUAL'
     },
   });
 }

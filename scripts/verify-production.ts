@@ -142,18 +142,18 @@ async function runAllTests() {
     console.log(`✔ Configured max login attempts: ${maxAttempts} (Locked for ${lockDuration} mins)`);
 
     const trackerKey = 'test-locked-email@school.com';
-    if (!globalThis.loginAttemptsTracker) {
-      globalThis.loginAttemptsTracker = {};
+    if (!(globalThis as any).loginAttemptsTracker) {
+      (globalThis as any).loginAttemptsTracker = {};
     }
     // Simulate failed attempts
-    globalThis.loginAttemptsTracker[trackerKey] = { attempts: maxAttempts, lockedUntil: new Date(Date.now() + 15 * 60 * 1000) };
-    const tracker = globalThis.loginAttemptsTracker[trackerKey];
+    (globalThis as any).loginAttemptsTracker[trackerKey] = { attempts: maxAttempts, lockedUntil: new Date(Date.now() + 15 * 60 * 1000) };
+    const tracker = (globalThis as any).loginAttemptsTracker[trackerKey];
     if (tracker.attempts >= maxAttempts && tracker.lockedUntil && tracker.lockedUntil > new Date()) {
       console.log('✔ Locked credentials trigger verification: PASS (Account locked out correctly)');
     } else {
       throw new Error('Lock triggers failed to lock account status.');
     }
-    delete globalThis.loginAttemptsTracker[trackerKey];
+    delete (globalThis as any).loginAttemptsTracker[trackerKey];
 
     // 8. Maintenance runs
     console.log('\nStep 9: Running database maintenance vacuum checks...');

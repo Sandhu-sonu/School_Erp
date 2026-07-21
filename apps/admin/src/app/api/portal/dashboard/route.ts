@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@school-erp/db';
-import { getStudentDashboardSummary } from '@/lib/services/parent-portal';
+import { getStudentDashboardSummary } from '../../../../lib/services/parent-portal';
 
 export async function GET(request: NextRequest) {
   try {

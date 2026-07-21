@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
       where: classId ? { classId } : {},
       include: {
         class: { select: { name: true } },
+        teacher: { select: { id: true, name: true, employeeCode: true } }
       },
       orderBy: { code: 'asc' },
     });
@@ -46,8 +47,8 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { name, code, classId, isOptional } = body;
-    const subject = await createSubject({ name, code, classId, isOptional });
+    const { name, code, classId, isOptional, weeklyPeriods, teacherId, consecutivePeriods, preferredTime } = body;
+    const subject = await createSubject({ name, code, classId, isOptional, weeklyPeriods, teacherId, consecutivePeriods, preferredTime });
     return NextResponse.json(subject, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });

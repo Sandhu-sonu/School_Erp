@@ -47,7 +47,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { currentPassword, newPassword } = await request.json();
+    const { currentPassword, newPassword } = (await request.json()) as any;
 
     if (!currentPassword || !newPassword) {
       return NextResponse.json({ error: 'Missing required parameters: currentPassword, newPassword' }, { status: 400 });

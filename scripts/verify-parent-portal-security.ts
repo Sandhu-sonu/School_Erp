@@ -284,7 +284,7 @@ async function runSecurityTests() {
   // --- STEP 4: AUDIT RESULTS & STANDINGS ---
   console.log('\nStep 4: Testing Results Standings & Grade Records...');
   const resResponse = await resultsGet(mockReq(`http://localhost/api/portal/results?studentId=${studentA.id}`, parentA.id));
-  const resultsData = await resResponse.json();
+  const resultsData = (await resResponse.json()) as any;
   
   console.log(`✔ Results returned: ${resultsData.length} exams`);
   const term1 = resultsData[0];
@@ -302,7 +302,7 @@ async function runSecurityTests() {
   // --- STEP 5: AUDIT FEES & SLIPS ---
   console.log('\nStep 5: Testing Fees Ledgers & Collections Slips...');
   const feeResponse = await feesGet(mockReq(`http://localhost/api/portal/fees?studentId=${studentA.id}`, parentA.id));
-  const feeData = await feeResponse.json();
+  const feeData = (await feeResponse.json()) as any;
   
   console.log(`✔ Billing Status: ${feeData.feeAccount.feeStatus}`);
   console.log(`✔ Billed: ₹${feeData.feeAccount.totalFee}, Paid: ₹${feeData.feeAccount.paidAmount}, Remaining Dues: ₹${feeData.feeAccount.remainingFee}`);
@@ -319,7 +319,7 @@ async function runSecurityTests() {
   // --- STEP 6: AUDIT NOTICE FILTERING ---
   console.log('\nStep 6: Testing Targeted Notice Board Filter Rules...');
   const noticesResponse = await noticesGet(mockReq(`http://localhost/api/portal/notices?studentId=${studentA.id}`, parentA.id));
-  const noticesData = await noticesResponse.json();
+  const noticesData = (await noticesResponse.json()) as any;
   
   console.log(`✔ Notices returned for Student A (Class 10):`);
   for (const notice of noticesData) {

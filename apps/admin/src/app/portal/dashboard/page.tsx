@@ -8,6 +8,57 @@ import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
+const TRANSLATIONS: Record<string, Record<string, string>> = {
+  English: {
+    noStudentsTitle: 'No Associated Students',
+    noStudentsDesc: 'There are no active student profiles associated with your mobile number.',
+    accessDenied: 'Access Denied. Student profile not associated with this account.',
+    outstandingFees: 'Outstanding Fees',
+    latestExamStanding: 'Latest Exam Standing',
+    score: 'Score',
+    grade: 'Grade',
+    noResults: 'No exam results published yet.',
+    schoolNotices: 'School Notices',
+    noNotices: 'No notices posted recently.',
+    holidaysEvents: 'Holidays & Events',
+    noEvents: 'No upcoming events scheduled.',
+    class: 'Class',
+    adm: 'Adm'
+  },
+  Hindi: {
+    noStudentsTitle: 'कोई संबद्ध छात्र नहीं है',
+    noStudentsDesc: 'आपके मोबाइल नंबर से संबद्ध कोई सक्रिय छात्र प्रोफ़ाइल नहीं है।',
+    accessDenied: 'प्रवेश निषेध। छात्र प्रोफ़ाइल इस खाते से संबद्ध नहीं है।',
+    outstandingFees: 'बकाया शुल्क',
+    latestExamStanding: 'नवीनतम परीक्षा परिणाम',
+    score: 'अंक',
+    grade: 'ग्रेड',
+    noResults: 'अभी तक कोई परीक्षा परिणाम घोषित नहीं हुआ है।',
+    schoolNotices: 'स्कूल की सूचनाएं',
+    noNotices: 'हाल ही में कोई सूचना पोस्ट नहीं की गई है।',
+    holidaysEvents: 'छुट्टियां और कार्यक्रम',
+    noEvents: 'कोई आगामी कार्यक्रम निर्धारित नहीं है।',
+    class: 'कक्षा',
+    adm: 'प्रवेश संख्या'
+  },
+  Punjabi: {
+    noStudentsTitle: 'ਕੋਈ ਸਬੰਧਤ ਵਿਦਿਆਰਥੀ ਨਹੀਂ',
+    noStudentsDesc: 'ਤੁਹਾਡੇ ਮੋਬਾਈਲ ਨੰਬਰ ਨਾਲ ਕੋਈ ਵੀ ਸਰਗਰਮ ਵਿਦਿਆਰਥੀ ਪ੍ਰੋਫਾਈਲ ਨਹੀਂ ਜੁੜਿਆ ਹੋਇਆ ਹੈ।',
+    accessDenied: 'ਪਹੁੰਚ ਦੀ ਮਨਾਹੀ। ਵਿਦਿਆਰਥੀ ਪ੍ਰੋਫਾਈਲ ਇਸ ਖਾਤੇ ਨਾਲ ਸਬੰਧਤ ਨਹੀਂ ਹੈ।',
+    outstandingFees: 'ਬਾਕੀ ਫੀਸ',
+    latestExamStanding: 'ਤਾਜ਼ਾ ਪ੍ਰੀਖਿਆ ਨਤੀਜਾ',
+    score: 'ਅੰਕ',
+    grade: 'ਗ੍ਰੇਡ',
+    noResults: 'ਅਜੇ ਤੱਕ ਕੋਈ ਪ੍ਰੀਖਿਆ ਨਤੀਜਾ ਘੋਸ਼ਿਤ ਨਹੀਂ ਹੋਇਆ ਹੈ।',
+    schoolNotices: 'ਸਕੂਲ ਨੋਟਿਸ',
+    noNotices: 'ਹਾਲ ਹੀ ਵਿੱਚ ਕੋਈ ਨੋਟਿਸ ਨਹੀਂ ਭੇਜਿਆ ਗਿਆ।',
+    holidaysEvents: 'ਛੁੱਟੀਆਂ ਅਤੇ ਸਮਾਗਮ',
+    noEvents: 'ਕੋਈ ਆਉਣ ਵਾਲਾ ਸਮਾਗਮ ਤੈਅ ਨਹੀਂ ਹੈ।',
+    class: 'ਜਮਾਤ',
+    adm: 'ਦਾਖਲਾ ਨੰਬਰ'
+  }
+};
+
 export default async function PortalDashboardPage({
   searchParams,
 }: {
@@ -15,6 +66,11 @@ export default async function PortalDashboardPage({
 }) {
   const cookieStore = await cookies();
   const parentId = cookieStore.get('parent_session')?.value;
+  const language = cookieStore.get('language')?.value || 'English';
+
+  const t = (key: string) => {
+    return TRANSLATIONS[language]?.[key] || TRANSLATIONS['English']?.[key] || key;
+  };
 
   if (!parentId) {
     redirect('/portal/login');
@@ -39,8 +95,8 @@ export default async function PortalDashboardPage({
     return (
       <div className="flex flex-col items-center justify-center p-8 text-center min-h-[50vh]">
         <User className="h-12 w-12 text-slate-400 mb-3" />
-        <h3 className="font-bold text-slate-700">No Associated Students</h3>
-        <p className="text-xs text-slate-450 mt-1">There are no active student profiles associated with your mobile number.</p>
+        <h3 className="font-bold text-slate-700">{t('noStudentsTitle')}</h3>
+        <p className="text-xs text-slate-450 mt-1">{t('noStudentsDesc')}</p>
       </div>
     );
   }
@@ -53,7 +109,7 @@ export default async function PortalDashboardPage({
   if (!validStudent) {
     return (
       <div className="p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg text-xs font-medium text-center">
-        Access Denied. Student profile not associated with this account.
+        {t('accessDenied')}
       </div>
     );
   }
@@ -74,9 +130,9 @@ export default async function PortalDashboardPage({
         <div className="flex-1 min-w-0">
           <h2 className="text-sm font-bold truncate">{summary.student.name}</h2>
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[9px] text-blue-200 font-semibold mt-0.5">
-            <span>Class: {summary.enrollment.class} - {summary.enrollment.section}</span>
+            <span>{t('class')}: {summary.enrollment.class} - {summary.enrollment.section}</span>
             <span>•</span>
-            <span>Adm: {summary.student.admissionNumber}</span>
+            <span>{t('adm')}: {summary.student.admissionNumber}</span>
           </div>
         </div>
       </div>
@@ -88,7 +144,7 @@ export default async function PortalDashboardPage({
             <CreditCard className="h-4 w-4" />
           </div>
           <div>
-            <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">Outstanding Fees</p>
+            <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">{t('outstandingFees')}</p>
             <h3 className="text-sm font-bold text-slate-800 mt-0.5">
               ₹{summary.feeSummary ? summary.feeSummary.remainingFee.toLocaleString('en-IN', { minimumFractionDigits: 2 }) : '0.00'}
             </h3>
@@ -107,16 +163,16 @@ export default async function PortalDashboardPage({
               <Award className="h-4 w-4" />
             </div>
             <div>
-              <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">Latest Exam Standing</p>
+              <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">{t('latestExamStanding')}</p>
               {summary.latestResultSummary ? (
                 <div>
                   <h3 className="text-xs font-bold text-slate-800 mt-0.5">{summary.latestResultSummary.examName}</h3>
                   <p className="text-[10px] text-slate-500 font-semibold mt-0.5">
-                    Score: {summary.latestResultSummary.percentage.toFixed(1)}% | Grade: {summary.latestResultSummary.finalGrade}
+                    {t('score')}: {summary.latestResultSummary.percentage.toFixed(1)}% | {t('grade')}: {summary.latestResultSummary.finalGrade}
                   </p>
                 </div>
               ) : (
-                <p className="text-xs text-slate-400 font-medium mt-1">No exam results published yet.</p>
+                <p className="text-xs text-slate-400 font-medium mt-1">{t('noResults')}</p>
               )}
             </div>
           </div>
@@ -132,11 +188,11 @@ export default async function PortalDashboardPage({
       <div className="space-y-2">
         <h2 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
           <Bell className="h-3.5 w-3.5 text-slate-450" />
-          School Notices
+          {t('schoolNotices')}
         </h2>
         {summary.notices.length === 0 ? (
           <div className="p-4 border border-dashed border-slate-200 rounded-lg text-center text-xs text-slate-400 font-medium bg-white">
-            No notices posted recently.
+            {t('noNotices')}
           </div>
         ) : (
           <div className="space-y-2">
@@ -157,11 +213,11 @@ export default async function PortalDashboardPage({
       <div className="space-y-2">
         <h2 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
           <Calendar className="h-3.5 w-3.5 text-slate-450" />
-          Holidays & Events
+          {t('holidaysEvents')}
         </h2>
         {summary.calendarEvents.length === 0 ? (
           <div className="p-4 border border-dashed border-slate-200 rounded-lg text-center text-xs text-slate-400 font-medium bg-white">
-            No upcoming events scheduled.
+            {t('noEvents')}
           </div>
         ) : (
           <div className="space-y-2 bg-white border border-slate-200 rounded-xl divide-y divide-slate-100 overflow-hidden shadow-sm">
